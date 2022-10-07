@@ -2,7 +2,7 @@
   import { slide } from '$lib/utils/effects';
   import Match from './Matches.svelte';
 
-  const connected = true;
+  const connected = false;
 </script>
 
 <div class="flex flex-col items-center justify-center w-full h-[83vh]">
