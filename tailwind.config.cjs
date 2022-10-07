@@ -11,6 +11,7 @@ module.exports = {
       },
       boxShadow: {
         'top': '0 -10px 15px -3px rgba(0, 0, 0, 0.2)',
+        'in': 'inset 10px 0px 15px 0 rgba(0, 0, 0, 0.2)',
       },
       fontFamily: {
         sans: ["Inter var", "sans-serif"],
