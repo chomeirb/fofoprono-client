@@ -23,10 +23,10 @@
         </div>
         <div class="text-col1 text-xl underline flex flex-row">
           <li>
-            <a class="px-2 hover:opacity-70" href="/home">Règles</a>
+            <a class="px-2 hover:opacity-70" href="/rules">Règles</a>
           </li>
           <li>
-            <a class="px-2 hover:opacity-70" href="/home">Connexion/Inscription</a>
+            <a class="px-2 hover:opacity-70" href="/signin">Connexion</a>
           </li>
         </div>
       </ul>

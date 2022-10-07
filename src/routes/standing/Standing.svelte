@@ -30,9 +30,9 @@
 
 
 <div class="flex flex-col items-center justify-center mb-3 w-full">
-  <ul class="w-[95%]">
+  <ul class="w-[95%] flex flex-col gap-3 pt-4">
     {#each players as player, i}
-      <li class="flex flex-row justify-between items-center w-full h-[50px] px-5 shadow-lg">
+      <li class="flex flex-row justify-between items-center w-full h-[50px] px-5 shadow-xl border">
         <div class="w-1/4 flex flex-row justify-between">
           <p class="text-col1 w-1/6 text-left text-xl">{i+1}</p>
           <p class="text-col1 w-5/6 text-left text-xl">{player.name}</p>

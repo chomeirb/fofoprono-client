@@ -16,7 +16,7 @@ module.exports = {
       fontFamily: {
         sans: ["Inter var", "sans-serif"],
         serif: ["Inter var", "serif"],
-        'comic': ["'Proxima Nova'", "system-ui", "sans-serif"],
+        'proxima': ["'Proxima Nova'", "system-ui", "sans-serif"],
       },
       screens: {
         'm15': {'max': '1535px'},

@@ -24,10 +24,10 @@
 </script>
 
 <div class="flex flex-col items-center justify-center mb-3 w-full">
-  <ul class="w-[95%]">
+  <ul class="w-[95%] flex flex-col gap-3 pt-4">
     {#each matches as match}
-      <li class="flex flex-row justify-between w-full gap-5 h-full items-center py-3 shadow-xl px-3">
-        <div class="flex flex-row gap-10 justify-between w-1/4 text-xl pr-24">
+      <li class="flex flex-row justify-between w-full gap-5 h-full items-center py-3 shadow-xl border px-3">
+        <div class="flex flex-row gap-10 justify-between w-1/4 text-lg pr-24">
           <p>{formatDate(match.time)}</p>
           <p>{formatTime(match.time)}</p>
         </div>
@@ -40,7 +40,7 @@
           <p class="w-1/3 text-right">{match.awayTeam.toUpperCase()}</p>
         </div>
         <div class="flex flex-row justify-end w-1/4">
-          <p class="text-xl">{match.stage}</p>
+          <p class="text-lg">{match.stage}</p>
         </div>
       </li>
     {/each}
