@@ -5,7 +5,6 @@ export function slide(value: number, element: string) {
     if (e == null) {
       return;
     }
-    console.log("SLIDEz");
     e.style['transform'] = `translateX(${value}%)`;
   }
 }
