@@ -1,27 +1,26 @@
+<script>
+  import { onDestroy, onMount } from "svelte";
+  import Form from "./Form.svelte";
+  import { result, cleanResult } from "./store";
+
+  let resultContent = "";
+
+  result.subscribe((value) => {
+    resultContent = value;
+  });
+
+  onDestroy(() => {
+    cleanResult();
+  });
+</script>
 
 <div class="flex flex-col items-center justify-center mt-10 w-full  h-[80vh]">
   <div class="text-4xl flex flex-row justify-between items-center w-full max-w-xl">
     <p class="font-bold">INSCRIPTION</p>
   </div>
-  <form class="flex flex-col justify-start w-full max-w-xl mt-5 mb-10 shadow-in text-2xl gap-8 py-8 px-20">
-    <div class="flex flex-col justify-start w-full">
-      <p class="font-bold">Pseudo</p>
-      <input type="text" class="w-full h-10 shadow-lg border rounded px-2" />
-    </div>
-    <div class="flex flex-col justify-start w-full">
-      <p class="font-bold">Email</p>
-      <input type="mail" class="w-full h-10 shadow-lg border rounded px-2" />
-    </div>
-    <div class="flex flex-col justify-start w-full">
-      <p class="font-bold">Mot de passe</p>
-      <input type="password" class="w-full h-10 shadow-lg border rounded px-2" />
-    </div>
-    <div class="flex flex-col items-center w-full gap-5">
-      <button type="submit" class="bg-col1 text-col4 px-5 py-2 rounded w-1/2 hover:translate-x-6 duration-200">Inscription ➔</button>
-      <a href="/signin" class="text-xl px-5 py-2 rounded underline hover:opacity-70">Déjà un compte ?</a>
-    </div>
-  </form>
+  <div class="flex flex-col justify-start items-center w-full max-w-xl mt-5 mb-10 shadow-in text-2xl gap-5 py-8 px-20">
+    <Form />
+    <p class="text-3xl px-5 rounded text-center font-bold">{resultContent}</p>
+    <a href="/signin" class="text-xl px-5 rounded underline hover:opacity-70">Déjà un compte ?</a>
+  </div>
 </div>
-
-
-
