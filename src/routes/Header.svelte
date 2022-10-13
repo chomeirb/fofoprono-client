@@ -1,5 +1,48 @@
 <script>
-  import logo from '$lib/images/fplogo.png';
+    import logo from '$lib/images/fplogo.png';
+    import { onMount } from 'svelte';
+  import logoutPic from '$lib/images/logout.png';
+    let connected = false;
+    let name = '';
+
+  onMount(async () => {
+    try {
+      const res = await fetch(`http://127.0.0.1:8080/user`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: null,
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        name = data.name;
+        connected = true;
+      }
+    } catch (err) {
+      connected = false;
+    }
+  });
+
+  const logout = async () => {
+    try {
+      const res = await fetch(`http://127.0.0.1:8080/logout`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: null,
+      });
+
+      if (res.ok) {
+        connected = false;
+      }
+    } catch (err) {
+      connected =  true;
+    }
+  };
+
 </script>
 
 
@@ -20,13 +63,18 @@
           <li class="hover:translate-y-2 duration-200">
             <a class="bg-col1 rounded px-5 py-2" href="/standing">Classement</a>
           </li>
-        </div>
-        <div class="text-col1 text-xl underline flex flex-row">
-          <li>
-            <a class="px-2 hover:opacity-70" href="/rules">Règles</a>
+          <li class="hover:translate-y-2 duration-200">
+            <a class="bg-col1 rounded px-5 py-2" href="/rules">Règles</a>
           </li>
-          <li>
-            <a class="px-2 hover:opacity-70" href="/signin">Connexion</a>
+        </div>
+        <div class="text-col1 text-xl flex flex-row">
+          <li class="flex flex-row items-center gap-6">
+            {#if connected}
+              <p class="px-2 font-bold text-4xl border shadow-xl">{name}</p>
+              <img src={logoutPic} class="hover:opacity-70 hover:cursor-pointer h-10" alt="logout" on:click={logout} />
+            {:else}
+              <a class="px-2 hover:opacity-70 underline" href="/signin">Connexion</a>
+            {/if}
           </li>
         </div>
       </ul>
