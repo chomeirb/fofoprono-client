@@ -3,8 +3,6 @@ export function isPassed(date: number): boolean {
 }
 
 // Return a string of the date in the format of exemple : lun. 5 nov
-// Language: typescript
-// Path: src/lib/utils/time.ts
 export function formatDate(time: number): string {
   const date = new Date(time);
   return date.toLocaleString("fr-FR", {
@@ -15,8 +13,6 @@ export function formatDate(time: number): string {
 }
 
 // Return a string of the date in the format of exemple : 22:00
-// Language: typescript
-// Path: src/lib/utils/time.ts
 export function formatTime(time: number): string {
   const date = new Date(time);
   return date.toLocaleString("fr-FR", {

@@ -1,8 +1,6 @@
 <script>
-    import Standing from "./Standing.svelte";
-    import StandingBanner from "./StandingBanner.svelte";
-
-
+  import Standing from './Standing.svelte';
+  import StandingBanner from './StandingBanner.svelte';
 </script>
 
 <div class="flex flex-col items-center justify-center mt-10 w-full  h-[80vh]">

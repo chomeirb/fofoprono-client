@@ -1,9 +1,10 @@
 <script>
-    import logo from '$lib/images/fplogo.png';
-    import { onMount } from 'svelte';
+  import logo from '$lib/images/fplogo.png';
+  import { onMount } from 'svelte';
   import logoutPic from '$lib/images/logout.png';
-    let connected = false;
-    let name = '';
+  import { disableCurtain, enableCurtain } from './store';
+  let connected = false;
+  let name = '';
 
   onMount(async () => {
     try {
@@ -39,26 +40,24 @@
         connected = false;
       }
     } catch (err) {
-      connected =  true;
+      connected = true;
     }
   };
-
 </script>
-
 
 <header class="flex flex-row shadow-lg justify-center text-3xl text-col4 w-full h-[90px]">
   <div class="w-full h-full max-w-7xl flex flex-row justify-center gap-5 items-center">
-    <a href="/home" class="h-[50%] hover:-rotate-12 duration-200">
+    <a href="/home" class="h-[50%] hover:-rotate-12 duration-200" on:click={enableCurtain}>
       <img src={logo} alt="logo" class="h-full" />
     </a>
     <nav class="flex flex-row items-center justify-center w-full h-[90%]">
       <ul class="flex flex-row justify-between w-full gap-5 h-full items-center">
         <div class="flex flex-row gap-5 h-full items-center">
           <li class="hover:translate-y-2 duration-200">
-            <a class="bg-col1 rounded px-5 py-2 hover:translate-y-10 duration-200" href="/home">Accueil</a>
+            <a class="bg-col1 rounded px-5 py-2 hover:translate-y-10 duration-200" on:click={disableCurtain} href="/home">Accueil</a>
           </li>
           <li class="hover:translate-y-2 duration-200">
-            <a class="bg-col1 rounded px-5 py-2 hover:translate-y-10 duration-200" href="/prono">Pronostiques</a>
+            <a class="bg-col1 rounded px-5 py-2 hover:translate-y-10 duration-200" href="/prono">Pronostics</a>
           </li>
           <li class="hover:translate-y-2 duration-200">
             <a class="bg-col1 rounded px-5 py-2" href="/standing">Classement</a>

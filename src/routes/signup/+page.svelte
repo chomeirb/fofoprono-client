@@ -1,9 +1,9 @@
 <script>
-  import { onDestroy, onMount } from "svelte";
-  import Form from "./Form.svelte";
-  import { result, cleanResult } from "./store";
+  import { onDestroy, onMount } from 'svelte';
+  import Form from './Form.svelte';
+  import { result, cleanResult } from './store';
 
-  let resultContent = "";
+  let resultContent = '';
 
   result.subscribe((value) => {
     resultContent = value;
