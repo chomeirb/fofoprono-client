@@ -8,7 +8,7 @@
 
   onMount(async () => {
     try {
-      const res = await fetch(`http://127.0.0.1:8080/user`, {
+      const res = await fetch(`/user`, {
         method: 'GET',
         credentials: "same-origin",
       });
@@ -25,7 +25,7 @@
 
   const logout = async () => {
     try {
-      const res = await fetch(`http://127.0.0.1:8080/logout`, {
+      const res = await fetch(`/logout`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

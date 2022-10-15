@@ -1,7 +1,7 @@
 import adapter from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
 
-/** @type {import('@sveltejs/kit').KitConfig} */
+/** @type {import('@sveltejs/kit').Config} */
 const config = {
 	// Consult https://github.com/sveltejs/svelte-preprocess
 	// for more information about preprocessors
@@ -10,9 +10,9 @@ const config = {
       postcss: true,
     }),
   	],
-  	csrf: {
-		checkOrigin: false,
-  	},
+  	// csrf: {
+	// 	checkOrigin: false,
+  	// },
 
 	kit: {
 		adapter: adapter({
