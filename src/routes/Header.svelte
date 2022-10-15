@@ -10,10 +10,7 @@
     try {
       const res = await fetch(`http://127.0.0.1:8080/user`, {
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: null,
+        credentials: "same-origin",
       });
 
       if (res.ok) {
@@ -72,7 +69,7 @@
               <p class="px-2 font-bold text-4xl border shadow-xl">{name}</p>
               <img src={logoutPic} class="hover:opacity-70 hover:cursor-pointer h-10" alt="logout" on:click={logout} />
             {:else}
-              <a class="px-2 hover:opacity-70 underline" href="/signin">Connexion</a>
+              <a class="px-2 hover:opacity-70 underline" href="/login">Connexion</a>
             {/if}
           </li>
         </div>

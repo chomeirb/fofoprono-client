@@ -1,9 +1,10 @@
 <script>
-  import { API_URL } from '$env/static/private';
+  // import { API_URL } from '$env/static/private';
   import { onDestroy } from 'svelte';
   import { connecting, result, cleanResult } from './store';
 
   let name = '';
+  let mail = '';
   let password = '';
 
   let connectingContent = false;
@@ -20,12 +21,13 @@
 
     connecting.set(true);
     try {
-      const body = JSON.stringify({ name, password });
+      const body = JSON.stringify({ name, mail, password });
       console.log(body);
-      const res = await fetch(`${API_URL}/signin`, {
-        method: 'POST',
+      const res = await fetch('/login', {
+        method: "POST",
         headers: {
           'Content-Type': 'application/json',
+          'content-type' : 'text/html; charset=UTF-8',
         },
         body: body,
       });

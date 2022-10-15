@@ -21,6 +21,6 @@
   <div class="flex flex-col justify-start items-center w-full max-w-xl mt-5 mb-10 shadow-in text-2xl gap-5 py-8 px-20">
     <Form />
     <p class="text-3xl px-5 rounded text-center font-bold">{resultContent}</p>
-    <a href="/signin" class="text-xl px-5 rounded underline hover:opacity-70">Déjà un compte ?</a>
+    <a href="/login" class="text-xl px-5 rounded underline hover:opacity-70">Déjà un compte ?</a>
   </div>
 </div>

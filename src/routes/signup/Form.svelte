@@ -1,5 +1,5 @@
 <script>
-  import { API_URL } from '$env/static/private';
+  // import { API_URL } from '$env/static/private';
   import { onDestroy } from 'svelte';
   import { submiting, result, cleanResult } from './store';
 
@@ -23,7 +23,7 @@
     try {
       const body = JSON.stringify({ name, mail, password });
       console.log(body);
-      const res = await fetch(`${API_URL}/signup`, {
+      const res = await fetch(`http://127.0.0.1:8080/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
