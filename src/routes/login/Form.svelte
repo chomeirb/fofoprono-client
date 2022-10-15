@@ -23,11 +23,11 @@
     try {
       const body = JSON.stringify({ name, mail, password });
       console.log(body);
-      const res = await fetch('/login', {
+      const res = await fetch('/api/login', {
         method: "POST",
+        credentials: "same-origin",
         headers: {
           'Content-Type': 'application/json',
-          'content-type' : 'text/html; charset=UTF-8',
         },
         body: body,
       });

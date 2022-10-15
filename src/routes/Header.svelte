@@ -8,7 +8,7 @@
 
   onMount(async () => {
     try {
-      const res = await fetch(`/user`, {
+      const res = await fetch(`/api/user`, {
         method: 'GET',
         credentials: "same-origin",
       });
@@ -25,7 +25,7 @@
 
   const logout = async () => {
     try {
-      const res = await fetch(`/logout`, {
+      const res = await fetch(`/api/logout`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

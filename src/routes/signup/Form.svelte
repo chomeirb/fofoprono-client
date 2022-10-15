@@ -23,7 +23,7 @@
     try {
       const body = JSON.stringify({ name, mail, password });
       console.log(body);
-      const res = await fetch(`http://127.0.0.1:8080/signup`, {
+      const res = await fetch(`/api/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
