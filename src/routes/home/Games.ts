@@ -7,7 +7,7 @@ export async function getGames() {
       credentials: 'same-origin',
     });
 
-    if (response.ok) {
+    if (response.ok || response.status === 401) {
       games.set(await response.json());
     } else {
       fetchError.set("error");

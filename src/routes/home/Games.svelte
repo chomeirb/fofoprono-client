@@ -1,7 +1,7 @@
 <script lang="ts">
   import { formatDate, formatTime } from '$lib/utils/time';
   import { onMount } from 'svelte';
-  import { getGames } from './Game';
+  import { getGames } from './Games';
   import { fetchError, games } from './store';
   import type { Game } from '$lib/types/game';
 

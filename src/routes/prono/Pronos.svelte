@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { formatDate, formatTime, isPassed } from '$lib/utils/time';
 
   // to fetch from api
