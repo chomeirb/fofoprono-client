@@ -18,18 +18,19 @@
       result.set('Veuillez remplir tous les champs !');
       return;
     }
-
+    
     connecting.set(true);
     try {
+      let token = window.btoa(`${name}:${password}`);
+
       const body = JSON.stringify({ name, mail, password });
       console.log(body);
       const res = await fetch('/api/login', {
         method: "POST",
         credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json',
+          'Authorization': `Basic ${token}`,
         },
-        body: body,
       });
 
       if (res.ok) {
