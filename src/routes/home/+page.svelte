@@ -1,6 +1,6 @@
 <script>
   import { slide } from '$lib/utils/effects';
-  import Match from './Matches.svelte';
+  import Games from './Games.svelte';
   import { curtain } from '../store';
 
   let curtainValue = true;
@@ -28,7 +28,7 @@
       <a href="/prono" class="bg-col1 text-col4 py-2 px-5 rounded hover:translate-x-3 duration-300">Pronostiquer →</a>
     </div>
     <div class="w-full max-w-7xl mt-4 mb-10 overflow-y-scroll shadow-in">
-      <Match />
+      <Games />
     </div>
   </div>
 </div>

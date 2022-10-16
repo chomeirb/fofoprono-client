@@ -1,10 +1,11 @@
-<script>
+<script lang="ts">
   import logo from '$lib/images/fplogo.png';
   import { onMount } from 'svelte';
   import logoutPic from '$lib/images/logout.png';
   import { disableCurtain, enableCurtain } from './store';
-  let connected = false;
-  let name = '';
+
+  let connected: Boolean = false;
+  let name: String = '';
 
   onMount(async () => {
     try {

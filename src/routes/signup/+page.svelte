@@ -1,9 +1,9 @@
-<script>
+<script lang="ts">
   import { onDestroy, onMount } from 'svelte';
   import Form from './Form.svelte';
   import { result, cleanResult } from './store';
 
-  let resultContent = '';
+  let resultContent: String = '';
 
   result.subscribe((value) => {
     resultContent = value;

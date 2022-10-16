@@ -1,5 +1,5 @@
 <script>
-  import Match from "./Matches.svelte";
+  import Match from "./Pronos.svelte";
 </script>
 
 <div class="flex flex-col items-center justify-center mt-10 w-full  h-[80vh]">
