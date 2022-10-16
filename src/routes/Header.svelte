@@ -11,7 +11,7 @@
     try {
       const res = await fetch(`/api/user`, {
         method: 'GET',
-        credentials: "same-origin",
+        credentials: 'same-origin',
       });
 
       if (res.ok) {
@@ -36,6 +36,7 @@
 
       if (res.ok) {
         connected = false;
+        window.location.href = '/login';
       }
     } catch (err) {
       connected = true;

@@ -18,7 +18,7 @@
       result.set('Veuillez remplir tous les champs !');
       return;
     }
-    
+
     connecting.set(true);
     try {
       let token = window.btoa(`${name}:${password}`);
@@ -26,10 +26,10 @@
       const body = JSON.stringify({ name, mail, password });
       console.log(body);
       const res = await fetch('/api/login', {
-        method: "POST",
-        credentials: "same-origin",
+        method: 'POST',
+        credentials: 'same-origin',
         headers: {
-          'Authorization': `Basic ${token}`,
+          Authorization: `Basic ${token}`,
         },
       });
 
