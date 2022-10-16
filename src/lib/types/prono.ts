@@ -1,4 +1,3 @@
-
 export type Prono = {
   id: number;
   prediction_home: number;

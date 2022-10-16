@@ -9,4 +9,4 @@ export type Game = {
   odds_home: number;
   odds_away: number;
   odds_draw: number;
-}
+};

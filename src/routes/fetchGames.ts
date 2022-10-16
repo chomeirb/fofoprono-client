@@ -4,21 +4,18 @@ export async function getGames() {
   try {
     const response = await fetch("/api/games", {
       method: "GET",
-      credentials: 'same-origin',
+      credentials: "same-origin",
     });
 
     fetchStatus.set(response.status);
+    // fetchError.set(response.statusText);
 
-    if (response.ok || response.status === 203) {
+    if (response.ok) {
       games.set(await response.json());
-      if (response.status === 203) {
-        fetchError.set("Connection requise !");
-      }
-    } else {
-      fetchError.set("error");
     }
   } catch (error) {
     console.error(error);
-    fetchError.set("error");
+    console.error("Unexpected Error");
+    fetchError.set("Could not fetch games");
   }
 }
