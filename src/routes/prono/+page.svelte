@@ -25,6 +25,8 @@
     >
       <p class="font-bold">PRONOSTIQUER</p>
       <button
+        type="submit"
+        form="Pronos"
         class="bg-col1 text-col4 py-2 px-5 rounded hover:translate-x-3 duration-300"
         >Soumettre →</button
       >

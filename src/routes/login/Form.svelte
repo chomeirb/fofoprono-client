@@ -23,8 +23,7 @@
     try {
       let token = window.btoa(`${name}:${password}`);
 
-      const body = JSON.stringify({ name, mail, password });
-      console.log(body);
+      // const body = JSON.stringify({ name, mail, password });
       const res = await fetch("/api/login", {
         method: "POST",
         credentials: "same-origin",

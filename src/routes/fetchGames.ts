@@ -8,10 +8,11 @@ export async function getGames() {
     });
 
     fetchStatus.set(response.status);
-    // fetchError.set(response.statusText);
 
     if (response.ok) {
       games.set(await response.json());
+    } else {
+      fetchError.set(response.statusText);
     }
   } catch (error) {
     console.error(error);
