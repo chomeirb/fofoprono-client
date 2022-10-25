@@ -191,13 +191,12 @@
                 <p class="text-xl border-2">{game.odds_away}</p>
               </div>
               {#if !passed && exists}
-                <form id="Delete prono" on:click={() => delete_prono(index)}>
-                  <button
-                    style={deleted ? "color:red" : "color:black"}
-                    class="text-xl"
-                    type="button">✖</button
-                  >
-                </form>
+                <button
+                  style={deleted ? "color:red" : "color:black"}
+                  on:click={() => delete_prono(index)}
+                  class="text-xl"
+                  type="button">✖</button
+                >
               {:else}
                 <p style="color:lightgrey" class="text-xl">✖</p>
               {/if}
