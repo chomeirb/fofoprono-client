@@ -5,18 +5,26 @@
   import { fetchError, fetchStatus, fetchLoggedIn, games } from "../store";
 
   let fetchedData: [Prono, Game][] = [];
-  let clientPronos: Prono[] = [];
-  let clientInputs: [number, number][] = [];
+  let inputs: [number, number][] = [];
+
+  let submitPronos: Prono[] = [];
+  let deletePronos: Prono[] = [];
 
   let fetchErrorContent: String = "loading";
   let fetchStatusContent: number;
 
   games.subscribe((value: [Prono, Game][]) => {
     fetchedData = value;
-    clientPronos = value.map(() => {
+
+    submitPronos = value.map(() => {
       return null!;
     });
-    clientInputs = value.map(() => {
+
+    deletePronos = value.map(() => {
+      return null!;
+    });
+
+    inputs = value.map(() => {
       return [null!, null!];
     });
   });
@@ -30,18 +38,18 @@
   });
 
   function handleInputs(team: Team, index: number) {
-    const [prediction_home, prediction_away] = clientInputs[index];
+    const [prediction_home, prediction_away] = inputs[index];
     if (prediction_home === null && prediction_away === null) {
-      clientPronos[index] = null!;
+      submitPronos[index] = null!;
       return;
     }
 
     const fetchedProno = fetchedData[index][0] && { ...fetchedData[index][0] };
-    if (clientPronos[index] === null) {
+    if (submitPronos[index] === null) {
       if (fetchedProno) {
-        clientPronos[index] = fetchedProno;
+        submitPronos[index] = fetchedProno;
       } else {
-        clientPronos[index] = {
+        submitPronos[index] = {
           game_id: fetchedData[index][1].id,
           prediction_home: 0,
           prediction_away: 0,
@@ -51,34 +59,52 @@
 
     switch (team) {
       case Team.Home:
-        clientPronos[index].prediction_home =
-          (prediction_home) ?? fetchedProno?.prediction_home ?? 0;
+        submitPronos[index].prediction_home =
+          prediction_home ?? fetchedProno?.prediction_home ?? 0;
         break;
       case Team.Away:
-        clientPronos[index].prediction_away =
+        submitPronos[index].prediction_away =
           prediction_away ?? fetchedProno?.prediction_away ?? 0;
         break;
     }
   }
 
   const submit = async () => {
-    const filtered = clientPronos.filter((element) => {
+    const toSubmit = submitPronos.filter((element) => {
       return element !== null;
     });
-    const body = JSON.stringify(filtered);
-    console.log(filtered);
-    const res = await fetch("/api/prono", {
+
+    const toDelete = deletePronos.filter((element) => {
+      return element !== null;
+    });
+
+    const res_s = await fetch("/api/prono", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: body,
+      body: JSON.stringify(toSubmit),
     });
 
-    if (res.ok) {
+    const res_d = await fetch("/api/prono", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(toDelete),
+    });
+
+    if (res_s.ok && res_d.ok) {
       window.location.href = "/prono";
     }
   };
+
+  function delete_prono(index: number) {
+    deletePronos[index] =
+      deletePronos[index] === null
+        ? fetchedData[index][0] && { ...fetchedData[index][0] }
+        : null!;
+  }
 </script>
 
 <head>
@@ -110,7 +136,10 @@
         </li>
       {:else}
         {#each fetchedData as [fetchedProno, game], index}
-          {@const clientProno = clientPronos[index]}
+          {@const clientProno = submitPronos[index]}
+          {@const deleted = deletePronos[index] !== null}
+          {@const exists = fetchedData[index][0] !== null}
+          {@const passed = isPassed(game.time)}
           <li
             class="flex flex-row justify-between w-full gap-5 h-full items-center py-3 shadow-xl border px-3"
           >
@@ -130,26 +159,26 @@
                   inputmode="numeric"
                   min="0"
                   max="20"
-                  bind:value={clientInputs[index][0]}
+                  bind:value={inputs[index][0]}
                   on:input={() => handleInputs(Team.Home, index)}
                   class="w-7 bg-col1 text-col4 rounded text-center"
                   placeholder={clientProno?.prediction_home.toString() ??
                     fetchedProno?.prediction_home.toString() ??
                     "..."}
-                  disabled={isPassed(game.time)}
+                  disabled={passed}
                 />
                 <input
                   type="number"
                   inputmode="numeric"
                   min="0"
                   max="20"
-                  bind:value={clientInputs[index][1]}
+                  bind:value={inputs[index][1]}
                   on:input={() => handleInputs(Team.Away, index)}
                   class="w-7 bg-col1 text-col4 rounded text-center"
                   placeholder={clientProno?.prediction_away.toString() ??
                     fetchedProno?.prediction_away.toString() ??
                     "..."}
-                  disabled={isPassed(game.time)}
+                  disabled={passed}
                 />
               </div>
               <p class="w-1/3 text-right">{game.team_away.toUpperCase()}</p>
@@ -161,6 +190,17 @@
                 <p class="text-xl border-2">{game.odds_draw}</p>
                 <p class="text-xl border-2">{game.odds_away}</p>
               </div>
+              {#if !passed && exists}
+                <form id="Delete prono" on:click={() => delete_prono(index)}>
+                  <button
+                    style={deleted ? "color:red" : "color:black"}
+                    class="text-xl"
+                    type="button">✖</button
+                  >
+                </form>
+              {:else}
+                <p style="color:lightgrey" class="text-xl">✖</p>
+              {/if}
             </div>
           </li>
         {/each}
