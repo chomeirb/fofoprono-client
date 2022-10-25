@@ -118,6 +118,12 @@
     input[type="number"] {
       -moz-appearance: textfield;
     }
+
+    button {
+    }
+    button:disabled {
+      opacity: 0.2;
+    }
   </style>
 </head>
 
@@ -190,16 +196,13 @@
                 <p class="text-xl border-2">{game.odds_draw}</p>
                 <p class="text-xl border-2">{game.odds_away}</p>
               </div>
-              {#if !passed && exists}
-                <button
-                  style={deleted ? "color:red" : "color:black"}
-                  on:click={() => delete_prono(index)}
-                  class="text-xl"
-                  type="button">✖</button
-                >
-              {:else}
-                <p style="color:lightgrey" class="text-xl">✖</p>
-              {/if}
+              <button
+                style={deleted ? "color:red" : ""}
+                on:click={() => delete_prono(index)}
+                disabled={passed || !exists}
+                class="text-xl formatted"
+                type="button">✖</button
+              >
             </div>
           </li>
         {/each}
