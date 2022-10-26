@@ -99,11 +99,9 @@
     }
   };
 
-  function delete_prono(index: number) {
+  function deleteProno(index: number) {
     deletePronos[index] =
-      deletePronos[index] === null
-        ? fetchedData[index][0] && { ...fetchedData[index][0] }
-        : null!;
+      deletePronos[index] === null ? fetchedData[index][0] : null!;
   }
 </script>
 
@@ -141,24 +139,24 @@
           </p>
         </li>
       {:else}
-        {#each fetchedData as [fetchedProno, game], index}
+        {#each fetchedData as [fetchedProno, fetchedGame], index}
           {@const clientProno = submitPronos[index]}
           {@const deleted = deletePronos[index] !== null}
           {@const exists = fetchedData[index][0] !== null}
-          {@const passed = isPassed(game.time)}
+          {@const passed = isPassed(fetchedGame.time)}
           <li
             class="flex flex-row justify-between w-full gap-5 h-full items-center py-3 shadow-xl border px-3"
           >
             <div
               class="flex flex-row gap-10 justify-between w-1/4 text-lg pr-24"
             >
-              <p>{formatDate(game.time)}</p>
-              <p>{formatTime(game.time)}</p>
+              <p>{formatDate(fetchedGame.time)}</p>
+              <p>{formatTime(fetchedGame.time)}</p>
             </div>
             <div
               class="flex flex-row text-2xl gap-5 h-full items-center justify-between w-2/5"
             >
-              <p class="w-1/3">{game.team_home.toUpperCase()}</p>
+              <p class="w-1/3">{fetchedGame.team_home.toUpperCase()}</p>
               <div class="flex flex-row justify-center gap-5 w-1/5">
                 <input
                   type="number"
@@ -187,18 +185,20 @@
                   disabled={passed}
                 />
               </div>
-              <p class="w-1/3 text-right">{game.team_away.toUpperCase()}</p>
+              <p class="w-1/3 text-right">
+                {fetchedGame.team_away.toUpperCase()}
+              </p>
             </div>
             <div class="flex flex-row justify-end w-1/4 gap-5">
-              <p class="text-lg">{game.stage}</p>
+              <p class="text-lg">{fetchedGame.stage}</p>
               <div class="flex flex-row gap-1">
-                <p class="text-xl border-2">{game.odds_home}</p>
-                <p class="text-xl border-2">{game.odds_draw}</p>
-                <p class="text-xl border-2">{game.odds_away}</p>
+                <p class="text-xl border-2">{fetchedGame.odds_home}</p>
+                <p class="text-xl border-2">{fetchedGame.odds_draw}</p>
+                <p class="text-xl border-2">{fetchedGame.odds_away}</p>
               </div>
               <button
                 style={deleted ? "color:red" : ""}
-                on:click={() => delete_prono(index)}
+                on:click={() => deleteProno(index)}
                 disabled={passed || !exists}
                 class="text-xl formatted"
                 type="button">✖</button
