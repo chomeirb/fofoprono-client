@@ -11,26 +11,26 @@
     <p class="pl-12">
       ➔ Pour les <b>matchs de poules</b>, un <b>résultat correct </b>(Vainqueur
       du match trouvé uniquement) octroie <b>8 points</b>, tandis qu'un
-      <b>score juste octroie 16 points</b>
+      <b>score exact octroie 16 points</b>
     </p>
     <p class="pl-12">
       ➔ Pour les <b>huitièmes de finale</b>, un
       <b>résulat correct octroie 12 points</b>, tandis qu'un
-      <b>score juste octroie 24 points</b>
+      <b>score exact octroie 24 points</b>
     </p>
     <p class="pl-12">
       ➔ Pour les <b>quarts de finale</b>, un
       <b>résultat correct octroie 16 points</b>, tandis qu'un
-      <b>score juste octroie 32 points</b>
+      <b>score exact octroie 32 points</b>
     </p>
     <p class="pl-12">
       ➔ Pour les <b>demi-finales</b>, un
       <b>résultat correct octroie 20 points</b>, tandis qu'un
-      <b>score juste octroie 40 points</b>
+      <b>score exact octroie 40 points</b>
     </p>
     <p class="pl-12">
       ➔ Pour la <b>finale</b>, un <b>résultat correct octroie 30 points</b>,
-      tandis qu'un <b>score juste octroie 60 points</b>
+      tandis qu'un <b>score exact octroie 60 points</b>
     </p>
     <p>
       <b

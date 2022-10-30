@@ -10,6 +10,21 @@
   });
 </script>
 
+<head>
+  <style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type='number'] {
+      -moz-appearance: textfield;
+    }
+
+  </style>
+</head>
+
 <div class="flex flex-col h-[100vh]">
   <Header />
 

@@ -73,7 +73,7 @@
           <li class="hover:translate-y-2 duration-200">
             <a
               class="bg-col1 rounded px-5 py-2 hover:translate-y-10 duration-200"
-              href="/prono">Pronostiques</a
+              href="/prono">Pronostics</a
             >
           </li>
           <li class="hover:translate-y-2 duration-200">
