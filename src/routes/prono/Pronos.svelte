@@ -81,7 +81,7 @@
       {:else}
         {#each $games as [fetchedProno, fetchedGame], index}
           {#if teamFilter[index] && stageFilter[index]}
-            <PronoC fetchedProno={fetchedProno} fetchedGame={fetchedGame} bind:prono={submitPronos[index]} bind:remove={removePronos[index]} />
+            <PronoC pronoMode={true} fetchedProno={fetchedProno} fetchedGame={fetchedGame} bind:prono={submitPronos[index]} bind:remove={removePronos[index]} />
           {/if}
         {/each}
       {/if}

@@ -3,21 +3,24 @@
     import { Result, Team, type Prono, type PronoResult } from '$lib/types/prono';
     import { formatDate, formatTime, isPassed } from '$lib/utils/time';
 
-    let input: [number, number] = [null!, null!];
-
-    export let fetchedProno: PronoResult;
+    export let showOdds = true;
+    export let pronoMode = false;
+    
+    export let fetchedProno: PronoResult = null!;
     export let fetchedGame: Game;
+    
+    let input: [number, number] = [null!, null!];
 
     export let prono: Prono = null!;
     export let remove: Prono = null!;
 
     const passed = isPassed(fetchedGame.time);
-    const exists = fetchedProno !== null;
+    const exists = pronoMode && fetchedProno !== null;
 
     let showScore: boolean;
 
     function enter() {
-        showScore = fetchedGame.score_home !== null && fetchedGame.score_away !== null;
+        showScore = pronoMode && fetchedGame.score_home !== null && fetchedGame.score_away !== null;
     }
 
     function leave() {
@@ -25,6 +28,9 @@
     }
 
     function getResultColor(result: Result) {
+        if (!pronoMode) {
+            return ''
+        }
         switch (result) {
             case Result.Exact:
                 return 'bg-green-500';
@@ -32,8 +38,6 @@
                 return 'bg-yellow-500';
             case Result.Wrong:
                 return 'bg-red-500';
-            default:
-                return '';
         }
     }
 
@@ -63,6 +67,7 @@
     </div>
     <div class="flex flex-row text-2xl gap-5 h-full items-center justify-between w-2/5">
         <p class="w-1/3">{fetchedGame.team_home.toUpperCase()}</p>
+        {#if pronoMode}
         <div class="flex flex-row justify-center gap-5 w-1/5">
             <input
                 type="number"
@@ -90,17 +95,27 @@
                 placeholder={prono?.prediction_away.toString() ?? fetchedProno?.prediction.prediction_away.toString() ?? '...'}
                 disabled={passed} />
         </div>
+        {:else}
+        <p class="w-7 bg-col1 text-col4 rounded text-center">
+            {fetchedGame.score_home ?? ''}
+          </p>
+          <p class="w-7 bg-col1 text-col4 rounded text-center">
+            {fetchedGame.score_away ?? ''}
+          </p>
+        {/if}
         <p class="w-1/3 text-right">
             {fetchedGame.team_away.toUpperCase()}
         </p>
     </div>
     <div class="flex flex-row justify-end w-1/4 gap-5">
         <p class="text-lg">{displayStage(fetchedGame.stage)}</p>
+        {#if showOdds}
         <div class="flex flex-row gap-1">
             <p class="text-xl border-2">{fetchedGame.odds_home}</p>
             <p class="text-xl border-2">{fetchedGame.odds_draw}</p>
             <p class="text-xl border-2">{fetchedGame.odds_away}</p>
         </div>
+        {/if}
         <button
             on:click={setRemove}
             disabled={passed || !exists}
