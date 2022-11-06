@@ -11,6 +11,7 @@ export async function getGames() {
 
     if (response.ok) {
       games.set(await response.json());
+      fetchError.set('');
     } else {
       fetchError.set(response.statusText);
     }
