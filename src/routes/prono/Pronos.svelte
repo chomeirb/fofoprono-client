@@ -3,7 +3,7 @@
   import { displayStage, type Game } from '$lib/types/game';
   import type { Prediction, PronoResult } from '$lib/types/prono';
   import { fetchError, fetchStatus, games } from '../store';
-  import PronoC from './Prono.svelte';
+  import PronoC from '../Prono.svelte';
 
   let inputs: [number, number][] = [];
 
