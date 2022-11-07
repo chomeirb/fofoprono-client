@@ -6,20 +6,7 @@ export enum Stage {
   Final = 'Final',
 }
 
-export function displayStage(stage: Stage): string {
-  switch (stage) {
-    case Stage.Group:
-      return 'Poule';
-    case Stage.Sixteen:
-      return '1/8';
-    case Stage.Quarter:
-      return '1/4';
-    case Stage.Semi:
-      return '1/2';
-    case Stage.Final:
-      return 'Finale';
-  }
-}
+
 
 export type Game = {
   id: number;

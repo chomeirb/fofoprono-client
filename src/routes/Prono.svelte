@@ -1,14 +1,15 @@
 <script lang="ts">
-    import { displayStage, type Game } from '$lib/types/game';
+
+    import type { Game } from '$lib/types/game';
     import { PredictionResult, Team, type Prediction, type PronoResult } from '$lib/types/prono';
-    import { formatDate, formatTime, isPassed } from '$lib/utils/time';
+    import { displayStage, formatDate, formatTime, isPassed } from '$lib/utils/display';
 
     export let showOdds = true;
     export let pronoMode = false;
-    
+
     export let fetchedProno: PronoResult = null!;
     export let fetchedGame: Game;
-    
+
     let input: [number, number] = [null!, null!];
 
     export let prono: Prediction = null!;
@@ -29,7 +30,7 @@
 
     function getResultColor(result: PredictionResult) {
         if (!pronoMode) {
-            return ''
+            return '';
         }
         switch (result) {
             case PredictionResult.Exact:
@@ -68,40 +69,40 @@
     <div class="flex flex-row text-2xl gap-5 h-full items-center justify-between w-2/5">
         <p class="w-1/3">{fetchedGame.team_home.toUpperCase()}</p>
         {#if pronoMode}
-        <div class="flex flex-row justify-center gap-5 w-1/5">
-            <input
-                type="number"
-                inputmode="numeric"
-                min="0"
-                max="20"
-                bind:value={input[0]}
-                on:input={handleInputs}
-                class="w-7 bg-col1 text-col4 rounded text-center"
-                placeholder={prono?.prediction_home.toString() ?? fetchedProno?.prediction.prediction_home.toString() ?? '...'}
-                disabled={passed} />
-            <div class={`duration-300 flex flex-row text-green-800 z-0 ${showScore ? 'opacity-100 w-full h-full' : 'opacity-0 w-0 h-0'}`}>
-                <p>{fetchedGame.score_home}</p>
-                <p>&nbsp;-&nbsp;</p>
-                <p>{fetchedGame.score_away}</p>
+            <div class="flex flex-row justify-center gap-5 w-1/5">
+                <input
+                    type="number"
+                    inputmode="numeric"
+                    min="0"
+                    max="20"
+                    bind:value={input[0]}
+                    on:input={handleInputs}
+                    class="w-7 bg-col1 text-col4 rounded text-center"
+                    placeholder={prono?.prediction_home.toString() ?? fetchedProno?.prediction.prediction_home.toString() ?? '...'}
+                    disabled={passed} />
+                <div class={`duration-300 flex flex-row text-green-800 z-0 ${showScore ? 'opacity-100 w-full h-full' : 'opacity-0 w-0 h-0'}`}>
+                    <p>{fetchedGame.score_home}</p>
+                    <p>&nbsp;-&nbsp;</p>
+                    <p>{fetchedGame.score_away}</p>
+                </div>
+                <input
+                    type="number"
+                    inputmode="numeric"
+                    min="0"
+                    max="20"
+                    bind:value={input[1]}
+                    on:input={handleInputs}
+                    class="w-7 bg-col1 text-col4 rounded text-center z-10"
+                    placeholder={prono?.prediction_away.toString() ?? fetchedProno?.prediction.prediction_away.toString() ?? '...'}
+                    disabled={passed} />
             </div>
-            <input
-                type="number"
-                inputmode="numeric"
-                min="0"
-                max="20"
-                bind:value={input[1]}
-                on:input={handleInputs}
-                class="w-7 bg-col1 text-col4 rounded text-center z-10"
-                placeholder={prono?.prediction_away.toString() ?? fetchedProno?.prediction.prediction_away.toString() ?? '...'}
-                disabled={passed} />
-        </div>
         {:else}
-        <p class="w-7 bg-col1 text-col4 rounded text-center">
-            {fetchedGame.score_home ?? ''}
-          </p>
-          <p class="w-7 bg-col1 text-col4 rounded text-center">
-            {fetchedGame.score_away ?? ''}
-          </p>
+            <p class="w-7 bg-col1 text-col4 rounded text-center">
+                {fetchedGame.score_home ?? ''}
+            </p>
+            <p class="w-7 bg-col1 text-col4 rounded text-center">
+                {fetchedGame.score_away ?? ''}
+            </p>
         {/if}
         <p class="w-1/3 text-right">
             {fetchedGame.team_away.toUpperCase()}
@@ -110,11 +111,11 @@
     <div class="flex flex-row justify-end w-1/4 gap-5">
         <p class="text-lg">{displayStage(fetchedGame.stage)}</p>
         {#if showOdds}
-        <div class="flex flex-row gap-1">
-            <p class="text-xl border-2">{fetchedGame.odds_home}</p>
-            <p class="text-xl border-2">{fetchedGame.odds_draw}</p>
-            <p class="text-xl border-2">{fetchedGame.odds_away}</p>
-        </div>
+            <div class="flex flex-row gap-1">
+                <p class="text-xl border-2">{fetchedGame.odds_home}</p>
+                <p class="text-xl border-2">{fetchedGame.odds_draw}</p>
+                <p class="text-xl border-2">{fetchedGame.odds_away}</p>
+            </div>
         {/if}
         <button
             on:click={setRemove}

@@ -1,17 +1,15 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { displayStage, type Game } from '$lib/types/game';
+  import type { Game } from '$lib/types/game';
   import type { Prediction, PronoResult } from '$lib/types/prono';
+  import GamesDisplay from '../GamesDisplay.svelte';
+
   import { fetchError, fetchStatus, games } from '../store';
-  import PronoC from '../Prono.svelte';
 
   let inputs: [number, number][] = [];
 
   let submitPronos: Prediction[] = [];
   let removePronos: Prediction[] = [];
-
-  let teamFilter: boolean[] = [];
-  let stageFilter: boolean[] = [];
 
   // fetchError.set('loading')
 
@@ -23,17 +21,6 @@
 
     // Force update store queries when games are loaded
     goto(window.location.href);
-  });
-
-  export let queryTeam;
-  export let queryStage;
-
-  queryTeam.subscribe((team: string) => {
-    teamFilter = $games.map(([, game]) => game.team_home.concat(' ', game.team_away).toUpperCase().includes(team.toUpperCase()));
-  });
-
-  queryStage.subscribe((stage: string) => {
-    stageFilter = $games.map(([, game]) => displayStage(game.stage).toUpperCase().includes(stage.toUpperCase()));
   });
 
   const submit = async () => {
@@ -69,22 +56,16 @@
 
 <form id="Pronos" on:submit|preventDefault={submit}>
   <div class="flex flex-col items-center justify-center mb-3 w-full">
-    <ul class="w-[95%] flex flex-col gap-3 pt-4">
-      {#if $fetchError !== ''}
-        <li class="flex flex-row items-center justify-between bg-col1 text-col4 py-2 px-5 rounded">
-          <p class="font-bold">Aucun pronostique</p>
-          <p>
-            Problème rencontré lors du chargement: {$fetchStatus}
-            {$fetchError}
-          </p>
-        </li>
-      {:else}
-        {#each $games as [fetchedProno, fetchedGame], index}
-          {#if teamFilter[index] && stageFilter[index]}
-            <PronoC pronoMode={true} fetchedProno={fetchedProno} fetchedGame={fetchedGame} bind:prono={submitPronos[index]} bind:remove={removePronos[index]} />
-          {/if}
-        {/each}
-      {/if}
-    </ul>
+    {#if $fetchError !== ''}
+      <div class="flex flex-row items-center justify-between bg-col1 text-col4 py-2 px-5 rounded">
+        <p class="font-bold">Aucun pronostique</p>
+        <p>
+          Problème rencontré lors du chargement: {$fetchStatus}
+          {$fetchError}
+        </p>
+      </div>
+    {:else}
+      <GamesDisplay pronoMode={true} games={$games} bind:pronos={submitPronos} bind:removes={removePronos} />
+    {/if}
   </div>
 </form>

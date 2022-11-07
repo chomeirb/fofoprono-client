@@ -1,4 +1,5 @@
 import type { SystemTime } from "$lib/types/game";
+import { Stage } from "$lib/types/game";
 
 export function isPassed(time: SystemTime): boolean {
   return new Date(time.secs_since_epoch * 1000) < new Date();
@@ -21,4 +22,20 @@ export function formatTime(time: SystemTime): string {
     hour: "numeric",
     minute: "numeric",
   });
+}
+
+
+export function displayStage(stage: Stage): string {
+  switch (stage) {
+    case Stage.Group:
+      return 'Poule';
+    case Stage.Sixteen:
+      return '1/8';
+    case Stage.Quarter:
+      return '1/4';
+    case Stage.Semi:
+      return '1/2';
+    case Stage.Final:
+      return 'Finale';
+  }
 }
