@@ -1,6 +1,6 @@
 <script lang="ts">
     import { displayStage, type Game } from '$lib/types/game';
-    import { Result, Team, type Prono, type PronoResult } from '$lib/types/prono';
+    import { PredictionResult, Team, type Prediction, type PronoResult } from '$lib/types/prono';
     import { formatDate, formatTime, isPassed } from '$lib/utils/time';
 
     export let showOdds = true;
@@ -11,8 +11,8 @@
     
     let input: [number, number] = [null!, null!];
 
-    export let prono: Prono = null!;
-    export let remove: Prono = null!;
+    export let prono: Prediction = null!;
+    export let remove: Prediction = null!;
 
     const passed = isPassed(fetchedGame.time);
     const exists = pronoMode && fetchedProno !== null;
@@ -27,16 +27,16 @@
         showScore = false;
     }
 
-    function getResultColor(result: Result) {
+    function getResultColor(result: PredictionResult) {
         if (!pronoMode) {
             return ''
         }
         switch (result) {
-            case Result.Exact:
+            case PredictionResult.Exact:
                 return 'bg-green-500';
-            case Result.Correct:
+            case PredictionResult.Correct:
                 return 'bg-yellow-500';
-            case Result.Wrong:
+            case PredictionResult.Wrong:
                 return 'bg-red-500';
         }
     }

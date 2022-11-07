@@ -1,15 +1,15 @@
-export enum Result {
+export enum PredictionResult {
   Exact = 'Exact',
   Correct = 'Correct',
   Wrong = 'Wrong',
 }
 
 export type PronoResult = {
-  prediction: Prono,
-  result: Result,
+  prediction: Prediction,
+  result: PredictionResult,
 }
 
-export type Prono = {
+export type Prediction = {
   game_id: number;
   prediction_home: number;
   prediction_away: number;

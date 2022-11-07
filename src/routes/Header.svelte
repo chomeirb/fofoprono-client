@@ -77,7 +77,7 @@
             >
           </li>
           <li class="hover:translate-y-2 duration-200">
-            <a class="bg-col1 rounded px-5 py-2" href="/standing">Classement</a>
+            <a class="bg-col1 rounded px-5 py-2" href="/ranking">Classement</a>
           </li>
           <li class="hover:translate-y-2 duration-200">
             <a class="bg-col1 rounded px-5 py-2" href="/rules">Règles</a>

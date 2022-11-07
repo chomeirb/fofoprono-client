@@ -2,7 +2,7 @@
   import { formatDate, formatTime } from '$lib/utils/time';
   import { fetchError, fetchStatus, games } from '../store';
   import type { Game } from '$lib/types/game';
-  import type { Prono, PronoResult } from '$lib/types/prono';
+  import type { Prediction, PronoResult } from '$lib/types/prono';
   import PronoC from '../prono/Prono.svelte';
 
   let gamesContent: [PronoResult, Game][] = [];
