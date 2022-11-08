@@ -1,13 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{html,svelte,ts}'],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        col1: "#3C3744",
-        col2: "#3D52D5",
-        col3: "#B4C5E4",
-        col4: "#FBFFF1",
+        primary: "#3C3744",
+        secondary: "#FBFFF1",
+        tertiary: "#3D52D5",
       },
       boxShadow: {
         'top': '0 -10px 15px -3px rgba(0, 0, 0, 0.2)',

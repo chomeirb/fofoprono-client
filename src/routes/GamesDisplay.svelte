@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Game } from '$lib/types/game';
   import type { Prediction, PronoResult } from '$lib/types/prono';
-  import { displayStage } from '$lib/utils/display';
+  import { displayStage, sysTimeToDate } from '$lib/utils/display';
   import { getQueryParamsStore } from './prono/store';
   import PronoDisplay from './Prono.svelte';
   import Filter from './Filter.svelte';
@@ -13,30 +13,51 @@
 
   let teamFilter: boolean[] = [];
   let stageFilter: boolean[] = [];
+  let fromDateFilter: boolean[] = [];
+  let toDateFilter: boolean[] = [];
 
   let queryTeam = getQueryParamsStore('team');
   let queryStage = getQueryParamsStore('stage');
+  let queryFromDate = getQueryParamsStore('from', '2022-11-17');
+  let queryToDate = getQueryParamsStore('to', '2025-11-17');
 
   queryTeam.subscribe((team: string) => {
     teamFilter = games.map(([, game]) => game.team_home.concat(' ', game.team_away).toUpperCase().includes(team.toUpperCase()));
   });
 
   queryStage.subscribe((stage: string) => {
-    stageFilter = games.map(([, game]) => displayStage(game.stage).toUpperCase().includes(stage.toUpperCase()));
+    stageFilter = games.map(([, game]) => game.stage == stage || stage == '');
+  });
+
+  queryFromDate.subscribe((date: string) => {
+    if (date == '') {
+      fromDateFilter = games.map(() => true);
+    } else {
+      fromDateFilter = games.map(([, game]) => sysTimeToDate(game.time) >= new Date(date));
+    }
+  });
+
+  queryToDate.subscribe((date: string) => {
+    if (date == '') {
+      toDateFilter = games.map(() => true);
+    } else {
+      toDateFilter = games.map(([, game]) => sysTimeToDate(game.time) <= new Date(date));
+    }
   });
 </script>
 
-<Filter bind:queryTeam bind:queryStage />
+<div class="bg-primary dark:bg-secondary w-full h-[1px] mb-3 -mt-1">&nbsp;</div>
+<Filter bind:queryTeam bind:queryStage bind:queryFromDate bind:queryToDate />
 <div class="w-full mt-4 mb-10 overflow-y-scroll h-[60vh] shadow-in items-center flex flex-col">
   <ul class="w-[95%] flex flex-col gap-3 pt-4 items-center pb-6">
-  {#each games as [fetchedProno, fetchedGame], index}
-    {#if teamFilter[index] && stageFilter[index]}
-      {#if pronoMode}
-        <PronoDisplay pronoMode fetchedProno={fetchedProno} fetchedGame={fetchedGame} bind:prono={pronos[index]} bind:remove={removes[index]} />
-      {:else}
-        <PronoDisplay fetchedGame={fetchedGame} />
+    {#each games as [fetchedProno, fetchedGame], index}
+      {#if teamFilter[index] && stageFilter[index] && fromDateFilter[index] && toDateFilter[index]}
+        {#if pronoMode}
+          <PronoDisplay pronoMode fetchedProno={fetchedProno} fetchedGame={fetchedGame} bind:prono={pronos[index]} bind:remove={removes[index]} />
+        {:else}
+          <PronoDisplay fetchedGame={fetchedGame} />
+        {/if}
       {/if}
-    {/if}
-  {/each}
+    {/each}
   </ul>
 </div>

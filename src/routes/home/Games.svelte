@@ -23,12 +23,12 @@
 
 <div class="flex flex-col items-center justify-center mb-3 w-full">
   {#if fetchErrorContent !== ''}
-    <div class="flex flex-row items-center justify-between bg-col1 text-col4 py-2 px-5 rounded">
+    <div class="flex flex-row items-center justify-between bg-primary dark:bg-secondary text-secondary dark:text-primary py-2 px-5 rounded">
       <p class="font-bold">Aucun match</p>
       <p>Problème rencontré lors du chargement: {fetchStatusContent} {fetchErrorContent}</p>
     </div>
   {:else if gamesContent.length === 0}
-    <div class="flex flex-row items-center justify-between bg-col1 text-col4 py-2 px-5 rounded">
+    <div class="flex flex-row items-center justify-between bg-primary dark:bg-secondary text-secondary dark:text-primary py-2 px-5 rounded">
       <p class="font-bold">Aucun match</p>
       <p>Il n'y a aucun match</p>
     </div>

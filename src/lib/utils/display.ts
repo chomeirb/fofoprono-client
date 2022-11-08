@@ -24,17 +24,20 @@ export function formatTime(time: SystemTime): string {
   });
 }
 
+export function sysTimeToDate(time: SystemTime): Date {
+  return new Date(time.secs_since_epoch * 1000);
+}
 
 export function displayStage(stage: Stage): string {
   switch (stage) {
     case Stage.Group:
       return 'Poule';
     case Stage.Sixteen:
-      return '1/8';
+      return 'Huitième';
     case Stage.Quarter:
-      return '1/4';
+      return 'Quart';
     case Stage.Semi:
-      return '1/2';
+      return 'Demi';
     case Stage.Final:
       return 'Finale';
   }

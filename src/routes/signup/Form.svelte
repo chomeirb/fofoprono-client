@@ -50,9 +50,9 @@
   });
 </script>
 
-<form class="flex flex-col gap-5" on:submit|preventDefault={submit}>
+<form class="flex flex-col gap-5 text-primary" on:submit|preventDefault={submit}>
   <div class="flex flex-col justify-start w-full">
-    <p class="font-bold">Pseudo</p>
+    <p class="font-bold dark:text-secondary text-primary">Pseudo</p>
     <input
       type="text"
       class="w-full h-10 shadow-lg border rounded px-2"
@@ -61,7 +61,7 @@
     />
   </div>
   <div class="flex flex-col justify-start w-full">
-    <p class="font-bold">Email</p>
+    <p class="font-bold dark:text-secondary text-primary">Email</p>
     <input
       type="email"
       class="w-full h-10 shadow-lg border rounded px-2"
@@ -70,7 +70,7 @@
     />
   </div>
   <div class="flex flex-col justify-start w-full">
-    <p class="font-bold">Mot de passe</p>
+    <p class="font-bold dark:text-secondary text-primary">Mot de passe</p>
     <input
       type="password"
       class="w-full h-10 shadow-lg border rounded px-2"
@@ -81,7 +81,7 @@
   <div class="flex flex-col items-center w-full gap-5">
     <input
       type="submit"
-      class="bg-col1 text-col4 px-5 py-2 shadow-xl rounded w-1/2 hover:translate-x-6 hover:cursor-pointer duration-200"
+      class="bg-primary dark:bg-secondary text-secondary dark:text-primary px-5 py-2 shadow-xl rounded w-1/2 hover:translate-x-6 hover:cursor-pointer duration-200"
       value={submitContent ? "Envoie..." : "M'incrire ➔"}
     />
   </div>

@@ -12,7 +12,7 @@ const URLSearchParamsToObject = (params: URLSearchParams) =>
     return obj;
 };
 
-export const getQueryParamsStore = (key: string) =>
+export const getQueryParamsStore = (key: string, defaultValue: string = '') =>
 {
     let params: Record<string, string>;
     Page.subscribe((page) =>
@@ -25,7 +25,7 @@ export const getQueryParamsStore = (key: string) =>
         {
             return Page.subscribe((page) =>
             {
-                cb(page.url.searchParams.get(key) ?? '');
+                cb(page.url.searchParams.get(key) ?? defaultValue);
             });
         },
         set: (value: string) =>

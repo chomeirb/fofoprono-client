@@ -32,13 +32,13 @@
         class="flex flex-row justify-between items-center w-full h-[50px] px-5 shadow-xl border"
       >
         <div class="w-1/4 flex flex-row justify-between">
-          <p class="text-col1 w-1/6 text-left text-xl">{i + 1}</p>
-          <p class="text-col1 w-5/6 text-left text-xl">{player.name}</p>
+          <p class="text-primary dark:text-secondary w-1/6 text-left text-xl">{i + 1}</p>
+          <p class="text-primary dark:text-secondary w-5/6 text-left text-xl">{player.name}</p>
         </div>
         <div class="w-1/2 flex flex-row justify-between">
-          <p class="text-col1 text-xl text-left w-1/4">{player.exact}</p>
-          <p class="text-col1 text-xl text-center w-1/4">{player.good}</p>
-          <p class="text-col1 text-xl text-right font-bold w-1/4">
+          <p class="text-primary dark:text-secondary text-xl text-left w-1/4">{player.exact}</p>
+          <p class="text-primary dark:text-secondary text-xl text-center w-1/4">{player.good}</p>
+          <p class="text-primary dark:text-secondary text-xl text-right font-bold w-1/4">
             {player.points}
           </p>
         </div>

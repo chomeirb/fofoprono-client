@@ -11,7 +11,7 @@ import { fetchLoggedIn } from '../store';
   {:else}
     <div class="text-4xl flex flex-row justify-between items-center w-full max-w-7xl">
       <p class="font-bold">PRONOSTIQUER</p>
-      <button type="submit" form="Pronos" class="bg-col1 text-col4 py-2 px-5 rounded hover:translate-x-3 duration-300">Soumettre →</button>
+      <button type="submit" form="Pronos" class="bg-primary dark:bg-secondary text-secondary dark:text-primary py-2 px-5 rounded hover:translate-x-3 duration-300">Soumettre →</button>
     </div>
     <div class="w-full max-w-7xl mt-4 mb-10">
       <Pronos />

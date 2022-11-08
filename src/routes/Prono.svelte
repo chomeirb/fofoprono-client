@@ -60,7 +60,7 @@
     }
 </script>
 
-<li class="flex flex-row justify-between w-full gap-5 h-full items-center shadow-xl border pr-3" on:mouseenter={enter} on:mouseleave={leave}>
+<li class="flex flex-row text-primary dark:text-secondary justify-between w-full gap-5 h-full items-center shadow-xl border pr-3" on:mouseenter={enter} on:mouseleave={leave}>
     <div class={`w-1 h-full ${getResultColor(fetchedProno?.result)} py-4`}>&nbsp;</div>
     <div class="flex flex-row gap-10 justify-between w-1/4 text-lg pr-24">
         <p>{formatDate(fetchedGame.time)}</p>
@@ -77,10 +77,10 @@
                     max="20"
                     bind:value={input[0]}
                     on:input={handleInputs}
-                    class="w-7 bg-col1 text-col4 rounded text-center"
+                    class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center"
                     placeholder={prono?.prediction_home.toString() ?? fetchedProno?.prediction.prediction_home.toString() ?? '...'}
                     disabled={passed} />
-                <div class={`duration-300 flex flex-row text-green-800 z-0 ${showScore ? 'opacity-100 w-full h-full' : 'opacity-0 w-0 h-0'}`}>
+                <div class={`duration-300 flex flex-row text-green-600 z-0 ${showScore ? 'opacity-100 w-full h-full' : 'opacity-0 w-0 h-0'}`}>
                     <p>{fetchedGame.score_home}</p>
                     <p>&nbsp;-&nbsp;</p>
                     <p>{fetchedGame.score_away}</p>
@@ -92,15 +92,15 @@
                     max="20"
                     bind:value={input[1]}
                     on:input={handleInputs}
-                    class="w-7 bg-col1 text-col4 rounded text-center z-10"
+                    class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center z-10"
                     placeholder={prono?.prediction_away.toString() ?? fetchedProno?.prediction.prediction_away.toString() ?? '...'}
                     disabled={passed} />
             </div>
         {:else}
-            <p class="w-7 bg-col1 text-col4 rounded text-center">
+            <p class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center">
                 {fetchedGame.score_home ?? ''}
             </p>
-            <p class="w-7 bg-col1 text-col4 rounded text-center">
+            <p class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center">
                 {fetchedGame.score_away ?? ''}
             </p>
         {/if}
