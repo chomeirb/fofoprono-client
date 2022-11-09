@@ -14,7 +14,7 @@
     <input
       id="from"
       type="date"
-      class="bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center px-3 py-1 w-full"
+      class="bg-primary dark:bg-secondary text-secondary dark:text-primary rounded py-1 w-full"
       bind:value={$queryFromDate} />
   </div>
   <div class="flex flex-col w-[24%]">
@@ -22,7 +22,7 @@
     <input
       id="to"
       type="date"
-      class="bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center px-3 py-1 w-1/2"
+      class="bg-primary dark:bg-secondary text-secondary dark:text-primary rounded py-1 w-1/2"
       bind:value={$queryToDate} />
   </div>
   <div class="flex flex-col w-[33%] ml-10">
@@ -30,7 +30,7 @@
     <input
       id="team"
       type="text"
-      class="bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center px-3 py-1 w-1/2"
+      class="bg-primary dark:bg-secondary text-secondary dark:text-primary rounded px-1 py-1 w-1/2"
       bind:value={$queryTeam} />
   </div>
   <div class="flex flex-col w-[10%]">
@@ -38,14 +38,12 @@
     <select
       id="stage"
       type="text"
-      class="bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center px-3 py-1 w-full h-full"
+      class="bg-primary dark:bg-secondary text-secondary dark:text-primary rounded py-1 w-full h-full"
       bind:value={$queryStage}>
-      <option value="" />
-      <option value={Stage.Group}>{displayStage(Stage.Group)}</option>
-      <option value={Stage.Sixteen}>{displayStage(Stage.Sixteen)}</option>
-      <option value={Stage.Quarter}>{displayStage(Stage.Quarter)}</option>
-      <option value={Stage.Semi}>{displayStage(Stage.Semi)}</option>
-      <option value={Stage.Final}>{displayStage(Stage.Final)}</option>
+      <option value="">Tous</option>
+      {#each Object.values(Stage) as stage}
+        <option value={stage}>{displayStage(stage)}</option>
+      {/each}
     </select>
   </div>
 </div>

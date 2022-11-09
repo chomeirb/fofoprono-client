@@ -1,5 +1,4 @@
 <script lang="ts">
-
     import type { Game } from '$lib/types/game';
     import { PredictionResult, Team, type Prediction, type PronoResult } from '$lib/types/prono';
     import { displayStage, formatDate, formatTime, isPassed } from '$lib/utils/display';
@@ -60,7 +59,10 @@
     }
 </script>
 
-<li class="flex flex-row text-primary dark:text-secondary justify-between w-full gap-5 h-full items-center shadow-xl border pr-3" on:mouseenter={enter} on:mouseleave={leave}>
+<li
+    class="flex flex-row text-primary dark:text-secondary justify-between w-full gap-5 h-full items-center shadow-xl border pr-3"
+    on:mouseenter={enter}
+    on:mouseleave={leave}>
     <div class={`w-1 h-full ${getResultColor(fetchedProno?.result)} py-4`}>&nbsp;</div>
     <div class="flex flex-row gap-10 justify-between w-1/4 text-lg pr-24">
         <p>{formatDate(fetchedGame.time)}</p>
@@ -68,8 +70,8 @@
     </div>
     <div class="flex flex-row text-2xl gap-5 h-full items-center justify-between w-2/5">
         <p class="w-1/3">{fetchedGame.team_home.toUpperCase()}</p>
-        {#if pronoMode}
-            <div class="flex flex-row justify-center gap-5 w-1/5">
+        <div class="flex flex-row justify-center w-1/5">
+            {#if pronoMode}
                 <input
                     type="number"
                     inputmode="numeric"
@@ -77,14 +79,12 @@
                     max="20"
                     bind:value={input[0]}
                     on:input={handleInputs}
-                    class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center"
+                    class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center mr-3"
                     placeholder={prono?.prediction_home.toString() ?? fetchedProno?.prediction.prediction_home.toString() ?? '...'}
                     disabled={passed} />
-                <div class={`duration-300 flex flex-row text-green-600 z-0 ${showScore ? 'opacity-100 w-full h-full' : 'opacity-0 w-0 h-0'}`}>
-                    <p>{fetchedGame.score_home}</p>
-                    <p>&nbsp;-&nbsp;</p>
-                    <p>{fetchedGame.score_away}</p>
-                </div>
+                <p class={`duration-100 flex-none text-green-600 z-0 ${showScore ? '' : 'text-[0px]'}`}>
+                    {fetchedGame.score_home} - {fetchedGame.score_away}
+                </p>
                 <input
                     type="number"
                     inputmode="numeric"
@@ -92,18 +92,18 @@
                     max="20"
                     bind:value={input[1]}
                     on:input={handleInputs}
-                    class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center z-10"
+                    class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center ml-3 z-10"
                     placeholder={prono?.prediction_away.toString() ?? fetchedProno?.prediction.prediction_away.toString() ?? '...'}
                     disabled={passed} />
-            </div>
-        {:else}
-            <p class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center">
-                {fetchedGame.score_home ?? ''}
-            </p>
-            <p class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center">
-                {fetchedGame.score_away ?? ''}
-            </p>
-        {/if}
+            {:else}
+                <p class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center mr-3">
+                    {fetchedGame.score_home ?? ''}
+                </p>
+                <p class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center ml-3">
+                    {fetchedGame.score_away ?? ''}
+                </p>
+            {/if}
+        </div>
         <p class="w-1/3 text-right">
             {fetchedGame.team_away.toUpperCase()}
         </p>
