@@ -11,7 +11,7 @@
 
 <div class="flex flex-col items-center justify-center w-full h-full">
   {#if curtainValue}
-    <div id="welcome" class="absolute bg-primary dark:bg-secondary text-secondary dark:text-primary  h-[calc(100vh_-_180px)] w-full flex flex-row items-center justify-center duration-500 z-10">
+    <div id="welcome" class="absolute bg-gradient-to-bl from-primary to-black dark:bg-secondary text-secondary  h-[calc(100vh_-_180px)] w-full flex flex-row items-center justify-center duration-500 z-10">
       <p class="text-6xl font-bold p-60 text-center">Bienvenue sur FOFOPRONO, sur le site de pronostics de la coupe du monde 2022!</p>
       <button
         class="py-2 px-5 rounded h-full text-8xl w-1/3"

@@ -94,7 +94,7 @@
           <img
             src={darkMode ? nightLightDark : nightLight}
             id="night-light"
-            class="h-10 hover:opacity-70 hover:cursor-pointer"
+            class="h-8 hover:opacity-70 hover:cursor-pointer"
             alt="night-light"
             on:click={toggleDarkMode} />
           <li class="flex flex-row items-center gap-6">

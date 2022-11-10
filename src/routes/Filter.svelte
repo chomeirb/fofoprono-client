@@ -14,7 +14,7 @@
     <input
       id="from"
       type="date"
-      class="bg-primary dark:bg-secondary text-secondary dark:text-primary rounded py-1 w-full"
+      class="bg-primary dark:bg-secondary text-secondary dark:text-primary rounded px-3 py-1 w-full h-10"
       bind:value={$queryFromDate} />
   </div>
   <div class="flex flex-col w-full">
@@ -22,7 +22,7 @@
     <input
       id="to"
       type="date"
-      class="bg-primary dark:bg-secondary text-secondary dark:text-primary rounded py-1 w-1/2"
+      class="bg-primary dark:bg-secondary text-secondary dark:text-primary rounded px-3 py-1 w-full h-10"
       bind:value={$queryToDate} />
   </div>
   <div class="flex flex-col w-full">
@@ -30,7 +30,7 @@
     <input
       id="team"
       type="text"
-      class="bg-primary dark:bg-secondary text-secondary dark:text-primary rounded px-1 py-1 w-1/2"
+      class="bg-primary dark:bg-secondary text-secondary dark:text-primary rounded px-3 py-1 w-full h-10"
       bind:value={$queryTeam} />
   </div>
   <div class="flex flex-col w-full">
@@ -38,7 +38,7 @@
     <select
       id="stage"
       type="text"
-      class="bg-primary dark:bg-secondary text-secondary dark:text-primary rounded py-1 w-full h-full"
+      class="bg-primary dark:bg-secondary text-secondary dark:text-primary rounded px-3 py-1 w-full h-10"
       bind:value={$queryStage}>
       <option value="">Tous</option>
       {#each Object.values(Stage) as stage}
