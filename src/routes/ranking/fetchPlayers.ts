@@ -1,10 +1,10 @@
-import { fetchError, fetchStatus, games } from "./store";
+import { fetchStatus, fetchError, players } from "./store";
 
-export async function getGames()
+export async function getPlayers()
 {
   try
   {
-    const response = await fetch("/api/games", {
+    const response = await fetch("/api/ranking", {
       method: "GET",
       credentials: "same-origin",
     });
@@ -13,7 +13,7 @@ export async function getGames()
 
     if (response.ok)
     {
-      games.set(await response.json());
+      players.set(await response.json());
       fetchError.set('');
     } else
     {
@@ -23,6 +23,6 @@ export async function getGames()
   {
     console.error(error);
     console.error("Unexpected Error");
-    fetchError.set("Could not fetch games");
+    fetchError.set("Could not fetch players");
   }
 }

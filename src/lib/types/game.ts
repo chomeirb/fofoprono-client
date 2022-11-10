@@ -1,12 +1,11 @@
-export enum Stage {
+export enum Stage
+{
   Group = 'Group',
   Sixteen = 'Sixteen',
   Quarter = 'Quarter',
   Semi = 'Semi',
   Final = 'Final',
 }
-
-
 
 export type Game = {
   id: number;

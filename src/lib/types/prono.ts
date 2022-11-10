@@ -1,4 +1,5 @@
-export enum PredictionResult {
+export enum PredictionResult
+{
   Exact = 'Exact',
   Correct = 'Correct',
   Wrong = 'Wrong',
@@ -15,7 +16,8 @@ export type Prediction = {
   prediction_away: number;
 };
 
-export enum Team {
+export enum Team
+{
   Home,
   Away,
 }

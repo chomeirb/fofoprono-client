@@ -6,16 +6,12 @@
 
   import { fetchError, fetchStatus, games } from '../store';
 
-  let inputs: [number, number][] = [];
-
   let submitPronos: Prediction[] = [];
   let removePronos: Prediction[] = [];
 
   // fetchError.set('loading')
 
   games.subscribe((value: [PronoResult, Game][]) => {
-    inputs = value.map(() => [null!, null!]);
-
     submitPronos = value.map(() => null!);
     removePronos = value.map(() => null!);
 
