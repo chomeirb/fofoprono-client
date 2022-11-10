@@ -1,7 +1,6 @@
 import { writable, type Writable } from "svelte/store";
 import type { Game } from "$lib/types/game";
 import type { PronoResult } from "$lib/types/prono";
-import type { UserScore } from "$lib/types/player";
 
 export const games: Writable<[PronoResult, Game][]> = writable([]);
 

@@ -1,11 +1,11 @@
 <script lang="ts">
   import PlayerDisplay from './Player.svelte';
   import { fetchError, fetchStatus, players } from './store';
-  import type { Current, Other } from '$lib/types/player';
+  import type { RankedUser } from "$lib/types/player";
 
-  let orderedPlayers: (Current | Other)[];
+  let orderedPlayers: RankedUser[];
 
-  players.subscribe((value: (Current | Other)[]) => {
+  players.subscribe((value: RankedUser[]) => {
     orderedPlayers = value;
   });
 </script>
