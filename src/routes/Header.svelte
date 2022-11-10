@@ -70,7 +70,7 @@
 </script>
 
 <header class="flex flex-row shadow-lg justify-center text-3xl text-secondary dark:text-primary w-full h-[90px]">
-  <div class="w-full h-full max-w-7xl flex flex-row justify-center gap-5 items-center">
+  <div class="w-full h-full max-w-8xl flex flex-row justify-center gap-5 items-center">
     <a href="/home" class="h-[50%] hover:-rotate-12 duration-200" on:click={enableCurtain}>
       <img src={darkMode ? logoDark : logo} alt="logo" class="h-full" />
     </a>

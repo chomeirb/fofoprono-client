@@ -46,18 +46,19 @@
   });
 </script>
 
-<div class="bg-primary dark:bg-secondary w-full h-[1px] mb-3 -mt-1">&nbsp;</div>
-<Filter bind:queryTeam bind:queryStage bind:queryFromDate bind:queryToDate />
-<div class="w-full mt-4 mb-10 overflow-y-scroll h-[60vh] shadow-in items-center flex flex-col">
-  <ul class="w-[95%] flex flex-col gap-3 pt-4 items-center pb-6">
-    {#each games as [fetchedProno, fetchedGame], index}
-      {#if teamFilter[index] && stageFilter[index] && fromDateFilter[index] && toDateFilter[index]}
-        {#if pronoMode}
-          <PronoDisplay pronoMode fetchedProno={fetchedProno} fetchedGame={fetchedGame} bind:prono={pronos[index]} bind:remove={removes[index]} />
-        {:else}
-          <PronoDisplay fetchedGame={fetchedGame} />
+<div class="w-full grid grid-cols-20-80">
+  <Filter bind:queryTeam bind:queryStage bind:queryFromDate bind:queryToDate />
+  <div class="w-full mt-4 mb-10 overflow-y-scroll h-[60vh] shadow-in items-center flex flex-col">
+    <ul class="w-[95%] flex flex-col gap-3 pt-4 items-center pb-6">
+      {#each games as [fetchedProno, fetchedGame], index}
+        {#if teamFilter[index] && stageFilter[index] && fromDateFilter[index] && toDateFilter[index]}
+          {#if pronoMode}
+            <PronoDisplay pronoMode fetchedProno={fetchedProno} fetchedGame={fetchedGame} bind:prono={pronos[index]} bind:remove={removes[index]} />
+          {:else}
+            <PronoDisplay fetchedGame={fetchedGame} />
+          {/if}
         {/if}
-      {/if}
-    {/each}
-  </ul>
+      {/each}
+    </ul>
+  </div>
 </div>

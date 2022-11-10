@@ -12,7 +12,7 @@ module.exports = {
       },
       boxShadow: {
         'top': '0 -10px 15px -3px rgba(0, 0, 0, 0.2)',
-        'in': 'inset 10px 0px 15px 0 rgba(0, 0, 0, 0.2)',
+        'in': 'inset 10px 0px 15px 10px rgba(0, 0, 0, 0.2)',
       },
       fontFamily: {
         sans: ["Inter var", "sans-serif"],
@@ -56,9 +56,6 @@ module.exports = {
       backgroundSize: {
         '2000': '2000px',
       },
-      gridTemplateColumns: {
-        'welcome': '5fr 4fr',
-      },
       spacing: {
         112: '26rem',
         116: '28rem',
@@ -72,6 +69,12 @@ module.exports = {
         '4xl': '1.75rem',
         '5xl': '3rem',
         '6xl': '4rem',
+      },
+      maxWidth: {
+        '8xl': '1600px',
+      },
+      gridTemplateColumns: {
+        '20-80': '2fr 10fr',
       },
       rotate: {
         '405': '405deg',

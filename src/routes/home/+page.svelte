@@ -23,11 +23,11 @@
   {/if}
   <!-- <Welcome /> -->
   <div class="flex flex-col items-center mt-10 justify-center w-full" on:mouseenter={slide(-100, 'welcome')}>
-    <div class="text-4xl flex flex-row justify-between items-center pt-10 w-full max-w-7xl">
+    <div class="text-4xl flex flex-row justify-between items-center pt-10 w-full max-w-8xl">
       <p class="text-primary dark:text-secondary font-bold">MATCHS</p>
       <a href="/prono" class="bg-primary dark:bg-secondary text-secondary dark:text-primary py-2 px-5 rounded hover:translate-x-3 duration-300">Pronostiquer →</a>
     </div>
-    <div class="w-full max-w-7xl mt-4 mb-10">
+    <div class="w-full max-w-8xl mt-4 mb-10">
       <Games />
     </div>
   </div>

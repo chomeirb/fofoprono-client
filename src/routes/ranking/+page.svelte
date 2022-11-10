@@ -10,7 +10,7 @@
 </script>
 
 <div class="flex flex-col items-center justify-center py-10 w-full h-full">
-  <div class="text-4xl flex flex-row justify-between items-center w-full max-w-7xl">
+  <div class="text-4xl flex flex-row justify-between items-center w-full max-w-8xl">
     <p class="font-bold">CLASSEMENT</p>
   </div>
   <div class="w-full max-w-7xl mt-5 bg-primary dark:bg-secondary text-secondary dark:text-primary items-center">
