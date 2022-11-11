@@ -1,9 +1,8 @@
-import { fetchStatus, fetchError, players } from "./store";
+import type { RankedUser } from "$lib/types/player";
+import { fetchStatus, fetchError } from "./store";
 
-export async function getPlayers()
-{
-  try
-  {
+export async function getPlayers(): Promise<RankedUser[]> {
+  try {
     const response = await fetch("/api/ranking", {
       method: "GET",
       credentials: "same-origin",
@@ -11,18 +10,17 @@ export async function getPlayers()
 
     fetchStatus.set(response.status);
 
-    if (response.ok)
-    {
-      players.set(await response.json());
+    if (response.ok) {
       fetchError.set('');
-    } else
-    {
+      return await response.json();
+    } else {
       fetchError.set(response.statusText);
+      return [];
     }
-  } catch (error)
-  {
+  } catch (error) {
     console.error(error);
     console.error("Unexpected Error");
     fetchError.set("Could not fetch players");
+    return [];
   }
 }

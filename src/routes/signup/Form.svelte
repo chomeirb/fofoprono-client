@@ -22,7 +22,6 @@
     submiting.set(true);
     try {
       const body = JSON.stringify({ name, mail, password });
-      console.log(body);
       const res = await fetch(`/api/signup`, {
         method: "POST",
         headers: {
