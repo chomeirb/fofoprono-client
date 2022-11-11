@@ -1,7 +1,5 @@
 <script>
-  import { onMount } from 'svelte';
   import Ranking from './Ranking.svelte';
-  import RankingBanner from './RankingBanner.svelte';
 </script>
 
 <div class="flex flex-col items-center justify-center mt-10 w-full h-full">
