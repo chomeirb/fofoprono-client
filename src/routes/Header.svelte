@@ -90,7 +90,7 @@
             <a class="bg-primary dark:bg-secondary rounded px-5 py-2" href="/rules">Règles</a>
           </li>
         </div>
-        <div class="text-primary dark:text-secondary text-xl flex flex-row gap-5">
+        <div class="text-primary dark:text-secondary text-xl flex flex-row items-center gap-5">
           <img
             src={darkMode ? nightLightDark : nightLight}
             id="night-light"

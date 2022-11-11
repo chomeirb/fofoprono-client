@@ -64,12 +64,12 @@
     on:mouseenter={enter}
     on:mouseleave={leave}>
     <div class={`w-1 h-full ${getResultColor(fetchedProno?.result)} py-4`}>&nbsp;</div>
-    <div class="flex flex-row gap-10 justify-between w-1/4 text-lg pr-24">
+    <div class="flex flex-row gap-5 justify-between w-[22%] text-lg pr-16">
         <p>{formatDate(fetchedGame.time)}</p>
         <p>{formatTime(fetchedGame.time)}</p>
     </div>
-    <div class="flex flex-row text-2xl gap-5 h-full items-center justify-between w-2/5">
-        <p class="w-1/3">{fetchedGame.team_home.toUpperCase()}</p>
+    <div class="flex flex-row text-2xl gap-5 h-full items-center justify-between w-[45%]">
+        <p class="w-[40%]">{fetchedGame.team_home.toUpperCase()}</p>
         <div class="flex flex-row justify-center w-1/5">
             {#if pronoMode}
                 <input
@@ -104,7 +104,7 @@
                 </p>
             {/if}
         </div>
-        <p class="w-1/3 text-right">
+        <p class="w-[40%] text-right">
             {fetchedGame.team_away.toUpperCase()}
         </p>
     </div>
@@ -112,9 +112,9 @@
         <p class="text-lg">{displayStage(fetchedGame.stage)}</p>
         {#if showOdds}
             <div class="flex flex-row gap-1">
-                <p class="text-xl border-2">{fetchedGame.odds_home}</p>
-                <p class="text-xl border-2">{fetchedGame.odds_draw}</p>
-                <p class="text-xl border-2">{fetchedGame.odds_away}</p>
+                <p class="text-xl border-2 px-1">{fetchedGame.odds_home.toPrecision(3)}</p>
+                <p class="text-xl border-2 px-1">{fetchedGame.odds_draw.toPrecision(3)}</p>
+                <p class="text-xl border-2 px-1">{fetchedGame.odds_away.toPrecision(3)}</p>
             </div>
         {/if}
         <button

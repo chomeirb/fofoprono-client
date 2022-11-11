@@ -12,7 +12,7 @@
   </li>
 </ul> -->
 
-<div class="flex justify-between">
+<div class="flex justify-around">
   <p>Rg</p>
   <p>Nom</p>
   <p>Sc. exacts</p>

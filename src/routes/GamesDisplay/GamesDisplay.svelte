@@ -2,8 +2,8 @@
   import type { Game } from '$lib/types/game';
   import type { Prediction, PronoResult } from '$lib/types/prono';
   import { displayStage, sysTimeToDate } from '$lib/utils/display';
-  import { getQueryParamsStore } from './prono/store';
-  import PronoDisplay from './Prono.svelte';
+  import { getQueryParamsStore } from '../prono/store';
+  import PronoDisplay from './Game.svelte';
   import Filter from './Filter.svelte';
 
   export let pronoMode: boolean;

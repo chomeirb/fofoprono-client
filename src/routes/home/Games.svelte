@@ -2,7 +2,7 @@
   import { fetchError, fetchStatus, games } from '../store';
   import type { Game } from '$lib/types/game';
   import type { PronoResult } from '$lib/types/prono';
-  import GamesDisplay from '../GamesDisplay.svelte';
+  import GamesDisplay from '../GamesDisplay/GamesDisplay.svelte';
 
   let gamesContent: [PronoResult, Game][] = [];
   let fetchErrorContent: String;

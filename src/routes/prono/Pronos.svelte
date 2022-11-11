@@ -2,7 +2,7 @@
   import { goto } from '$app/navigation';
   import type { Game } from '$lib/types/game';
   import type { Prediction, PronoResult } from '$lib/types/prono';
-  import GamesDisplay from '../GamesDisplay.svelte';
+  import GamesDisplay from '../GamesDisplay/GamesDisplay.svelte';
 
   import { fetchError, fetchStatus, games } from '../store';
 
