@@ -9,6 +9,7 @@ export type RankedUser = {
     name: string,
     user_score: UserScore,
     user_type: UserType,
+    rank: number,
 }
 
 export enum UserType {
