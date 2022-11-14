@@ -3,7 +3,6 @@
 
     export let player: RankedUser;
 
-    //52/3
 </script>
 
 <li class="flex flex-row justify-between items-center w-full px-5 py-3 shadow-xl border">
