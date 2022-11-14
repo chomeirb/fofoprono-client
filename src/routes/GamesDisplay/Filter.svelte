@@ -8,8 +8,8 @@
   export let queryToDate;
 </script>
 
-<div class="flex flex-col gap-3 justify-start w-[90%] shadow-in mt-4 px-4 py-5 h-min">
-  <div class="flex flex-col w-full">
+<div class="flex flex-col m8:flex-row gap-3 justify-start m8:justify-around w-[90%] shadow-in mt-4 px-4 m8:px-1 py-5 m8:py-2 m8:text-base h-min">
+  <div class="flex flex-col w-full m8:w-[20%]">
     <label for="from">Du</label>
     <input
       id="from"
@@ -17,7 +17,7 @@
       class="bg-primary dark:bg-secondary text-secondary dark:text-primary rounded px-3 py-1 w-full h-10"
       bind:value={$queryFromDate} />
   </div>
-  <div class="flex flex-col w-full">
+  <div class="flex flex-col w-full m8:w-[20%]">
     <label for="to">Au</label>
     <input
       id="to"
@@ -25,7 +25,7 @@
       class="bg-primary dark:bg-secondary text-secondary dark:text-primary rounded px-3 py-1 w-full h-10"
       bind:value={$queryToDate} />
   </div>
-  <div class="flex flex-col w-full">
+  <div class="flex flex-col w-full m8:w-[20%]">
     <label for="team">Équipe</label>
     <input
       id="team"
@@ -33,7 +33,7 @@
       class="bg-primary dark:bg-secondary text-secondary dark:text-primary rounded px-3 py-1 w-full h-10"
       bind:value={$queryTeam} />
   </div>
-  <div class="flex flex-col w-full">
+  <div class="flex flex-col w-full m8:w-[20%]">
     <label for="stage">Étape</label>
     <select
       id="stage"

@@ -60,16 +60,19 @@
 </script>
 
 <li
-    class="flex flex-row text-primary dark:text-secondary justify-between w-full gap-5 h-full items-center shadow-xl border pr-3"
+    class="flex flex-row m8:flex-col text-primary dark:text-secondary justify-between m8:justify-start w-full gap-5 m8:gap-2 h-full items-center shadow-xl border pr-3 m8:pb-3 m8:px-3"
     on:mouseenter={enter}
     on:mouseleave={leave}>
-    <div class={`w-1 h-full ${getResultColor(fetchedProno?.result)} py-4`}>&nbsp;</div>
-    <div class="flex flex-row gap-5 justify-between w-[22%] text-lg pr-16">
-        <p>{formatDate(fetchedGame.time)}</p>
-        <p>{formatTime(fetchedGame.time)}</p>
+    <div class={`w-1 h-full m8:h-1 m8:w-full ${getResultColor(fetchedProno?.result)} py-4 m8:py-0`}>&nbsp;</div>
+    <div class="flex flex-row gap-5 justify-between w-[22%] m8:w-full text-lg pr-16 m8:pr-0">
+        <div class="flex flex-row m8:w-[44%] w-[80%] justify-between">
+            <p>{formatDate(fetchedGame.time)}</p>
+            <p>{formatTime(fetchedGame.time)}</p>
+        </div>
+        <p class="text-lg hidden m8:flex">{displayStage(fetchedGame.stage)}</p>
     </div>
-    <div class="flex flex-row text-2xl gap-5 h-full items-center justify-between w-[45%]">
-        <p class="w-[40%]">{fetchedGame.team_home.toUpperCase()}</p>
+    <div class="flex flex-row text-2xl gap-5 h-full items-center justify-between w-[45%] m8:w-full">
+        <p class="w-[40%] m8:text-right">{fetchedGame.team_home.toUpperCase()}</p>
         <div class="flex flex-row justify-center w-1/5">
             {#if pronoMode}
                 <input
@@ -82,7 +85,7 @@
                     class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center mr-3"
                     placeholder={prono?.prediction_home.toString() ?? fetchedProno?.prediction.prediction_home.toString() ?? '...'}
                     disabled={passed} />
-                <p class={`duration-100 flex-none text-green-600 z-0 ${showScore ? '' : 'text-[0px]'}`}>
+                <p class={`duration-100 flex-none text-green-600 ${showScore ? '' : 'text-[0px]'}`}>
                     {fetchedGame.score_home} - {fetchedGame.score_away}
                 </p>
                 <input
@@ -92,7 +95,7 @@
                     max="20"
                     bind:value={input[1]}
                     on:input={handleInputs}
-                    class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center ml-3 z-10"
+                    class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center ml-3"
                     placeholder={prono?.prediction_away.toString() ?? fetchedProno?.prediction.prediction_away.toString() ?? '...'}
                     disabled={passed} />
             {:else}
@@ -104,14 +107,14 @@
                 </p>
             {/if}
         </div>
-        <p class="w-[40%] text-right">
+        <p class="w-[40%] text-right m8:text-left">
             {fetchedGame.team_away.toUpperCase()}
         </p>
     </div>
-    <div class="flex flex-row justify-end w-1/4 gap-5">
-        <p class="text-lg">{displayStage(fetchedGame.stage)}</p>
+    <div class="flex flex-row justify-end mt-1 w-1/4 m8:w-full gap-5">
+        <p class="text-lg m8:hidden">{displayStage(fetchedGame.stage)}</p>
         {#if showOdds}
-            <div class="flex flex-row gap-1">
+            <div class="flex flex-row m8:justify-around gap-1 m8:gap-5 m8:mr-6">
                 <p class="text-xl border-2 px-1">{fetchedGame.odds_home.toPrecision(3)}</p>
                 <p class="text-xl border-2 px-1">{fetchedGame.odds_draw.toPrecision(3)}</p>
                 <p class="text-xl border-2 px-1">{fetchedGame.odds_away.toPrecision(3)}</p>

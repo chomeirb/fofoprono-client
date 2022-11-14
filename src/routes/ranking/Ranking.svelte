@@ -67,9 +67,9 @@
   }
 </script>
 
-<div class="w-full grid grid-cols-20-80">
+<div class="w-full grid grid-cols-20-80 m8:flex m8:flex-col m8:items-center">
   <Filter bind:queryPlayer />
-  <div class="flex flex-col items-center justify-center mt-4 mb-10 w-full h-[60vh] shadow-in">
+  <div class="flex flex-col items-center justify-center mt-4 w-full h-[60vh] m8:h-[50vh] shadow-in">
     <RankingBanner sortingFunction={sortPlayers} currentSortLabel={currentSortLabel} currentSortOrder={currentSortOrder}/>
     <ul class="w-full px-5 h-full flex flex-col gap-3 pt-4 overflow-y-scroll">
       {#each orderedPlayers as player, index}

@@ -81,16 +81,16 @@
       !hamIsOpen ? 'translate-x-[100vw]' : ''
     } duration-500 mt-[90px] items-center`}>
     <li class="w-4/6 py-2 flex flex-col items-center rounded border">
-      <a on:click={disableCurtain} href="/home">Accueil</a>
+      <a on:click={() => hamIsOpen = false} href="/home">Accueil</a>
     </li>
     <li class="w-4/6 py-2 flex flex-col items-center rounded border">
-      <a href="/prono">Pronostics</a>
+      <a on:click={() => hamIsOpen = false} href="/prono">Pronostics</a>
     </li>
     <li class="w-4/6 py-2 flex flex-col items-center rounded border">
-      <a href="/ranking">Classement</a>
+      <a on:click={() => hamIsOpen = false} href="/ranking">Classement</a>
     </li>
     <li class="w-4/6 py-2 flex flex-col items-center rounded border">
-      <a href="/rules">Règles</a>
+      <a on:click={() => hamIsOpen = false} href="/rules">Règles</a>
     </li>
     <li>
       <img

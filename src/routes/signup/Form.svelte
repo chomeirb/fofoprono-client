@@ -77,10 +77,10 @@
       on:change={cleanResult}
     />
   </div>
-  <div class="flex flex-col items-center w-full gap-5">
+  <div class="flex flex-col items-center w-full gap-5 mt-5">
     <input
       type="submit"
-      class="bg-primary dark:bg-secondary text-secondary dark:text-primary px-5 py-2 shadow-xl rounded w-1/2 hover:translate-x-6 hover:cursor-pointer duration-200"
+      class="bg-primary dark:bg-secondary text-secondary dark:text-primary px-5 py-2 shadow-xl rounded w-1/2 m8:w-5/6 hover:translate-x-6 hover:cursor-pointer duration-200"
       value={submitContent ? "Envoie..." : "M'incrire ➔"}
     />
   </div>

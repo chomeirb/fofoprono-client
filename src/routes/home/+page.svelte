@@ -13,7 +13,7 @@
   {#if curtainValue}
     <div
       id="welcome"
-      class="absolute bg-gradient-to-bl from-primary to-black dark:bg-secondary text-secondary  h-[calc(100vh_-_180px)] w-full flex flex-row items-center justify-center duration-500 z-10">
+      class="absolute m8:hidden bg-gradient-to-bl from-primary to-black dark:bg-secondary text-secondary  h-[calc(100vh_-_180px)] w-full flex flex-row items-center justify-center duration-500 z-10">
       <p class="text-6xl font-bold p-60 text-center">Bienvenue sur FOFOPRONO, le site de pronostics de la coupe du monde 2022!</p>
       <button
         class="py-2 px-5 rounded h-full text-8xl w-1/3"
@@ -25,12 +25,14 @@
   {/if}
   <!-- <Welcome /> -->
   <div class="flex flex-col items-center mt-10 justify-center w-full" on:mouseenter={slide(-100, 'welcome')}>
-    <div class="text-4xl flex flex-row justify-between items-center pt-10 w-full max-w-8xl">
+    <div class="text-4xl m8:text-2xl flex flex-row m8:flex-col justify-between m8:justify-start m8:gap-5 items-center w-full max-w-8xl">
       <p class="text-primary dark:text-secondary font-bold">CALENDRIER/RÉSULTATS</p>
-      <a href="/prono" class="bg-primary dark:bg-secondary text-secondary dark:text-primary py-2 px-5 rounded hover:translate-x-3 duration-300"
+      <a
+        href="/prono"
+        class="bg-primary dark:bg-secondary text-secondary dark:text-primary m8:text-lg py-2 px-5 m8:hidden rounded hover:translate-x-3 duration-300"
         >Pronostiquer →</a>
     </div>
-    <div class="w-full max-w-8xl mt-4 mb-10">
+    <div class="w-full max-w-8xl mt-4 m8:mb-0">
       <Games />
     </div>
   </div>
