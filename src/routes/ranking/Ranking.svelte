@@ -25,22 +25,27 @@
       }
       return player;
     });
-    playerFilter = filterPlayers($queryPlayer);
+    orderedPlayers = filterPlayers($queryPlayer);
+    console.log(orderedPlayers);
   });
 
   queryPlayer.subscribe((players: string) => {
     localStorage.setItem('player', players);
-    playerFilter = filterPlayers(players);
+    orderedPlayers = filterPlayers(players);
   });
 
-  function filterPlayers(players: string): boolean[] {
+  function filterPlayers(players: string): RankedUser[] {
     if (players == '') {
-      return orderedPlayers.map(() => true);
+      return orderedPlayers.map((player) => {
+        player.show = true;
+        return player;
+      });
     } else {
       let queryPlayersArray = players.split(',').map((player) => player.trim());
-      return orderedPlayers.map((player) =>
-        queryPlayersArray.reduce((acc, current) => acc || (player.name.toUpperCase().includes(current.toUpperCase()) && current !== ''), false)
-      );
+      return orderedPlayers.map((player) => {
+        player.show = queryPlayersArray.reduce((acc, current) => acc || (player.name.toUpperCase().includes(current.toUpperCase()) && current !== ''), false);
+        return player;
+      });
     }
   }
 
@@ -70,10 +75,10 @@
 <div class="w-full grid grid-cols-20-80 m8:flex m8:flex-col m8:items-center">
   <Filter bind:queryPlayer />
   <div class="flex flex-col items-center justify-center mt-4 w-full h-[60vh] m8:h-[50vh] shadow-in">
-    <RankingBanner sortingFunction={sortPlayers} currentSortLabel={currentSortLabel} currentSortOrder={currentSortOrder}/>
+    <RankingBanner sortingFunction={sortPlayers} currentSortLabel={currentSortLabel} currentSortOrder={currentSortOrder} />
     <ul class="w-full px-5 h-full flex flex-col gap-3 pt-4 overflow-y-scroll">
       {#each orderedPlayers as player, index}
-        {#if playerFilter[index]}
+        {#if player.show} 
           <PlayerDisplay player={player} />
         {/if}
       {/each}

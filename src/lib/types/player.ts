@@ -10,9 +10,10 @@ export type RankedUser = {
     user_score: UserScore,
     user_type: UserType,
     rank: number,
+    show: boolean,
 }
 
 export enum UserType {
-    Current,
-    Other,
+    Current = 'Current',
+    Other = 'Other',
 }
