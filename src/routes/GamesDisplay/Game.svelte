@@ -63,7 +63,7 @@
     class="flex flex-row m8:flex-col text-primary dark:text-secondary justify-between m8:justify-start w-full gap-5 m8:gap-2 h-full items-center shadow-xl border pr-3 m8:pb-3 m8:px-3"
     on:mouseenter={enter}
     on:mouseleave={leave}>
-    <div class={`w-1 h-full m8:h-1 m8:w-full ${getResultColor(fetchedProno?.result)} py-4 m8:py-0`}>&nbsp;</div>
+    <div class={`w-1 h-full m8:h-1 m8:w-[106%] ${getResultColor(fetchedProno?.result)} py-4 m8:py-0`}>&nbsp;</div>
     <div class="flex flex-row gap-5 justify-between w-[22%] m8:w-full text-lg pr-16 m8:pr-0">
         <div class="flex flex-row m8:w-[44%] w-[80%] justify-between">
             <p>{formatDate(fetchedGame.time)}</p>
