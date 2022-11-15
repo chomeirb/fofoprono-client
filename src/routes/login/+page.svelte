@@ -14,8 +14,8 @@
   });
 </script>
 
-<div class="flex flex-col items-center justify-center mt-10 m8:mt-2 w-full  h-[80vh]">
-  <div class="text-4xl flex flex-row justify-between m8:justify-center items-center w-full max-w-xl">
+<div class="flex flex-col items-center justify-center mt-10 m12:mt-2 w-full  h-[80vh]">
+  <div class="text-4xl flex flex-row justify-between m12:justify-center items-center w-full max-w-xl">
     <p class="font-bold">CONNEXION</p>
   </div>
   <div class="flex flex-col justify-start items-center w-full max-w-xl mt-5 mb-10 shadow-in text-2xl gap-5 py-8 px-20">
