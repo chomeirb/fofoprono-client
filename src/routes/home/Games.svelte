@@ -3,21 +3,28 @@
   import type { Game } from '$lib/types/game';
   import type { PronoResult } from '$lib/types/prono';
   import GamesDisplay from '../GamesDisplay/GamesDisplay.svelte';
+    import { onDestroy } from 'svelte';
 
   let gamesContent: [PronoResult, Game][] = [];
   let fetchErrorContent: String;
   let fetchStatusContent: number;
 
-  games.subscribe((value: [PronoResult, Game][]) => {
+  const unsubscribeGames = games.subscribe((value: [PronoResult, Game][]) => {
     gamesContent = value;
   });
 
-  fetchError.subscribe((value: String) => {
+  const unsubscribeFetchError = fetchError.subscribe((value: String) => {
     fetchErrorContent = value;
   });
 
-  fetchStatus.subscribe((value: number) => {
+  const unsubscribeFetchStatus = fetchStatus.subscribe((value: number) => {
     fetchStatusContent = value;
+  });
+
+  onDestroy(() => {
+    unsubscribeGames();
+    unsubscribeFetchError();
+    unsubscribeFetchStatus();
   });
 </script>
 
