@@ -78,7 +78,7 @@
     <RankingBanner sortingFunction={sortPlayers} currentSortLabel={currentSortLabel} currentSortOrder={currentSortOrder} />
     <ul class="w-full px-5 h-full flex flex-col gap-3 pt-4 overflow-y-scroll">
       {#each orderedPlayers as player, index}
-        {#if player.show} 
+        {#if player.show}
           <PlayerDisplay player={player} />
         {/if}
       {/each}

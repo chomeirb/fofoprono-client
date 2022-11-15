@@ -34,8 +34,7 @@
       });
 
       if (res.ok) {
-        const data = await res.json();
-        name = data.name;
+        name = await res.json();
         fetchLoggedIn.set(true);
       }
     } catch (err) {
