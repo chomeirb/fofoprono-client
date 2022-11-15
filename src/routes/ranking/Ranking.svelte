@@ -25,10 +25,9 @@
       return player;
     });
     orderedPlayers = filterPlayers($queryPlayer);
-    console.log(orderedPlayers);
   });
 
-  queryPlayer.subscribe((players: string) => {
+  const unsubscribe = queryPlayer.subscribe((players: string) => {
     localStorage.setItem('player', players);
     orderedPlayers = filterPlayers(players);
   });
@@ -70,7 +69,7 @@
     });
   }
 
-
+  onDestroy(unsubscribe);
 </script>
 
 <div class="w-full grid grid-cols-20-80 m12:flex m12:flex-col m12:items-center">

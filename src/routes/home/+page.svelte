@@ -2,11 +2,14 @@
   import { slide } from '$lib/utils/effects';
   import Games from './Games.svelte';
   import { curtain } from '../store';
+  import { onDestroy } from 'svelte';
 
   let curtainValue = true;
-  curtain.subscribe((value) => {
+  const unsubscribeCurtain = curtain.subscribe((value) => {
     curtainValue = value;
   });
+
+  onDestroy(unsubscribeCurtain);
 </script>
 
 <div class="flex flex-col items-center justify-center w-full h-full">

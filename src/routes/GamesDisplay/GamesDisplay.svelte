@@ -5,6 +5,7 @@
   import { getQueryParamsStore } from '../prono/store';
   import PronoDisplay from './Game.svelte';
   import Filter from './Filter.svelte';
+    import { onDestroy } from 'svelte';
 
   export let pronoMode: boolean;
   export let games: [PronoResult, Game][];
@@ -21,15 +22,15 @@
   let queryFromDate = getQueryParamsStore('from', '2022-11-17');
   let queryToDate = getQueryParamsStore('to', '2025-11-17');
 
-  queryTeam.subscribe((team: string) => {
+  const unsubscribeTeam = queryTeam.subscribe((team: string) => {
     teamFilter = games.map(([, game]) => game.team_home.concat(' ', game.team_away).toUpperCase().includes(team.toUpperCase()));
   });
 
-  queryStage.subscribe((stage: string) => {
+  const unsubscribeStage = queryStage.subscribe((stage: string) => {
     stageFilter = games.map(([, game]) => game.stage == stage || stage == '');
   });
 
-  queryFromDate.subscribe((date: string) => {
+  const unsubscribeFromDate = queryFromDate.subscribe((date: string) => {
     if (date == '') {
       fromDateFilter = games.map(() => true);
     } else {
@@ -37,12 +38,19 @@
     }
   });
 
-  queryToDate.subscribe((date: string) => {
+  const unsubscribeToDate = queryToDate.subscribe((date: string) => {
     if (date == '') {
       toDateFilter = games.map(() => true);
     } else {
       toDateFilter = games.map(([, game]) => sysTimeToDate(game.time) <= new Date(date));
     }
+  });
+
+  onDestroy(() => {
+    unsubscribeTeam();
+    unsubscribeStage();
+    unsubscribeFromDate();
+    unsubscribeToDate();
   });
 </script>
 

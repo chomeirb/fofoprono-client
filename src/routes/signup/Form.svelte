@@ -9,7 +9,7 @@
 
   let submitContent = false;
 
-  submiting.subscribe((value) => {
+  const unsubscribeSubmitting = submiting.subscribe((value) => {
     submitContent = value;
   });
 
@@ -45,7 +45,7 @@
   };
 
   onDestroy(() => {
-    submiting.set(false);
+    unsubscribeSubmitting();
   });
 </script>
 

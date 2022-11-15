@@ -5,12 +5,13 @@
 
   let resultContent: String = '';
 
-  result.subscribe((value) => {
+  const unsubscribeResult = result.subscribe((value) => {
     resultContent = value;
   });
 
   onDestroy(() => {
     cleanResult();
+    unsubscribeResult();
   });
 </script>
 
