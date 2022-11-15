@@ -62,6 +62,6 @@
     <input
       type="submit"
       class="bg-primary dark:bg-secondary text-secondary dark:text-primary px-5 py-2 shadow-xl rounded m12:w-5/6 hover:translate-x-6 hover:cursor-pointer duration-200"
-      value={connectingContent ? 'Connection...' : 'Connexion ➔'} />
+      value={connectingContent ? 'Connexion...' : 'Connexion ➔'} />
   </div>
 </form>
