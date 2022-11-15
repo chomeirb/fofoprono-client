@@ -61,7 +61,7 @@
         </p>
       </div>
     {:else}
-      <GamesDisplay pronoMode={true} games={$games} bind:pronos={submitPronos} bind:removes={removePronos} />
+      <GamesDisplay pronoMode={true} games={$games} bind:pronos={submitPronos} bind:remove={removePronos} />
     {/if}
   </div>
 </form>
