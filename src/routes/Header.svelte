@@ -5,7 +5,7 @@
   import nightLightDark from '$lib/images/night-light-dark.png';
   import logoutPic from '$lib/images/logout.png';
   import logoutPicDark from '$lib/images/logout-dark.png';
-  import { onMount } from 'svelte';
+  import { onDestroy, onMount } from 'svelte';
   import { disableCurtain, enableCurtain, fetchLoggedIn } from './store';
 
   // let connected: Boolean = false;
@@ -72,6 +72,8 @@
   function toggleHam() {
     hamIsOpen = !hamIsOpen;
   }
+
+
 </script>
 
 <header class="flex flex-row shadow-lg justify-center text-3xl text-secondary dark:text-primary w-full h-[90px]">

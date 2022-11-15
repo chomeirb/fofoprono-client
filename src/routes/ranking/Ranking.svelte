@@ -4,11 +4,10 @@
   import type { RankedUser } from '$lib/types/player';
   import Filter from './Filter.svelte';
   import { getPlayers } from './fetchPlayers';
-  import { onMount } from 'svelte';
+  import { onDestroy, onMount } from 'svelte';
   import RankingBanner from './RankingBanner.svelte';
 
   let orderedPlayers: RankedUser[] = [];
-  let playerFilter: Boolean[] = [];
   let queryPlayer = getQueryParamsStore('player', localStorage.getItem('player') || '');
 
   let currentSortLabel = 'score';
@@ -70,6 +69,8 @@
       }
     });
   }
+
+
 </script>
 
 <div class="w-full grid grid-cols-20-80 m12:flex m12:flex-col m12:items-center">
