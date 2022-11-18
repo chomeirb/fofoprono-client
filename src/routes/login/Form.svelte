@@ -3,6 +3,7 @@
   import { onDestroy } from 'svelte';
   import { connecting, result, cleanResult } from './store';
 
+  let id = '';
   let name = '';
   let mail = '';
   let password = '';
@@ -14,22 +15,29 @@
   });
 
   const submit = async () => {
-    if (!(name && password)) {
+    if (!(id && password)) {
       result.set('Veuillez remplir tous les champs !');
       return;
     }
 
+    if (/\@/.test(id)) {
+      name = '';
+      mail = id;
+    } else {
+      name = id;
+      mail = '';
+    }
+
     connecting.set(true);
     try {
-      let token = window.btoa(`${name}:${password}`);
-
-      // const body = JSON.stringify({ name, mail, password });
+      const body = JSON.stringify({ name, mail, password });
       const res = await fetch('/api/login', {
         method: 'POST',
         credentials: 'same-origin',
         headers: {
-          Authorization: `Basic ${token}`,
+          "Content-Type": "application/json",
         },
+        body: body,
       });
 
       if (res.ok) {
@@ -51,8 +59,8 @@
 
 <form class="flex flex-col gap-5 text-primary" on:submit|preventDefault={submit}>
   <div class="flex flex-col justify-start w-full">
-    <p class="font-bold dark:text-secondary text-primary">Pseudo</p>
-    <input autocomplete="username" type="text" class="w-full h-10 shadow-lg border rounded px-2" bind:value={name} on:change={cleanResult} />
+    <p class="font-bold dark:text-secondary text-primary">Pseudo ou adresse email</p>
+    <input autocomplete="username" type="text" class="w-full h-10 shadow-lg border rounded px-2" bind:value={id} on:change={cleanResult} />
   </div>
   <div class="flex flex-col justify-start w-full">
     <p class="font-bold dark:text-secondary text-primary">Mot de passe</p>
