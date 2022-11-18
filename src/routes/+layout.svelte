@@ -28,7 +28,7 @@
 <div class="flex flex-col h-[100vh]">
   <Header />
 
-  <main class="h-[calc(100vh_-_180px)] text-primary dark:text-secondary">
+  <main class="h-[calc(100vh_-_180px)] text-primary dark:text-secondary overflow-y-auto">
     <slot />
   </main>
 

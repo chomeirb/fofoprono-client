@@ -111,19 +111,20 @@
             {fetchedGame.team_away.toUpperCase()}
         </p>
     </div>
-    <div class="flex flex-row justify-end mt-1 w-1/4 m12:w-full gap-5 m12:text-lg">
+    <div class="flex flex-row justify-end m12:justify-center mt-1 w-1/4 m12:w-full gap-5 m12:text-lg">
         <p class="text-lg m12:hidden">{displayStage(fetchedGame.stage)}</p>
         {#if showOdds}
-            <div class="flex flex-row m12:justify-around gap-1 m12:gap-5 m12:mr-10">
+            <div class="flex flex-row m12:justify-center gap-1 m12:gap-5">
                 <p class="text-xl border-2 px-1">{fetchedGame.odds_home.toPrecision(3)}</p>
                 <p class="text-xl border-2 px-1">{fetchedGame.odds_draw.toPrecision(3)}</p>
                 <p class="text-xl border-2 px-1">{fetchedGame.odds_away.toPrecision(3)}</p>
             </div>
         {/if}
-        <button
+        <!-- Button to supp remove for the moment because confusing -->
+        <!-- <button
             on:click={setRemove}
             disabled={passed || !exists}
             class={`w-[10%] -ml-2 text-xl ${passed || !exists ? 'opacity-0' : 'hover:opacity-50 hover:text-2xl'} ${remove ? 'text-red-600' : ''} duration-200`}
-            type="button">✖</button>
+            type="button">✖</button> -->
     </div>
 </li>

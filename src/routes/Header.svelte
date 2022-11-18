@@ -78,7 +78,7 @@
 
 <header class="flex flex-row shadow-lg justify-center text-3xl text-secondary dark:text-primary w-full h-[90px]">
   <ul
-    class={`m12:flex flex-col justify-start w-[100vw] shadow-in pt-10 bg-secondary dark:bg-primary text-primary dark:text-secondary fixed hidden m8 gap-10 h-[calc(100vh_-_180px)] ${
+    class={`m12:flex overflow-y-auto flex-col justify-start w-[100vw] shadow-in pt-10 bg-secondary dark:bg-primary text-primary dark:text-secondary fixed hidden m8 gap-10 h-[calc(100vh_-_180px)] ${
       !hamIsOpen ? 'translate-x-[100vw]' : ''
     } duration-500 mt-[90px] items-center`}>
     <li class="w-4/6 py-2 flex flex-col items-center rounded border">
@@ -103,7 +103,7 @@
     </li>
   </ul>
 
-  <div class="w-full h-full max-w-8xl flex flex-row justify-center m12:justify-around gap-5 items-center">
+  <div class="w-full h-full max-w-8xl px-3 flex flex-row justify-center m12:justify-between gap-5 items-center">
     <a href="/home" class="h-[50%] hover:-rotate-12 duration-200" on:click={enableCurtain}>
       <img src={darkMode ? logoDark : logo} alt="logo" class="h-full" />
     </a>
@@ -135,7 +135,7 @@
               <p class="px-2 font-bold text-4xl border shadow-xl w-min max-w-lg m12:max-w-[185px] m12:text-xl truncate text-center">{name}</p>
               <img src={darkMode ? logoutPicDark : logoutPic} class="hover:opacity-70 hover:cursor-pointer h-10" alt="logout" on:click={logout} />
             {:else}
-              <a class="px-2 hover:opacity-70 underline" href="/login">Connexion</a>
+              <a class="px-2 hover:opacity-70 underline" on:click={() => hamIsOpen = false} href="/login">Connexion</a>
             {/if}
           </li>
           <div class="flex-col hidden m12:flex gap-2 h-full justify-center cursor-pointer" on:click={toggleHam}>

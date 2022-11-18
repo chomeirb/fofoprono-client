@@ -28,7 +28,7 @@
   });
 </script>
 
-<div class="flex flex-col items-center justify-center mb-3 w-full">
+<div class="flex flex-col items-center justify-center h-full w-full">
   {#if fetchErrorContent !== ''}
     <div class="flex flex-row items-center justify-between bg-primary dark:bg-secondary text-secondary dark:text-primary py-2 px-5 rounded">
       <p class="font-bold">Aucun match</p>

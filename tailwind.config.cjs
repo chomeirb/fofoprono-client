@@ -42,6 +42,8 @@ module.exports = {
 
         'm6': {'max': '639px'},
         // => @media (max-width: 639px) { ... }
+
+        'm3': {'max': '330px'},
       },
       animation: {
         'spin-logo': 'spin 5s linear infinite',
