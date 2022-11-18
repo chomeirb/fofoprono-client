@@ -8,7 +8,7 @@
   import RankingBanner from './RankingBanner.svelte';
 
   let orderedPlayers: RankedUser[] = [];
-  let queryPlayer = getQueryParamsStore('player', localStorage.getItem('player') || '');
+  let queryPlayers = getQueryParamsStore('player', localStorage.getItem('player') || '');
 
   let currentSortLabel = 'score';
   let currentSortOrder = 'asc';
@@ -24,13 +24,14 @@
       }
       return player;
     });
-    orderedPlayers = filterPlayers($queryPlayer);
+    orderedPlayers = filterPlayers($queryPlayers);
   });
 
-  const unsubscribe = queryPlayer.subscribe((players: string) => {
+  const unsubscribePlayers = queryPlayers.subscribe((players: string) => {
     localStorage.setItem('player', players);
     orderedPlayers = filterPlayers(players);
   });
+
 
   function filterPlayers(players: string): RankedUser[] {
     if (players == '') {
@@ -69,11 +70,13 @@
     });
   }
 
-  onDestroy(unsubscribe);
+  onDestroy(() => {
+    unsubscribePlayers();
+  });
 </script>
 
 <div class="w-full h-full flex flex-row m12:flex m12:flex-col m12:items-center">
-  <Filter bind:queryPlayer />
+  <Filter bind:queryPlayers/>
   <div class="flex flex-col h-full overflow-hidden mt-4 w-5/6 m12:w-full">
     <RankingBanner sortingFunction={sortPlayers} currentSortLabel={currentSortLabel} currentSortOrder={currentSortOrder} />
     <div class="flex flex-col items-center w-full  h-[93%] m12:h-full overflow-y-auto shadow-in">

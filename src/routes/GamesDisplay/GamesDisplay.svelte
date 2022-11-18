@@ -10,7 +10,7 @@
   export let pronoMode: boolean;
   export let games: [PronoResult, Game][];
   export let pronos: Prediction[] = null!;
-  export let remove: Prediction[] = null!;
+  // export let remove: Prediction[] = null!;
 
   let teamFilter: boolean[] = [];
   let stageFilter: boolean[] = [];
@@ -61,7 +61,7 @@
       {#each games as [fetchedProno, fetchedGame], index}
         {#if teamFilter[index] && stageFilter[index] && fromDateFilter[index] && toDateFilter[index]}
           {#if pronoMode}
-            <PronoDisplay pronoMode fetchedProno={fetchedProno} fetchedGame={fetchedGame} bind:prono={pronos[index]} bind:remove={remove[index]} />
+            <PronoDisplay pronoMode fetchedProno={fetchedProno} fetchedGame={fetchedGame} bind:prono={pronos[index]} />
           {:else}
             <PronoDisplay fetchedGame={fetchedGame} />
           {/if}

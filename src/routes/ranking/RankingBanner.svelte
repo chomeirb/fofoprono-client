@@ -12,12 +12,12 @@
     Rg. {currentSortLabel === 'rank' ? (currentSortOrder === 'desc' ? '▲' : '▼') : ''}
   </p>
   <p
-    class="text-primary dark:text-secondary w-[52%] m6:text-base text-xl hover:underline hover:opacity-70 hover:cursor-pointer"
+    class="text-primary dark:text-secondary w-[60%] m6:text-base text-xl hover:underline hover:opacity-70 hover:cursor-pointer"
     on:click={() => sortingFunction('name')}>
     Nom {currentSortLabel === 'name' ? (currentSortOrder === 'asc' ? '▲' : '▼') : ''}
   </p>
   <p
-    class="text-primary dark:text-secondary w-[15%] m6:text-base text-xl hover:underline hover:opacity-70 hover:cursor-pointer text-left m12:hidden"
+    class="text-primary dark:text-secondary w-[17%] m6:text-base text-xl hover:underline hover:opacity-70 hover:cursor-pointer text-left m12:hidden"
     title="Scores exacts trouvé"
     on:click={() => sortingFunction('perfect')}>
     Exact {currentSortLabel === 'perfect' ? (currentSortOrder === 'asc' ? '▲' : '▼') : ''}

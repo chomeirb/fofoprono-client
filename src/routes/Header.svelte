@@ -138,7 +138,7 @@
               <a class="px-2 hover:opacity-70 underline" on:click={() => hamIsOpen = false} href="/login">Connexion</a>
             {/if}
           </li>
-          <div class="flex-col hidden m12:flex gap-2 h-full justify-center cursor-pointer" on:click={toggleHam}>
+          <div class="select-none flex-col hidden m12:flex gap-2 h-full justify-center cursor-pointer" on:click={toggleHam}>
             <hr class={`bg-primary dark:bg-secondary h-1 rounded-full w-8 duration-500 ${hamIsOpen ? 'rotate-405 translate-y-3' : ''}`} id="ham-hr-1" />
             <hr class={`bg-primary dark:bg-secondary h-1 rounded-full w-8 duration-500 ${hamIsOpen ? 'translate-x-4 opacity-0' : ''}`} id="ham-hr-2" />
             <hr class={`bg-primary dark:bg-secondary h-1 rounded-full w-8 duration-500 ${hamIsOpen ? '-rotate-405 -translate-y-3' : ''}`} id="ham-hr-3" />
