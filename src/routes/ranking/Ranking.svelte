@@ -8,7 +8,7 @@
   import RankingBanner from './RankingBanner.svelte';
 
   let orderedPlayers: RankedUser[] = [];
-  let queryPlayer = getQueryParamsStore('player', localStorage.getItem('player') || '');
+  let queryPlayers = getQueryParamsStore('player', localStorage.getItem('player') || '');
 
   let currentSortLabel = 'score';
   let currentSortOrder = 'asc';
@@ -24,13 +24,14 @@
       }
       return player;
     });
-    orderedPlayers = filterPlayers($queryPlayer);
+    orderedPlayers = filterPlayers($queryPlayers);
   });
 
-  const unsubscribe = queryPlayer.subscribe((players: string) => {
+  const unsubscribePlayers = queryPlayers.subscribe((players: string) => {
     localStorage.setItem('player', players);
     orderedPlayers = filterPlayers(players);
   });
+
 
   function filterPlayers(players: string): RankedUser[] {
     if (players == '') {
@@ -69,19 +70,23 @@
     });
   }
 
-  onDestroy(unsubscribe);
+  onDestroy(() => {
+    unsubscribePlayers();
+  });
 </script>
 
-<div class="w-full grid grid-cols-20-80 m12:flex m12:flex-col m12:items-center">
-  <Filter bind:queryPlayer />
-  <div class="flex flex-col items-center justify-center mt-4 w-full h-[60vh] m12:h-[50vh] shadow-in">
+<div class="w-full h-full flex flex-row m12:flex m12:flex-col m12:items-center">
+  <Filter bind:queryPlayers/>
+  <div class="flex flex-col h-full overflow-hidden mt-4 w-5/6 m12:w-full">
     <RankingBanner sortingFunction={sortPlayers} currentSortLabel={currentSortLabel} currentSortOrder={currentSortOrder} />
-    <ul class="w-full px-5 h-full flex flex-col gap-3 pt-4 overflow-y-scroll">
-      {#each orderedPlayers as player, index}
-        {#if player.show}
-          <PlayerDisplay player={player} />
-        {/if}
-      {/each}
-    </ul>
+    <div class="flex flex-col items-center w-full  h-[93%] m12:h-full overflow-y-auto shadow-in">
+      <ul class="w-full px-5 h-full flex flex-col gap-3 py-4">
+        {#each orderedPlayers as player}
+          {#if player.show}
+            <PlayerDisplay player={player} />
+          {/if}
+        {/each}
+      </ul>
+    </div>
   </div>
 </div>

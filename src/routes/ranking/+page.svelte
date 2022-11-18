@@ -4,11 +4,11 @@
 
 </script>
 
-<div class="flex flex-col items-center justify-center w-full h-full">
-  <div class="text-4xl m12:text-2xl flex flex-row justify-between m12:justify-center items-center w-full max-w-8xl">
-    <p class="font-bold m12:text-center">CLASSEMENT</p>
+<div class="flex flex-col items-center justify-start w-full pt-3 h-full">
+  <div class="text-4xl m6:text-3xl h-[10%] flex flex-row justify-between m12:justify-center items-center w-full max-w-8xl px-3">
+    <p class="font-bold m12:text-center ">CLASSEMENT</p>
   </div>
-  <div class="w-full max-w-8xl mt-4">
+  <div class="w-full max-w-8xl px-3 m12:px-0 h-[83%]">
     <Ranking />
   </div>
 </div>

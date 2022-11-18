@@ -2,7 +2,7 @@
   <div class="text-4xl flex flex-row justify-start m12:justify-center items-center w-full max-w-8xl">
     <p class="font-bold">RÈGLES DU JEU</p>
   </div>
-  <div class="flex flex-col justify-start w-full max-w-8xl mt-5 mb-10 shadow-in text-2xl gap-8 p-8 h-[65vh] overflow-y-scroll m12:text-lg">
+  <div class="flex flex-col justify-start w-full max-w-8xl px-3 m12:px-0 mt-5 mb-10 shadow-in text-2xl gap-8 p-8 h-[65vh] overflow-y-auto m12:text-lg">
     <p>Le système de points attribués fonctionne comme suit :</p>
     <p class="pl-12">
       ➔ Pour les <b>matchs de poules</b>, un <b>résultat correct </b>(Vainqueur du match trouvé uniquement) octroie <b>8 points</b>, tandis qu'un

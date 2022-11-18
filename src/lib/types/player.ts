@@ -13,6 +13,11 @@ export type RankedUser = {
     show: boolean,
 }
 
+export type Group = {
+    label: string,
+    queryUsers: string,
+}
+
 export enum UserType {
     Current = 'Current',
     Other = 'Other',

@@ -14,11 +14,11 @@
   });
 </script>
 
-<div class="flex flex-col items-center justify-center mt-10 m12:mt-2 w-full  h-[80vh]">
-  <div class="text-4xl flex flex-row justify-between m12:justify-center items-center w-full max-w-xl">
+<div class="flex flex-col items-center justify-start h-full pt-[3%] w-full">
+  <div class="text-4xl flex flex-row h-[10%] m12:justify-center items-center w-full max-w-xl">
     <p class="font-bold">CONNEXION</p>
   </div>
-  <div class="flex flex-col justify-start items-center w-full max-w-xl mt-5 mb-10 shadow-in text-2xl gap-5 py-8 px-20">
+  <div class="flex flex-col h-[70%] overflow-auto justify-start items-center w-full max-w-xl shadow-in text-2xl gap-5 py-8 px-20 m12:px-5 m12:w-full">
     <Form />
     <p class="text-3xl px-5 rounded text-center font-bold">{resultContent}</p>
     <a href="/signup" class="text-xl px-5 rounded underline text-center hover:opacity-70">Pas encore de compte ?</a>

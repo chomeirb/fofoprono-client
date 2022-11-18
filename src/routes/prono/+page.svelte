@@ -3,18 +3,25 @@
   import Pronos from './Pronos.svelte';
 </script>
 
-<div class="flex flex-col items-center justify-center mt-5 w-full h-full">
+<div class="flex flex-col items-center justify-start pt-3 w-full h-full">
   {#if !$fetchLoggedIn}
-    <p class="text-5xl font-bold text-center w-2/3">Vous devez vous connecter pour effectuer des pronostics !</p>
+    <div class="flex flex-col items-center justify-center gap-10 h-full">
+      <p class="text-4xl font-bold text-center items-center w-2/3">Vous devez vous connecter pour effectuer des pronostics !</p>
+      <a href="/login" class="underline text-6xl">Connexion →</a>
+    </div>
   {:else}
-    <div class="text-4xl m12:text-xl flex flex-row justify-between items-center w-full max-w-8xl m12:px-3">
+    <div class="text-4xl m12:text-xl flex flex-row justify-between items-center w-full h-[10%] max-w-8xl px-3 m12:px-3">
       <p class="font-bold m12:text-xl">PRONOSTIQUER</p>
       <button
         type="submit"
         form="Pronos"
-        class="bg-primary dark:bg-secondary text-secondary dark:text-primary py-2 px-5 rounded hover:translate-x-3 duration-300">Soumettre →</button>
+        class="m12:hidden bg-primary dark:bg-secondary text-secondary dark:text-primary py-2 px-5 rounded hover:translate-x-3 duration-300">Valider →</button>
+        <button
+        type="submit"
+        form="Pronos"
+        class="hidden m12:flex bg-primary dark:bg-secondary text-secondary dark:text-primary py-2 px-5 rounded hover:translate-x-3 duration-300">✔️</button>
     </div>
-    <div class="w-full max-w-8xl mt-4 m12:mt-2">
+    <div class="w-full max-w-8xl px-3 m12:px-0 m12:mt-2 h-[83%]">
       <Pronos />
     </div>
   {/if}

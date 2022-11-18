@@ -10,7 +10,7 @@
   export let pronoMode: boolean;
   export let games: [PronoResult, Game][];
   export let pronos: Prediction[] = null!;
-  export let remove: Prediction[] = null!;
+  // export let remove: Prediction[] = null!;
 
   let teamFilter: boolean[] = [];
   let stageFilter: boolean[] = [];
@@ -54,14 +54,14 @@
   });
 </script>
 
-<div class="w-full grid grid-cols-20-80 m12:flex m12:flex-col m12:items-center">
+<div class="w-full grid grid-cols-20-80 m12:flex m12:flex-col m12:items-center h-full">
   <Filter bind:queryTeam bind:queryStage bind:queryFromDate bind:queryToDate />
-  <div class="w-full m12:overflow-x-hidden mt-4 mb-10 overflow-y-scroll h-[60vh] m12:h-[50vh] shadow-in items-center flex flex-col">
+  <div class="w-full m12:overflow-x-hidden mt-4 overflow-y-auto h-full shadow-in items-center flex flex-col">
     <ul class="w-[95%] flex flex-col gap-3 pt-4 items-center pb-6">
       {#each games as [fetchedProno, fetchedGame], index}
         {#if teamFilter[index] && stageFilter[index] && fromDateFilter[index] && toDateFilter[index]}
           {#if pronoMode}
-            <PronoDisplay pronoMode fetchedProno={fetchedProno} fetchedGame={fetchedGame} bind:prono={pronos[index]} bind:remove={remove[index]} />
+            <PronoDisplay pronoMode fetchedProno={fetchedProno} fetchedGame={fetchedGame} bind:prono={pronos[index]} />
           {:else}
             <PronoDisplay fetchedGame={fetchedGame} />
           {/if}

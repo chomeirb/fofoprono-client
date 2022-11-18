@@ -8,7 +8,7 @@
   export let queryToDate;
 </script>
 
-<div class="flex flex-col m12:flex-row gap-3 justify-start m12:justify-around w-[90%] shadow-in mt-4 px-4 m12:px-1 py-5 m12:py-2 m12:text-base h-min">
+<div class="flex flex-col m12:flex-row gap-3 justify-start m12:justify-around w-[90%] m12:w-full shadow-in mt-4 m12:mt-0 px-4 m12:px-1 py-5 m12:py-2 m12:text-base h-min">
   <div class="flex flex-col w-full m12:w-[20%]">
     <label for="from">Du</label>
     <input
