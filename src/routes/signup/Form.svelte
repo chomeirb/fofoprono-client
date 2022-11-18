@@ -53,6 +53,7 @@
   <div class="flex flex-col justify-start w-full">
     <p class="font-bold dark:text-secondary text-primary">Pseudo</p>
     <input
+      autocomplete="username"
       type="text"
       class="w-full h-10 shadow-lg border rounded px-2"
       bind:value={name}
@@ -62,6 +63,7 @@
   <div class="flex flex-col justify-start w-full">
     <p class="font-bold dark:text-secondary text-primary">Email</p>
     <input
+      autocomplete="email"
       type="email"
       class="w-full h-10 shadow-lg border rounded px-2"
       on:change={cleanResult}
@@ -71,6 +73,7 @@
   <div class="flex flex-col justify-start w-full">
     <p class="font-bold dark:text-secondary text-primary">Mot de passe</p>
     <input
+      autocomplete="new-password"
       type="password"
       class="w-full h-10 shadow-lg border rounded px-2"
       bind:value={password}
@@ -81,7 +84,7 @@
     <input
       type="submit"
       class="bg-primary dark:bg-secondary text-secondary dark:text-primary px-5 py-2 shadow-xl rounded w-1/2 m12:w-5/6 hover:translate-x-6 hover:cursor-pointer duration-200"
-      value={submitContent ? "Envoie..." : "M'incrire ➔"}
+      value={submitContent ? "Envoie..." : "M'inscrire ➔"}
     />
   </div>
 </form>
