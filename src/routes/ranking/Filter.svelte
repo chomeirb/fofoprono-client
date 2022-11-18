@@ -1,6 +1,6 @@
 <script lang="ts">
-  import groups from '../../../groups.json';
-  
+  import groups from '../../../data/groups.json';
+
 
   export let queryPlayers;
 </script>
