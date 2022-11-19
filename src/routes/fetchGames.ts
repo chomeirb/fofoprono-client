@@ -3,7 +3,7 @@ import { fetchError, fetchStatus, games } from "./store";
 
 export async function getGames() {
   try {
-    const response = await fetch("/api/games", {
+    const response = await fetch("/api/prono", {
       method: "GET",
       credentials: "same-origin",
     });
