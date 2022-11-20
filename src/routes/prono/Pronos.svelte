@@ -31,6 +31,7 @@
 
     const res_s = await fetch(`${PUBLIC_API_URL}/prono`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -39,6 +40,7 @@
 
     const res_d = await fetch(`${PUBLIC_API_URL}/prono`, {
       method: 'DELETE',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
