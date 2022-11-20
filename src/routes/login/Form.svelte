@@ -34,8 +34,8 @@
       const body = JSON.stringify({ name, mail, password });
       const res = await fetch(`${PUBLIC_API_URL}/login`, {
         method: 'POST',
-        credentials: "include",
         headers: {
+          "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",
         },
         body: body,
