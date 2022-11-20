@@ -8,7 +8,7 @@
   import { onDestroy, onMount } from 'svelte';
   import { disableCurtain, enableCurtain, fetchLoggedIn } from './store';
   import { PUBLIC_API_URL } from '$env/static/public';
-  import PopupConfirmLogout from '$lib/components/Popup/PopupConfirmLogout.svelte';
+  import PopupConfirmLogout from '$lib/components/Popup/ConfirmLogout.svelte';
 
   // let connected: Boolean = false;
   let name: String = '';
