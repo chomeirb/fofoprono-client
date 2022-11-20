@@ -35,7 +35,6 @@
       const res = await fetch(`${PUBLIC_API_URL}/login`, {
         method: 'POST',
         headers: {
-          "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",
         },
         body: body,
