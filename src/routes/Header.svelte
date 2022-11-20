@@ -47,6 +47,7 @@
     try {
       const res = await fetch(`${PUBLIC_API_URL}/logout`, {
         method: 'POST',
+        credentials: 'include',
       });
 
       if (res.ok) {
