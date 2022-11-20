@@ -6,14 +6,22 @@
   import { getPlayers } from './fetchPlayers';
   import { onDestroy, onMount } from 'svelte';
   import RankingBanner from './RankingBanner.svelte';
+  import type { Unsubscriber } from 'svelte/store';
 
   let orderedPlayers: RankedUser[] = [];
-  let queryPlayers = getQueryParamsStore('player', localStorage.getItem('player') || '');
+  let queryPlayers: {
+    subscribe: (cb: Function) => Unsubscriber;
+    set: (value: string) => void;
+  } = {
+    subscribe: () => () => {},
+    set: () => {},
+  };
 
   let currentSortLabel = 'score';
   let currentSortOrder = 'asc';
 
   onMount(async () => {
+    queryPlayers = getQueryParamsStore('player', localStorage.getItem('player') || '');
     orderedPlayers = await getPlayers();
     sortPlayers('score');
     orderedPlayers = orderedPlayers.map((player, index, players) => {
@@ -31,7 +39,6 @@
     localStorage.setItem('player', players);
     orderedPlayers = filterPlayers(players);
   });
-
 
   function filterPlayers(players: string): RankedUser[] {
     if (players == '') {
@@ -76,7 +83,7 @@
 </script>
 
 <div class="w-full h-full flex flex-row m12:flex m12:flex-col m12:items-center">
-  <Filter bind:queryPlayers/>
+  <Filter bind:queryPlayers />
   <div class="flex flex-col h-full overflow-hidden mt-4 w-5/6 m12:w-full">
     <RankingBanner sortingFunction={sortPlayers} currentSortLabel={currentSortLabel} currentSortOrder={currentSortOrder} />
     <div class="flex flex-col items-center w-full  h-[93%] m12:h-full overflow-y-auto shadow-in">

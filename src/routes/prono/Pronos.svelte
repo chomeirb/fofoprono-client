@@ -6,6 +6,7 @@
 
   import { fetchError, fetchStatus, games } from '../store';
   import { PUBLIC_API_URL } from '$env/static/public';
+    import { isPassed } from '$lib/utils/display';
 
   let submitPronos: Prediction[] = [];
   let removePronos: Prediction[] = [];
@@ -21,8 +22,8 @@
   });
 
   const submit = async () => {
-    const toSubmit = submitPronos.filter((element) => {
-      return element !== null;
+    const toSubmit = submitPronos.filter((element, index) => {
+      return element !== null && !isPassed($games[index][1].time);
     });
 
     const toDelete = removePronos.filter((element) => {
@@ -64,7 +65,7 @@
         </p>
       </div>
     {:else}
-      <GamesDisplay pronoMode={true} games={$games} bind:pronos={submitPronos} bind:remove={removePronos} />
+      <GamesDisplay pronoMode={true} games={$games} bind:pronos={submitPronos} />
     {/if}
   </div>
 </form>

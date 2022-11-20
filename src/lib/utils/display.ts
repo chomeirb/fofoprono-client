@@ -2,12 +2,12 @@ import type { SystemTime } from "$lib/types/game";
 import { Stage } from "$lib/types/game";
 
 export function isPassed(time: SystemTime): boolean {
-  return new Date(time.secs_since_epoch * 1000) < new Date();
+  return new Date(time.secs_since_epoch * 1000 - 3600000) < new Date();
 }
 
 // Return a string of the date in the format of exemple : lun. 5 nov
 export function formatDate(time: SystemTime): string {
-  const date = new Date(time.secs_since_epoch * 1000);
+  const date = new Date(time.secs_since_epoch * 1000 - 3600000);
   return date.toLocaleString("fr-FR", {
     weekday: "short",
     day: "numeric",
@@ -17,7 +17,7 @@ export function formatDate(time: SystemTime): string {
 
 // Return a string of the date in the format of exemple : 22:00
 export function formatTime(time: SystemTime): string {
-  const date = new Date(time.secs_since_epoch * 1000);
+  const date = new Date(time.secs_since_epoch * 1000 - 3600000);
   return date.toLocaleString("fr-FR", {
     hour: "numeric",
     minute: "numeric",
@@ -25,7 +25,7 @@ export function formatTime(time: SystemTime): string {
 }
 
 export function sysTimeToDate(time: SystemTime): Date {
-  return new Date(time.secs_since_epoch * 1000);
+  return new Date(time.secs_since_epoch * 1000 - 3600000);
 }
 
 export function displayStage(stage: Stage): string {
