@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { Game } from '$lib/types/game';
     import { PredictionResult, Team, type Prediction, type PronoResult } from '$lib/types/prono';
-    import { displayStage, formatDate, formatTime, isPassed } from '$lib/utils/display';
+    import { displayStage, formatDate, formatTime, getMatchTime, isPassed } from '$lib/utils/display';
 
     export let showOdds = true;
     export let pronoMode = false;
@@ -63,7 +63,7 @@
 
     function toggleDetails() {
         showDetails = !showDetails;
-        leave();
+        showDetails ? enter() : leave();
     }
 </script>
 
@@ -78,10 +78,18 @@
         class={`${
             showDetails ? 'm12:text-sm' : 'm12:text-[0px] m12:gap:0 m12:h-0'
         } flex flex-row gap-5 text-lg justify-between w-[22%] m12:w-full pr-16 m12:pr-0 duration-300`}>
-        <div class="flex flex-row m12:w-[44%] w-[90%] justify-between">
-            <p>{formatDate(fetchedGame.time)}</p>
-            <p>{formatTime(fetchedGame.time)}</p>
-        </div>
+        {#if !getMatchTime(fetchedGame.time)}
+            <div class="flex flex-row m12:w-[44%] w-[90%] justify-between m12:justify-start m12:gap-5">
+                <p>{formatDate(fetchedGame.time)}</p>
+                <p>{formatTime(fetchedGame.time)}</p>
+            </div>
+        {:else}
+            <div class="flex flex-row gap-10 items-center text-red-500">
+                <span class="flex animate-ping">⦿</span>
+                <span>{getMatchTime(fetchedGame.time)}</span>
+            </div>
+        {/if}
+
         <p class="hidden m12:flex">{displayStage(fetchedGame.stage)}</p>
     </div>
     <div class="flex flex-row justify-between m12:w-full w-[55%]">
@@ -127,7 +135,10 @@
         </div>
         <p class="hover:cursor-pointer select-none duration-100 m12:flex hidden" on:click={toggleDetails}>{showDetails ? '-' : '+'}</p>
     </div>
-    <div class={`${showDetails ? 'm12:text-sm m12:mt-1' : 'm12:text-[0px] m12:h-0'} flex flex-row text-lg justify-end m12:justify-start w-1/4 m12:w-full duration-300`}>
+    <div
+        class={`${
+            showDetails ? 'm12:text-sm m12:mt-1' : 'm12:text-[0px] m12:h-0'
+        } flex flex-row text-lg justify-end m12:justify-start w-1/4 m12:w-full duration-300`}>
         <div class="flex flex-row w-[90%] m12:justify-center m12:gap-0 justify-end gap-5">
             <p class="m12:hidden">{displayStage(fetchedGame.stage)}</p>
             {#if showOdds}
