@@ -1,7 +1,7 @@
 <script>
-  // import { API_URL } from '$env/static/private';
   import { onDestroy } from 'svelte';
   import { connecting, result, cleanResult } from './store';
+  import { PUBLIC_API_URL } from '$env/static/public';
 
   let id = '';
   let name = '';
@@ -31,7 +31,7 @@
     connecting.set(true);
     try {
       const body = JSON.stringify({ name, mail, password });
-      const res = await fetch('/api/login', {
+      const res = await fetch(`${PUBLIC_API_URL}/login`, {
         method: 'POST',
         credentials: 'same-origin',
         headers: {

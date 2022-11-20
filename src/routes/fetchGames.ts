@@ -1,9 +1,10 @@
 import type { Game } from "$lib/types/game";
 import { fetchError, fetchStatus, games } from "./store";
+import { PUBLIC_API_URL } from '$env/static/public';
 
 export async function getGames() {
   try {
-    const response = await fetch("/api/games", {
+    const response = await fetch(`${PUBLIC_API_URL}/games`, {
       method: "GET",
       credentials: "same-origin",
     });

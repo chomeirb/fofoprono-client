@@ -7,6 +7,7 @@
   import logoutPicDark from '$lib/images/logout-dark.png';
   import { onDestroy, onMount } from 'svelte';
   import { disableCurtain, enableCurtain, fetchLoggedIn } from './store';
+    import { PUBLIC_API_URL } from '$env/static/public';
 
   // let connected: Boolean = false;
   let name: String = '';
@@ -28,7 +29,7 @@
     }
 
     try {
-      const res = await fetch(`/api/user`, {
+      const res = await fetch(`${PUBLIC_API_URL}/user`, {
         method: 'GET',
         credentials: 'same-origin',
       });
@@ -44,7 +45,7 @@
 
   const logout = async () => {
     try {
-      const res = await fetch(`/api/logout`, {
+      const res = await fetch(`${PUBLIC_API_URL}/logout`, {
         method: 'POST',
       });
 

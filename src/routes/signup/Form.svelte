@@ -1,7 +1,7 @@
 <script>
-  // import { API_URL } from '$env/static/private';
   import { onDestroy } from "svelte";
   import { submiting, result, cleanResult } from "./store";
+  import { PUBLIC_API_URL } from "$env/static/public";
 
   let name = "";
   let mail = "";
@@ -22,7 +22,7 @@
     submiting.set(true);
     try {
       const body = JSON.stringify({ name, mail, password });
-      const res = await fetch(`/api/signup`, {
+      const res = await fetch(`${PUBLIC_API_URL}/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -5,6 +5,7 @@
   import GamesDisplay from '../GamesDisplay/GamesDisplay.svelte';
 
   import { fetchError, fetchStatus, games } from '../store';
+  import { PUBLIC_API_URL } from '$env/static/public';
 
   let submitPronos: Prediction[] = [];
   let removePronos: Prediction[] = [];
@@ -28,7 +29,7 @@
       return element !== null;
     });
 
-    const res_s = await fetch('/api/prono', {
+    const res_s = await fetch(`${PUBLIC_API_URL}/prono`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -36,7 +37,7 @@
       body: JSON.stringify(toSubmit),
     });
 
-    const res_d = await fetch('/api/prono', {
+    const res_d = await fetch(`${PUBLIC_API_URL}/prono`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
