@@ -2,7 +2,7 @@
   import { fetchError, fetchStatus, games } from '../store';
   import type { Game } from '$lib/types/game';
   import type { PronoResult } from '$lib/types/prono';
-  import GamesDisplay from '../../lib/components/GamesDisplay/GamesDisplay.svelte';
+  import GamesDisplay from '$lib/components/GamesDisplay/GamesDisplay.svelte';
     import { onDestroy } from 'svelte';
 
   let gamesContent: [PronoResult, Game][] = [];
