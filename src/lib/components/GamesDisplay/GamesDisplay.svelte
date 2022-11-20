@@ -2,7 +2,7 @@
   import type { Game } from '$lib/types/game';
   import type { Prediction, PronoResult } from '$lib/types/prono';
   import { displayStage, sysTimeToDate } from '$lib/utils/display';
-  import { getQueryParamsStore } from '../prono/store';
+  import { getQueryParamsStore } from '../../../routes/prono/store';
   import PronoDisplay from './Game.svelte';
   import Filter from './Filter.svelte';
     import { onDestroy } from 'svelte';

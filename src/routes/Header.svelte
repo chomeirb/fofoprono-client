@@ -7,7 +7,8 @@
   import logoutPicDark from '$lib/images/logout-dark.png';
   import { onDestroy, onMount } from 'svelte';
   import { disableCurtain, enableCurtain, fetchLoggedIn } from './store';
-    import { PUBLIC_API_URL } from '$env/static/public';
+  import { PUBLIC_API_URL } from '$env/static/public';
+  import PopupConfirmLogout from '$lib/components/Popup/ConfirmLogout.svelte';
 
   // let connected: Boolean = false;
   let name: String = '';
@@ -18,6 +19,7 @@
   });
 
   let hamIsOpen: Boolean = false;
+  let confirmLogout = false;
 
   onMount(async () => {
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -43,22 +45,6 @@
     }
   });
 
-  const logout = async () => {
-    try {
-      const res = await fetch(`${PUBLIC_API_URL}/logout`, {
-        method: 'POST',
-        credentials: 'include',
-      });
-
-      if (res.ok) {
-        fetchLoggedIn.set(false);
-        window.location.href = '/home';
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   function toggleDarkMode() {
     if (document.documentElement.classList.contains('dark')) {
       localStorage.theme = 'light';
@@ -73,6 +59,14 @@
 
   function toggleHam() {
     hamIsOpen = !hamIsOpen;
+  }
+
+  function showLogoutConfirm() {
+    confirmLogout = true;
+  }
+
+  function hideLogoutConfirm() {
+    confirmLogout = false;
   }
 
   onDestroy(unsubscribeLoggedIn);
@@ -135,9 +129,9 @@
           <li class="flex flex-row items-center gap-6">
             {#if loggedIn}
               <p class="px-2 font-bold text-4xl border shadow-xl w-min max-w-lg m12:max-w-[185px] m12:text-xl truncate text-center">{name}</p>
-              <img src={darkMode ? logoutPicDark : logoutPic} class="hover:opacity-70 hover:cursor-pointer h-10" alt="logout" on:click={logout} />
+              <img src={darkMode ? logoutPicDark : logoutPic} class="hover:opacity-70 hover:cursor-pointer h-10" alt="logout" on:click={showLogoutConfirm} />
             {:else}
-              <a class="px-2 hover:opacity-70 underline" on:click={() => hamIsOpen = false} href="/login">Connexion</a>
+              <a class="px-2 hover:opacity-70 underline" on:click={() => (hamIsOpen = false)} href="/login">Connexion</a>
             {/if}
           </li>
           <div class="select-none flex-col hidden m12:flex gap-2 h-full justify-center cursor-pointer" on:click={toggleHam}>
@@ -150,3 +144,7 @@
     </nav>
   </div>
 </header>
+
+{#if confirmLogout}
+  <PopupConfirmLogout hideFunction={hideLogoutConfirm} />
+{/if}
