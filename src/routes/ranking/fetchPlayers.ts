@@ -6,7 +6,7 @@ export async function getPlayers(): Promise<RankedUser[]> {
   try {
     const response = await fetch(`${PUBLIC_API_URL}/ranking`, {
       method: "GET",
-      credentials: "same-origin",
+      credentials: "include",
     });
 
     fetchStatus.set(response.status);

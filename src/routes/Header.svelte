@@ -31,7 +31,7 @@
     try {
       const res = await fetch(`${PUBLIC_API_URL}/user`, {
         method: 'GET',
-        credentials: 'same-origin',
+        credentials: 'include',
       });
 
       if (res.ok) {

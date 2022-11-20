@@ -6,7 +6,7 @@ export async function getGames() {
   try {
     const response = await fetch(`${PUBLIC_API_URL}/games`, {
       method: "GET",
-      credentials: "same-origin",
+      credentials: "include",
     });
 
     fetchStatus.set(response.status);
