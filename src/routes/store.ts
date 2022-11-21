@@ -7,6 +7,7 @@ export const games: Writable<[PronoResult, Game][]> = writable([]);
 export const fetchError: Writable<String> = writable("");
 export const fetchStatus: Writable<number> = writable();
 export const fetchLoggedIn: Writable<boolean> = writable();
+export const darkMode: Writable<boolean> = writable(false);
 
 export const curtain = writable(true);
 

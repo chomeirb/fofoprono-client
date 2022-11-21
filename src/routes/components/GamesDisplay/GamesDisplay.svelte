@@ -56,7 +56,7 @@
 
 <div class="w-full grid grid-cols-20-80 m12:flex m12:flex-col m12:items-center h-full">
   <Filter bind:queryTeam bind:queryStage bind:queryFromDate bind:queryToDate />
-  <div class="w-full m12:overflow-x-hidden mt-4 overflow-y-auto h-full shadow-in items-center flex flex-col">
+  <div class="w-full m12:overflow-x-hidden mt-4 m8:mt-0 m8:border-t overflow-y-auto h-full shadow-in items-center flex flex-col">
     <ul class="w-[95%] flex flex-col gap-3 pt-4 items-center pb-6">
       {#each games as [fetchedProno, fetchedGame], index}
         {#if teamFilter[index] && stageFilter[index] && fromDateFilter[index] && toDateFilter[index]}

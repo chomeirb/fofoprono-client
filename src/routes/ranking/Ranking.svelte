@@ -42,7 +42,7 @@
     } else {
       let queryPlayersArray = players.split(',').map((player) => player.trim());
       return orderedPlayers.map((player) => {
-        player.show = queryPlayersArray.reduce((acc, current) => acc || (player.name.toUpperCase().includes(current.toUpperCase()) && current !== ''), false);
+        player.show = queryPlayersArray.reduce((acc, current) => acc || (player.name.includes(current) && current !== ''), false);
         return player;
       });
     }
@@ -77,7 +77,7 @@
 
 <div class="w-full h-full flex flex-row m12:flex m12:flex-col m12:items-center">
   <Filter bind:queryPlayers/>
-  <div class="flex flex-col h-full overflow-hidden mt-4 w-5/6 m12:w-full">
+  <div class="flex flex-col h-full overflow-hidden mt-4 m8:mt-0 w-5/6 m12:w-full">
     <RankingBanner sortingFunction={sortPlayers} currentSortLabel={currentSortLabel} currentSortOrder={currentSortOrder} />
     <div class="flex flex-col items-center w-full  h-[93%] m12:h-full overflow-y-auto shadow-in">
       <ul class="w-full px-5 h-full flex flex-col gap-3 py-4">
