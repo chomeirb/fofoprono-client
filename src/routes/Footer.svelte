@@ -31,7 +31,7 @@
     <a href="https://github.com/chomeirb/fofoprono-client" class="ml-[1px] hover:-translate-y-1 duration-100" title="Code source du client" target="_blank">
       <img src={$darkMode ? githubFrontLogoDark : githubFrontLogo} alt="github front" class="h-8 m8:h-6" />
     </a>
-    <a href="https://chomeirb.com" class="ml-5 hover:-translate-y-1 duration-100" title="Chomeirb Corp." target="_blank">
+    <a href="https://www.chomeirb.com" class="ml-5 hover:-translate-y-1 duration-100" title="Chomeirb Corp." target="_blank">
       <img src={chomeirbLogo} alt="chomeirb" class="h-8 m8:h-6 m3:h-8" />
     </a>
   </div>
