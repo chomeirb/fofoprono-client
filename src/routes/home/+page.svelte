@@ -26,8 +26,8 @@
         →</button>
     </div>
   {/if}
-  <div class="flex flex-col items-center justify-start h-full w-full pt-3" on:mouseenter={slide(-100, 'welcome')}>
-    <div class="text-4xl h-[10%] m12:text-2xl flex flex-row m12:flex-col justify-between m12:justify-start m12:gap-5 items-center w-full max-w-8xl px-3">
+  <div class="flex flex-col items-center justify-start h-full w-full pt-3 m8:pt-0" on:mouseenter={slide(-100, 'welcome')}>
+    <div class="text-4xl h-[10%] m8:h-[8%] m12:text-2xl flex flex-row m12:flex-col justify-between m12:justify-center m12:gap-5 items-center w-full max-w-8xl px-3">
       <p class="text-primary dark:text-secondary font-bold">CALENDRIER/RÉSULTATS</p>
       <a
         href="/prono"
