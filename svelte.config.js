@@ -10,9 +10,6 @@ const config = {
       postcss: true,
     }),
   	],
-  	// csrf: {
-	// 	checkOrigin: false,
-  	// },
 
 	kit: {
 		adapter: adapter({

@@ -1,20 +1,28 @@
 import { writable, type Writable } from "svelte/store";
 import type { Game } from "$lib/types/game";
 import type { PronoResult } from "$lib/types/prono";
+import type { ResponseResult } from "$lib/types/returnable";
 
-export const games: Writable<[PronoResult, Game][]> = writable([]);
-
-export const fetchError: Writable<String> = writable("");
-export const fetchStatus: Writable<number> = writable();
-export const fetchLoggedIn: Writable<boolean> = writable();
 export const darkMode: Writable<boolean> = writable(false);
+
+export const games: Writable<ResponseResult<[PronoResult, Game][]>> = writable({
+    status: undefined!,
+    text: undefined!,
+    data: [],
+});
+
+export const session: Writable<ResponseResult<string>> = writable({
+    status: undefined!,
+    text: undefined!,
+    data: '',
+});
 
 export const curtain = writable(true);
 
 export function enableCurtain() {
-  curtain.set(true);
+    curtain.set(true);
 }
 
 export function disableCurtain() {
-  curtain.set(false);
+    curtain.set(false);
 }
