@@ -1,5 +1,5 @@
-export type ResponseResult<T> = {
+export type ResponseResult<Data> = {
     status: number,
     text: string,
-    data: T,
+    data: Data,
 }

@@ -18,7 +18,7 @@
                 </p>
             </div>
         {:else}
-            <GamesDisplay pronoMode={true} displayMode={true} games={response.data} />
+            <GamesDisplay pronoMode={true} displayMode={true} {response} />
         {/if}
     </div>
 </form>

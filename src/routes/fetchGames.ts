@@ -26,7 +26,7 @@ export async function storeGames() {
     } catch (error: any) {
         games.set({
             status: 500,
-            text: error.statusText,
+            text: error.toString(),
             data: [],
         });
     }

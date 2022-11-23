@@ -7,7 +7,7 @@ export const darkMode: Writable<boolean> = writable(false);
 
 export const games: Writable<ResponseResult<[PronoResult, Game][]>> = writable({
     status: undefined!,
-    text: undefined!,
+    text: 'LOADING',
     data: [],
 });
 

@@ -1,6 +1,5 @@
 <script lang="ts">
     import { PUBLIC_API_URL } from '$env/static/public';
-    import { session } from '../../../routes/store';
 
     export let hideFunction: () => void;
 
@@ -12,7 +11,6 @@
             });
 
             if (res.ok) {
-                // fetchLoggedIn.set(false);
                 window.location.href = '/home';
             }
         } catch (err) {

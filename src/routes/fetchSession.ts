@@ -1,13 +1,13 @@
 import { PUBLIC_API_URL } from '$env/static/public';
 import { session } from './store';
 
-export async function storeSession() {
-    try {
-        const response = await fetch(`${PUBLIC_API_URL}/user`, {
-            method: 'GET',
-            credentials: 'include',
-        });
+export async function storeSession(): Promise<void> {
+    const promise = fetch(`${PUBLIC_API_URL}/user`, {
+        method: 'GET',
+        credentials: 'include',
+    });
 
+    return promise.then(async (response) => {
         let result = {
             status: response.status,
             text: response.statusText,
@@ -19,12 +19,13 @@ export async function storeSession() {
         }
 
         session.set(result);
-
-    } catch (error: any) {
-        session.set({
+    }).catch(async (error) => {
+        let result = {
             status: 500,
-            text: error.statusText,
+            text: error.toString(),
             data: '',
-        });
-    }
+        }
+
+        session.set(result);
+    })
 }

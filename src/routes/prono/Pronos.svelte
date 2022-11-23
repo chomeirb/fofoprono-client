@@ -38,16 +38,6 @@
 
 <form class="h-full" id="Pronos" on:submit|preventDefault={submit}>
     <div class="flex flex-col items-center justify-center h-full w-full">
-        {#if $games.text !== 'OK'}
-            <div class="flex flex-row items-center justify-between bg-primary dark:bg-secondary text-secondary dark:text-primary py-2 px-5 rounded">
-                <p class="font-bold">Aucun pronostique</p>
-                <p>
-                    Problème rencontré lors du chargement: {$games.status}
-                    {$games.text}
-                </p>
-            </div>
-        {:else}
-            <GamesDisplay pronoMode={true} displayMode={false} games={$games.data} bind:pronos={submitPronos} />
-        {/if}
+        <GamesDisplay pronoMode={true} displayMode={false} response={$games} bind:pronos={submitPronos} />
     </div>
 </form>

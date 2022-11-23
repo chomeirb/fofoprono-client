@@ -1,14 +1,12 @@
-<script>
+<script lang="ts">
     import '../app.css';
     import Header from './Header.svelte';
     import Footer from './Footer.svelte';
     import { onMount } from 'svelte';
     import { storeGames } from './fetchGames';
     import { storeSession } from './fetchSession';
-    import { goto } from '$app/navigation';
 
     onMount(async () => {
-        storeSession();
         storeGames();
     });
 </script>
@@ -27,12 +25,14 @@
     </style>
 </head>
 
-<div class="flex flex-col h-[100vh] m8:h-[calc(100vh_+_90px)]">
-    <Header />
+{#await storeSession() then}
+    <div class="flex flex-col h-[100vh] m8:h-[calc(100vh_+_90px)]">
+        <Header />
 
-    <main class="h-[calc(100vh_-_180px)] m8:h-[calc(100vh_-_60px)] text-primary dark:text-secondary overflow-y-auto">
-        <slot />
-    </main>
+        <main class="h-[calc(100vh_-_180px)] m8:h-[calc(100vh_-_60px)] text-primary dark:text-secondary overflow-y-auto">
+            <slot />
+        </main>
 
-    <Footer />
-</div>
+        <Footer />
+    </div>
+{/await}
