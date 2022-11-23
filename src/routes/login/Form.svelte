@@ -39,19 +39,14 @@
     };
 </script>
 
-<form class="flex flex-col gap-5 text-primary" on:submit|preventDefault={submit}>
+<form class="flex flex-col gap-5 text-primary" on:submit|preventDefault={submit} on:input={() => (result = '')}>
     <div class="flex flex-col justify-start w-full">
         <p class="font-bold dark:text-secondary text-primary">Pseudo ou adresse email</p>
-        <input autocomplete="username" type="text" class="w-full h-10 shadow-lg border rounded px-2" bind:value={id} on:change={() => (result = '')} />
+        <input autocomplete="username" type="text" class="w-full h-10 shadow-lg border rounded px-2" bind:value={id} />
     </div>
     <div class="flex flex-col justify-start w-full">
         <p class="font-bold dark:text-secondary text-primary">Mot de passe</p>
-        <input
-            autocomplete="current-password"
-            type="password"
-            class="w-full h-10 shadow-lg border rounded px-2"
-            bind:value={password}
-            on:change={() => (result = '')} />
+        <input autocomplete="current-password" type="password" class="w-full h-10 shadow-lg border rounded px-2" bind:value={password} />
     </div>
     <div class="flex flex-col items-center w-full gap-5 mt-5">
         <input
