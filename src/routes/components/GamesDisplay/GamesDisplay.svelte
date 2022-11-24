@@ -1,72 +1,57 @@
 <script lang="ts">
-  import type { Game } from '$lib/types/game';
-  import type { Prediction, PronoResult } from '$lib/types/prono';
-  import { displayStage, sysTimeToDate } from '$lib/utils/display';
-  import { getQueryParamsStore } from '../../../routes/prono/store';
-  import PronoDisplay from './Game.svelte';
-  import Filter from './Filter.svelte';
-    import { onDestroy } from 'svelte';
+    import { getQueryParamsStore } from '../../queryParamsStore';
+    import type { Game } from '$lib/types/game';
+    import type { Prediction, PronoResult } from '$lib/types/prono';
+    import { sysTimeToDate } from '$lib/utils/display';
+    import PronoDisplay from './Game.svelte';
+    import Filter from './GamesFilter.svelte';
+    import type { ResponseResult } from '$lib/types/returnable';
 
-  export let pronoMode: boolean;
-  export let games: [PronoResult, Game][];
-  export let pronos: Prediction[] = null!;
-  // export let remove: Prediction[] = null!;
+    export let games: ResponseResult<[PronoResult, Game][]>;
+    export let pronos: Prediction[] = games.data.map(() => null!);
 
-  let teamFilter: boolean[] = [];
-  let stageFilter: boolean[] = [];
-  let fromDateFilter: boolean[] = [];
-  let toDateFilter: boolean[] = [];
+    export let pronoMode: boolean;
+    export let displayMode: boolean;
 
-  let queryTeam = getQueryParamsStore('team');
-  let queryStage = getQueryParamsStore('stage');
-  let queryFromDate = getQueryParamsStore('from', '2022-11-17');
-  let queryToDate = getQueryParamsStore('to', '2025-11-17');
+    let queryTeam = getQueryParamsStore('team');
+    let queryStage = getQueryParamsStore('stage');
+    let queryFrom = getQueryParamsStore('from');
+    let queryTo = getQueryParamsStore('to');
 
-  const unsubscribeTeam = queryTeam.subscribe((team: string) => {
-    teamFilter = games.map(([, game]) => game.team_home.concat(' ', game.team_away).toUpperCase().includes(team.toUpperCase()));
-  });
-
-  const unsubscribeStage = queryStage.subscribe((stage: string) => {
-    stageFilter = games.map(([, game]) => game.stage == stage || stage == '');
-  });
-
-  const unsubscribeFromDate = queryFromDate.subscribe((date: string) => {
-    if (date == '') {
-      fromDateFilter = games.map(() => true);
-    } else {
-      fromDateFilter = games.map(([, game]) => sysTimeToDate(game.time) >= new Date(date));
-    }
-  });
-
-  const unsubscribeToDate = queryToDate.subscribe((date: string) => {
-    if (date == '') {
-      toDateFilter = games.map(() => true);
-    } else {
-      toDateFilter = games.map(([, game]) => sysTimeToDate(game.time) <= new Date(date));
-    }
-  });
-
-  onDestroy(() => {
-    unsubscribeTeam();
-    unsubscribeStage();
-    unsubscribeFromDate();
-    unsubscribeToDate();
-  });
+    $: filtered = games.data
+        .filter(([, game]) => game.team_home.concat(' ', game.team_away).toUpperCase().includes($queryTeam.toUpperCase()))
+        .filter(([, game]) => game.stage == $queryStage || $queryStage == '')
+        .filter(([, game]) => $queryFrom === '' || sysTimeToDate(game.time) >= new Date($queryFrom))
+        .filter(([, game]) => $queryTo === '' || sysTimeToDate(game.time) <= new Date($queryTo));
 </script>
 
-<div class="w-full grid grid-cols-20-80 m12:flex m12:flex-col m12:items-center h-full">
-  <Filter bind:queryTeam bind:queryStage bind:queryFromDate bind:queryToDate />
-  <div class="w-full m12:overflow-x-hidden mt-4 m8:mt-0 m8:border-t overflow-y-auto h-full shadow-in items-center flex flex-col">
-    <ul class="w-[95%] flex flex-col gap-3 pt-4 items-center pb-6">
-      {#each games as [fetchedProno, fetchedGame], index}
-        {#if teamFilter[index] && stageFilter[index] && fromDateFilter[index] && toDateFilter[index]}
-          {#if pronoMode}
-            <PronoDisplay pronoMode fetchedProno={fetchedProno} fetchedGame={fetchedGame} bind:prono={pronos[index]} />
-          {:else}
-            <PronoDisplay fetchedGame={fetchedGame} />
-          {/if}
-        {/if}
-      {/each}
-    </ul>
-  </div>
+<div class="w-full h-full grid grid-cols-20-80 m12:flex m12:flex-col m12:items-center">
+    <Filter bind:queryTeam bind:queryStage bind:queryFrom bind:queryTo />
+    {#if games.text === 'LOADING'}
+        <div class="w-full h-full m12:overflow-x-hidden mt-4 m8:mt-0 m8:border-t overflow-y-auto shadow-in items-center flex place-content-center">
+            <p>Loading...</p>
+        </div>
+    {:else if games.text !== 'OK'}
+        <div class="w-full h-full m12:overflow-x-hidden mt-4 m8:mt-0 m8:border-t overflow-y-auto shadow-in items-center flex place-content-center">
+            <div class="justify-between bg-primary dark:bg-secondary text-secondary dark:text-primary py-2 px-5 rounded">
+                <p class="font-bold">Aucun pronostique</p>
+                <p>
+                    Problème rencontré lors du chargement: Code {games.status}<br />
+                    {games.text}
+                </p>
+            </div>
+        </div>
+    {:else}
+        <div class="w-full m12:overflow-x-hidden mt-4 m8:mt-0 m8:border-t overflow-y-auto h-full shadow-in items-center flex flex-col">
+            <ul class="w-full px-5 h-full flex flex-col gap-3 py-4">
+                {#each filtered as [fetchedProno, fetchedGame], index}
+                    {#if pronoMode}
+                        <PronoDisplay {pronoMode} {displayMode} {fetchedProno} {fetchedGame} bind:prono={pronos[index]} />
+                    {:else}
+                        <PronoDisplay {fetchedGame} />
+                    {/if}
+                {/each}
+            </ul>
+        </div>
+    {/if}
 </div>

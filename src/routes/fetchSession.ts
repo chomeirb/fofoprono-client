@@ -1,9 +1,9 @@
-import { games } from './store';
+import { session } from './store';
 import { PUBLIC_API_URL } from '$env/static/public';
 
-export async function storeGames() {
+export async function storeSession() {
     try {
-        const response = await fetch(`${PUBLIC_API_URL}/prono`, {
+        const response = await fetch(`${PUBLIC_API_URL}/user`, {
             method: 'GET',
             credentials: 'include',
         });
@@ -11,20 +11,20 @@ export async function storeGames() {
         let result = {
             status: response.status,
             text: response.statusText,
-            data: [],
+            data: '',
         };
 
         if (response.ok) {
             result.data = await response.json();
         }
 
-        games.set(result);
+        session.set(result);
 
     } catch (error: any) {
-        games.set({
+        session.set({
             status: 500,
             text: error.toString(),
-            data: [],
+            data: '',
         });
     }
 }

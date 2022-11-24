@@ -1,9 +1,9 @@
-import { games } from './store';
+import { players } from './store';
 import { PUBLIC_API_URL } from '$env/static/public';
 
-export async function storeGames() {
+export async function storePlayers() {
     try {
-        const response = await fetch(`${PUBLIC_API_URL}/prono`, {
+        const response = await fetch(`${PUBLIC_API_URL}/ranking`, {
             method: 'GET',
             credentials: 'include',
         });
@@ -18,10 +18,10 @@ export async function storeGames() {
             result.data = await response.json();
         }
 
-        games.set(result);
+        players.set(result);
 
     } catch (error: any) {
-        games.set({
+        players.set({
             status: 500,
             text: error.toString(),
             data: [],
