@@ -58,11 +58,6 @@
         }
     }
 
-    // This functionnality is desableb at the moment
-    // function setRemove() {
-    //     remove = remove === null ? fetchedProno.prediction : null!;
-    // }
-
     function handleInputs() {
         if (input[0] === null && input[1] === null) {
             prono = null!;
@@ -174,12 +169,6 @@
                     <p class={` ${showDetails ? 'border-2 px-1' : ''}`}>{fetchedGame.odds_away.toPrecision(3)}</p>
                 </div>
             {/if}
-            <!-- Button to supp remove for the moment because confusing -->
-            <!-- <button
-            on:click={setRemove}
-            disabled={passed || !exists}
-            class={`w-[10%] -ml-2 text-xl ${passed || !exists ? 'opacity-0' : 'hover:opacity-50 hover:text-2xl'} ${remove ? 'text-red-600' : ''} duration-200`}
-            type="button">✖</button> -->
         </div>
     </div>
 </li>

@@ -1,19 +1,11 @@
 <script>
     import { slide } from '$lib/utils/effects';
-    import Games from './Games.svelte';
     import { curtain } from '../store';
-    import { onDestroy } from 'svelte';
-
-    let curtainValue = true;
-    const unsubscribeCurtain = curtain.subscribe((value) => {
-        curtainValue = value;
-    });
-
-    onDestroy(unsubscribeCurtain);
+    import Games from './Games.svelte';
 </script>
 
 <div class="flex flex-col items-center justify-start w-full h-full">
-    {#if curtainValue}
+    {#if $curtain}
         <div
             id="welcome"
             class="absolute m12:hidden bg-gradient-to-bl from-primary to-black dark:bg-secondary text-secondary  h-[calc(100vh_-_180px)] w-full flex flex-row items-center justify-between duration-500 z-10">

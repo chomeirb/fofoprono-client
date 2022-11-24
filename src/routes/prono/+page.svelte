@@ -3,7 +3,7 @@
     import Pronos from './Pronos.svelte';
 </script>
 
-<div class="flex flex-col items-center justify-start pt-3 m8:pt-0 w-full h-full">
+<div class="flex flex-col items-center justify-start w-full pt-3 m8:pt-0 h-full">
     {#if !$session.data}
         <div class="flex flex-col items-center justify-center gap-10 h-full">
             <p class="text-4xl font-bold text-center items-center w-2/3">Vous devez vous connecter pour effectuer des pronostics !</p>
@@ -23,7 +23,7 @@
                 class="hidden m12:flex bg-primary dark:bg-secondary text-secondary dark:text-primary py-2 px-5 rounded hover:translate-x-3 duration-300"
                 >✔️</button>
         </div>
-        <div class="w-full max-w-8xl px-3 m12:px-0 m12:mt-2 m8:mt-0  h-[83%]">
+        <div class="w-full max-w-8xl px-3 m12:px-0 m12:mt-2 m8:mt-0 h-[83%]">
             <Pronos />
         </div>
     {/if}

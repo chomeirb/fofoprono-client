@@ -9,7 +9,7 @@ const URLSearchParamsToObject = (params: URLSearchParams) => {
     return obj;
 };
 
-export const getQueryParamsStore = (key: string, defaultValue: string = '') => {
+export const getQueryParamsStore = (key: string) => {
     let params: Record<string, string>;
     page.subscribe((p) => {
         params = URLSearchParamsToObject(p.url.searchParams);
@@ -18,7 +18,7 @@ export const getQueryParamsStore = (key: string, defaultValue: string = '') => {
     return {
         subscribe: (cb: Function) => {
             return page.subscribe((p) => {
-                cb(p.url.searchParams.get(key) ?? defaultValue);
+                cb(p.url.searchParams.get(key) ?? '');
             });
         },
         set: (value: string) => {

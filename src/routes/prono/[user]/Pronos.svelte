@@ -7,20 +7,18 @@
     import GamesDisplay from '../../components/GamesDisplay/GamesDisplay.svelte';
     import { getGames } from './fetchPronos';
 
-    let response: ResponseResult<[PronoResult, Game][]> = {
+    let games: ResponseResult<[PronoResult, Game][]> = {
         status: undefined!,
         text: 'LOADING',
         data: [],
     };
-    
+
     onMount(async () => {
         const user = $page.params.user;
-        response = await getGames(user);
+        games = await getGames(user);
     });
 </script>
 
 <form class="h-full">
-    <div class="flex flex-col items-center justify-center h-full w-full">
-        <GamesDisplay pronoMode={true} displayMode={true} {response} />
-    </div>
+    <GamesDisplay pronoMode={true} displayMode={true} {games} />
 </form>

@@ -37,7 +37,5 @@
 </script>
 
 <form class="h-full" id="Pronos" on:submit|preventDefault={submit}>
-    <div class="flex flex-col items-center justify-center h-full w-full">
-        <GamesDisplay pronoMode={true} displayMode={false} response={$games} bind:pronos={submitPronos} />
-    </div>
+    <GamesDisplay pronoMode={true} displayMode={false} games={$games} bind:pronos={submitPronos} />
 </form>

@@ -3,13 +3,15 @@
     import Header from './Header.svelte';
     import Footer from './Footer.svelte';
     import { onMount } from 'svelte';
+    import { session } from './store';
     import { storeGames } from './fetchGames';
     import { storeSession } from './fetchSession';
-    import { session } from './store';
+    import { storePlayers } from './fetchRanking';
 
     onMount(async () => {
         storeSession();
         storeGames();
+        storePlayers();
     });
 </script>
 
