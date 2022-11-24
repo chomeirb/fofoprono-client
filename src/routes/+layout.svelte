@@ -5,8 +5,10 @@
     import { onMount } from 'svelte';
     import { storeGames } from './fetchGames';
     import { storeSession } from './fetchSession';
+    import { session } from './store';
 
     onMount(async () => {
+        storeSession();
         storeGames();
     });
 </script>
@@ -25,7 +27,7 @@
     </style>
 </head>
 
-{#await storeSession() then}
+{#if $session.text !== 'LOADING'}
     <div class="flex flex-col h-[100vh] m8:h-[calc(100vh_+_90px)]">
         <Header />
 
@@ -35,4 +37,4 @@
 
         <Footer />
     </div>
-{/await}
+{/if}

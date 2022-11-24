@@ -4,8 +4,8 @@
 
     export let queryTeam;
     export let queryStage;
-    export let queryFromDate;
-    export let queryToDate;
+    export let queryFrom;
+    export let queryTo;
 </script>
 
 <div
@@ -16,7 +16,7 @@
             id="from"
             type="date"
             class="bg-primary dark:bg-secondary text-secondary m8:text-lg dark:text-primary rounded px-3 py-1 w-full h-10"
-            bind:value={$queryFromDate} />
+            bind:value={$queryFrom} />
     </div>
     <div class="flex flex-col w-full i2:w-[20%] i3:w-[20%] m8:w-12 m8:text-xs">
         <label for="to">Au</label>
@@ -24,7 +24,7 @@
             id="to"
             type="date"
             class="bg-primary dark:bg-secondary text-secondary m8:text-lg dark:text-primary rounded px-3 py-1 w-full h-10"
-            bind:value={$queryToDate} />
+            bind:value={$queryTo} />
     </div>
     <div class="flex flex-col w-full m12:w-[20%] m8:w-[33%] m8:text-xs">
         <label for="team">Équipe</label>

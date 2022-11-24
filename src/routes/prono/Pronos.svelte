@@ -30,7 +30,7 @@
             });
 
             if (response.ok) {
-                window.location.href = '/prono';
+                window.location.href = window.location.href;
             }
         }
     };

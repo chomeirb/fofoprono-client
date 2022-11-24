@@ -22,9 +22,13 @@ export const getQueryParamsStore = (key: string, defaultValue: string = '') => {
             });
         },
         set: (value: string) => {
-            params[key] = value;
-            const urlSearchParams = new URLSearchParams(params);
-            goto(`?${urlSearchParams.toString()}`, {
+            if (value === '') {
+                delete params[key];
+            } else {
+                params[key] = value;
+            }
+            const urlSearchParams = new URLSearchParams(params).toString();
+            goto(`?${urlSearchParams}`, {
                 keepfocus: true,
                 replaceState: true,
                 noscroll: true
