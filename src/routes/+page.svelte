@@ -1,2 +1,7 @@
-<meta http-equiv="refresh" content="0; url=/home" />
+<script lang="ts">
+    import { goto } from '$app/navigation';
 
+    goto('/home', {
+        replaceState: true,
+    });
+</script>

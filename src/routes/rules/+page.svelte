@@ -1,34 +1,34 @@
 <div class="flex flex-col items-center justify-center m8:justify-start py-10 m8:py-0 w-full h-full">
-  <div class="text-4xl flex flex-row justify-start m12:justify-center m8:py-2 items-center w-full max-w-8xl">
-    <p class="font-bold">RÈGLES DU JEU</p>
-  </div>
-  <div class="flex flex-col justify-start w-full max-w-8xl px-3 m12:px-4 mt-5 m8:mt-0 mb-10 shadow-in text-2xl gap-8 p-8 h-[80%] overflow-y-auto m12:text-lg">
-    <p>Le système de points attribués fonctionne comme suit :</p>
-    <p class="pl-12">
-      ➔ Pour les <b>matchs de poules</b>, un <b>résultat correct </b>(Vainqueur du match trouvé uniquement) octroie <b>8 points</b>, tandis qu'un
-      <b>score exact octroie 16 points</b>
-    </p>
-    <p class="pl-12">
-      ➔ Pour les <b>huitièmes de finale</b>, un
-      <b>résulat correct octroie 12 points</b>, tandis qu'un
-      <b>score exact octroie 24 points</b>
-    </p>
-    <p class="pl-12">
-      ➔ Pour les <b>quarts de finale</b>, un
-      <b>résultat correct octroie 16 points</b>, tandis qu'un
-      <b>score exact octroie 32 points</b>
-    </p>
-    <p class="pl-12">
-      ➔ Pour les <b>demi-finales</b>, un
-      <b>résultat correct octroie 20 points</b>, tandis qu'un
-      <b>score exact octroie 40 points</b>
-    </p>
-    <p class="pl-12">
-      ➔ Pour la <b>finale</b>, un <b>résultat correct octroie 30 points</b>, tandis qu'un <b>score exact octroie 60 points</b>
-    </p>
-    <p>
-      <b>Pour chaque match, le nombre de points attribués est ensuite multiplié par la côte du résultat match</b> (i.e. le nombre de points octroyé est pondéré par
-      la difficulté du résultat trouvé).
-    </p>
-  </div>
+    <div class="text-4xl flex flex-row justify-start m12:justify-center m8:py-2 items-center w-full max-w-8xl">
+        <p class="font-bold">RÈGLES DU JEU</p>
+    </div>
+    <div class="flex flex-col justify-start w-full max-w-8xl px-3 m12:px-4 mt-5 m8:mt-0 mb-10 shadow-in text-2xl gap-8 p-8 h-[80%] overflow-y-auto m12:text-lg">
+        <p>Le système de points attribués fonctionne comme suit :</p>
+        <p class="pl-12">
+            ➔ Pour les <b>matchs de poules</b>, un <b>résultat correct </b>(Vainqueur du match trouvé uniquement) octroie <b>8 points</b>, tandis qu'un
+            <b>score exact octroie 16 points</b>
+        </p>
+        <p class="pl-12">
+            ➔ Pour les <b>huitièmes de finale</b>, un
+            <b>résulat correct octroie 12 points</b>, tandis qu'un
+            <b>score exact octroie 24 points</b>
+        </p>
+        <p class="pl-12">
+            ➔ Pour les <b>quarts de finale</b>, un
+            <b>résultat correct octroie 16 points</b>, tandis qu'un
+            <b>score exact octroie 32 points</b>
+        </p>
+        <p class="pl-12">
+            ➔ Pour les <b>demi-finales</b>, un
+            <b>résultat correct octroie 20 points</b>, tandis qu'un
+            <b>score exact octroie 40 points</b>
+        </p>
+        <p class="pl-12">
+            ➔ Pour la <b>finale</b>, un <b>résultat correct octroie 30 points</b>, tandis qu'un <b>score exact octroie 60 points</b>
+        </p>
+        <p>
+            <b>Pour chaque match, le nombre de points attribués est ensuite multiplié par la côte du résultat match</b> (i.e. le nombre de points octroyé est pondéré
+            par la difficulté du résultat trouvé).
+        </p>
+    </div>
 </div>

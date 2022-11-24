@@ -1,25 +1,25 @@
 <script lang="ts">
     import type { Game } from '$lib/types/game';
-    import { PredictionResult, Team, type Prediction, type PronoResult } from '$lib/types/prono';
+    import { PredictionResult, type Prediction, type PronoResult } from '$lib/types/prono';
     import { displayStage, formatDate, formatTime, getMatchTime, isPassed } from '$lib/utils/display';
 
     export let showOdds = true;
     export let pronoMode = false;
+    export let displayMode = false;
 
     export let fetchedProno: PronoResult = null!;
     export let fetchedGame: Game;
 
-    let input: [number, number] = [null!, null!];
-
     export let prono: Prediction = null!;
     // export let remove: Prediction = null!;
 
-    const passed = isPassed(fetchedGame.time);
-    const exists = pronoMode && fetchedProno !== null;
+    let input: [number, number] = [null!, null!];
 
-    let showScore: boolean;
     // showDetails should be true if the window is wide enough
-    let showDetails: boolean = window.innerWidth > 768;
+    let showDetails = window.innerWidth > 768;
+    let showScore: boolean;
+
+    const passed = isPassed(fetchedGame.time);
 
     function enter() {
         showScore = pronoMode && fetchedGame.score_home !== null && fetchedGame.score_away !== null;
@@ -29,7 +29,7 @@
         showScore = false;
     }
 
-    function getResultColor(result: PredictionResult) {
+    function getResultColorBg(result: PredictionResult) {
         if (!pronoMode) {
             return '';
         }
@@ -43,10 +43,20 @@
         }
     }
 
-    // This functionnality is desableb at the moment
-    // function setRemove() {
-    //     remove = remove === null ? fetchedProno.prediction : null!;
-    // }
+    // Duplicate because tailwind = stupid
+    function getResultColorText(result: PredictionResult) {
+        if (!pronoMode) {
+            return '';
+        }
+        switch (result) {
+            case PredictionResult.Exact:
+                return 'text-green-500';
+            case PredictionResult.Correct:
+                return 'text-yellow-500';
+            case PredictionResult.Wrong:
+                return 'text-red-500';
+        }
+    }
 
     function handleInputs() {
         if (input[0] === null && input[1] === null) {
@@ -73,7 +83,7 @@
     } flex flex-row m12:flex-col text-primary duration-300 dark:text-secondary gap-5 justify-between m12:justify-start w-full h-full items-center shadow-xl border pr-3 m12:pb-1 m12:px-3`}
     on:mouseenter={enter}
     on:mouseleave={leave}>
-    <div class={`w-1 h-full m12:h-1 m12:w-[calc(100%_+_25px)] ${getResultColor(fetchedProno?.result)} m12:mb-1 py-4 m12:py-0`}>&nbsp;</div>
+    <div class={`w-1 h-full m12:h-1 m12:w-[calc(100%_+_25px)] ${getResultColorBg(fetchedProno?.result)} m12:mb-1 py-4 m12:py-0`}>&nbsp;</div>
     <div
         class={`${
             showDetails ? 'm12:text-sm' : 'm12:text-[0px] m12:gap:0 m12:h-0'
@@ -97,29 +107,40 @@
             <p class="w-[40%] m12:text-base">{fetchedGame.team_home.toUpperCase()}</p>
             <div class="flex flex-row justify-center w-1/5">
                 {#if pronoMode}
-                    <input
-                        type="number"
-                        inputmode="numeric"
-                        min="0"
-                        max="20"
-                        bind:value={input[0]}
-                        on:input={handleInputs}
-                        class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center mr-3"
-                        placeholder={prono?.prediction_home.toString() ?? fetchedProno?.prediction.prediction_home.toString() ?? '...'}
-                        disabled={passed} />
-                    <p class={`duration-100 flex-none text-green-600 ${showScore ? '' : 'text-[0px]'}`}>
-                        {fetchedGame.score_home} - {fetchedGame.score_away}
-                    </p>
-                    <input
-                        type="number"
-                        inputmode="numeric"
-                        min="0"
-                        max="20"
-                        bind:value={input[1]}
-                        on:input={handleInputs}
-                        class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center ml-3"
-                        placeholder={prono?.prediction_away.toString() ?? fetchedProno?.prediction.prediction_away.toString() ?? '...'}
-                        disabled={passed} />
+                    {#if passed || displayMode}
+                        {#if fetchedProno}
+                            <p class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center mr-3 order-first">
+                                {fetchedProno?.prediction.prediction_home ?? ''}
+                            </p>
+                            <p class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center ml-3 order-last">
+                                {fetchedProno?.prediction.prediction_away ?? ''}
+                            </p>
+                        {/if}
+                        <p class={`duration-100 flex-none ${getResultColorText(fetchedProno?.result)} ${showScore ? '' : 'text-[0px]'}`}>
+                            {fetchedGame.score_home} - {fetchedGame.score_away}
+                        </p>
+                    {:else}
+                        <input
+                            type="number"
+                            inputmode="numeric"
+                            min="0"
+                            max="20"
+                            bind:value={input[0]}
+                            on:input={handleInputs}
+                            class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center mr-3"
+                            placeholder={prono?.prediction_home.toString() ?? fetchedProno?.prediction.prediction_home.toString() ?? '...'}
+                            disabled={passed} />
+                        <input
+                            type="number"
+                            inputmode="numeric"
+                            min="0"
+                            max="20"
+                            bind:value={input[1]}
+                            on:input={handleInputs}
+                            class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center ml-3"
+                            placeholder={prono?.prediction_away.toString() ?? fetchedProno?.prediction.prediction_away.toString() ?? '...'}
+                            disabled={passed} />
+                    {/if}
                 {:else}
                     <p class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center mr-3">
                         {fetchedGame.score_home ?? ''}
@@ -148,12 +169,6 @@
                     <p class={` ${showDetails ? 'border-2 px-1' : ''}`}>{fetchedGame.odds_away.toPrecision(3)}</p>
                 </div>
             {/if}
-            <!-- Button to supp remove for the moment because confusing -->
-            <!-- <button
-            on:click={setRemove}
-            disabled={passed || !exists}
-            class={`w-[10%] -ml-2 text-xl ${passed || !exists ? 'opacity-0' : 'hover:opacity-50 hover:text-2xl'} ${remove ? 'text-red-600' : ''} duration-200`}
-            type="button">✖</button> -->
         </div>
     </div>
 </li>
