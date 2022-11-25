@@ -44,9 +44,9 @@
     {:else}
         <div class="w-full m12:overflow-x-hidden mt-4 m8:mt-0 m8:border-t overflow-y-auto h-full shadow-in items-center flex flex-col">
             <ul class="w-full px-5 h-full flex flex-col gap-3 py-4">
-                {#each filtered as [fetchedProno, fetchedGame], index}
+                {#each filtered as [fetchedProno, fetchedGame]}
                     {#if pronoMode}
-                        <PronoDisplay {pronoMode} {displayMode} {fetchedProno} {fetchedGame} bind:prono={pronos[index]} />
+                        <PronoDisplay {pronoMode} {displayMode} {fetchedProno} {fetchedGame} bind:prono={pronos[fetchedGame.id - 1]} />
                     {:else}
                         <PronoDisplay {fetchedGame} />
                     {/if}
