@@ -79,7 +79,7 @@
 <li
     class={`${
         showDetails ? 'm12:gap-2' : 'm12:gap-0'
-    } flex flex-row m12:flex-col text-primary duration-300 dark:text-secondary gap-5 justify-between m12:justify-start w-full h-full items-center shadow-xl border pr-3 m12:pb-1 m12:px-3`}
+    } flex flex-row m12:flex-col text-primary duration-300 dark:text-secondary gap-5 justify-between m12:justify-start w-full items-center shadow-xl border pr-3 m12:pb-1 m12:px-3`}
     on:mouseenter={enter}
     on:mouseleave={leave}>
     <div class={`w-1 h-full m12:h-1 m12:w-[calc(100%_+_25px)] ${getResultColorBg(fetchedProno?.result)} m12:mb-1 py-4 m12:py-0`}>&nbsp;</div>
