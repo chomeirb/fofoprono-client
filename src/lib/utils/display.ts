@@ -2,16 +2,16 @@ import type { SystemTime } from "$lib/types/game";
 import { Stage } from "$lib/types/game";
 
 export function isPast(time: SystemTime): boolean {
-    return new Date(time.secs_since_epoch * 1000 - 3600000) < new Date();
+    return new Date(time.secs_since_epoch * 1000) < new Date();
 }
 
 // Return minutes of a match if its in progress or false otherwise
 export function getMatchTime(time: SystemTime): string | false {
-    if (new Date(time.secs_since_epoch * 1000 - 3600000) > new Date() || new Date(time.secs_since_epoch * 1000 - 3600000 + 6660000) < new Date()) {
+    if (new Date(time.secs_since_epoch * 1000) > new Date() || new Date(time.secs_since_epoch * 1000 + 6660000) < new Date()) {
         return false;
     }
     // Return minutes of a match if its in progress
-    let minutes = Math.floor((new Date().getTime() - new Date(time.secs_since_epoch * 1000 - 3600000).getTime()) / 60000);
+    let minutes = Math.floor((new Date().getTime() - new Date(time.secs_since_epoch * 1000).getTime()) / 60000);
     if (minutes > 65) {
         return (minutes - 20).toString() + "'";
     } else if (minutes > 48) {
@@ -25,7 +25,7 @@ export function getMatchTime(time: SystemTime): string | false {
 
 // Return a string of the date in the format of exemple : lun. 5 nov
 export function formatDate(time: SystemTime): string {
-    const date = new Date(time.secs_since_epoch * 1000 - 3600000);
+    const date = new Date(time.secs_since_epoch * 1000);
     return date.toLocaleString("fr-FR", {
         weekday: "short",
         day: "numeric",
@@ -35,7 +35,7 @@ export function formatDate(time: SystemTime): string {
 
 // Return a string of the date in the format of exemple : 22:00
 export function formatTime(time: SystemTime): string {
-    const date = new Date(time.secs_since_epoch * 1000 - 3600000);
+    const date = new Date(time.secs_since_epoch * 1000);
     return date.toLocaleString("fr-FR", {
         hour: "numeric",
         minute: "numeric",
@@ -43,7 +43,7 @@ export function formatTime(time: SystemTime): string {
 }
 
 export function sysTimeToDate(time: SystemTime): Date {
-    return new Date(time.secs_since_epoch * 1000 - 3600000);
+    return new Date(time.secs_since_epoch * 1000);
 }
 
 export function displayStage(stage: Stage): string {
