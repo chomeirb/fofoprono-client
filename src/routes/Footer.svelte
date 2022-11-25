@@ -5,7 +5,7 @@
     import githubFrontLogoDark from '$lib/images/github-front-dark.png';
     import githubBackLogo from '$lib/images/github-back.png';
     import githubBackLogoDark from '$lib/images/github-back-dark.png';
-    import chomeirbLogo from '$lib/images/chomeirb-logo.png';
+    import chomeirbLogo from '$lib/images/chomeirb-logo.svg';
     import { darkMode } from './store';
 </script>
 
