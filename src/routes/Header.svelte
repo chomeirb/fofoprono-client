@@ -1,11 +1,9 @@
 <script lang="ts">
-    import FofoPronoLogo from './components/icons/FofopronoLogo.svelte';
-    import nightLight from '$lib/images/night-light.png';
-    import nightLightDark from '$lib/images/night-light-dark.png';
-    import logoutPic from '$lib/images/logout.png';
-    import logoutPicDark from '$lib/images/logout-dark.png';
+    import FofoPronoLogo from './components/icons/Fofoprono.svelte';
     import { onMount } from 'svelte';
     import { disableCurtain, enableCurtain, session, darkMode } from './store';
+    import LogoutIcon from './components/icons/Logout.svelte';
+    import ThemeIcon from './components/icons/Theme.svelte';
     import PopupConfirmLogout from './components/Popup/ConfirmLogout.svelte';
 
     let hamIsOpen = false;
@@ -47,8 +45,10 @@
 
     const currentDate = new Date();
     currentDate.setDate(currentDate.getDate() - 1);
-    const home = 'home?from=' + currentDate.toISOString().split('T')[0];
-    const prono = 'prono?from=' + currentDate.toISOString().split('T')[0];
+    const date = currentDate.toISOString().split('T')[0];
+    
+    const home = 'home?from=' + date;
+    const prono = 'prono?from=' + date;
 </script>
 
 <header class="flex flex-row shadow-lg justify-center text-3xl text-secondary dark:text-primary w-full h-[90px] m8:h-[60px]">
@@ -68,19 +68,14 @@
         <li class="w-4/6 py-2 flex flex-col items-center rounded border">
             <a on:click={() => (hamIsOpen = false)} href="/rules">Règles</a>
         </li>
-        <li>
-            <img
-                src={$darkMode ? nightLightDark : nightLight}
-                id="night-light"
-                class="h-8 hover:opacity-70 hover:cursor-pointer"
-                alt="night-light"
-                on:click={toggleDarkMode} />
-        </li>
+        <div alt="night-light" on:click={toggleDarkMode}>
+            <ThemeIcon style="hover:opacity-70 hover:cursor-pointer" color={$darkMode ? '#FBFFF1' : '#3C3744'} width={40} />
+        </div>
     </ul>
 
     <div class="w-full h-full max-w-8xl px-3 flex flex-row justify-center m12:justify-between gap-5 items-center">
         <a href="/{home}" class="h-[50%] hover:-rotate-12 duration-200" on:click={enableCurtain}>
-            <FofoPronoLogo color="{$darkMode ? '#FBFFF1' : '#3C3744'}" width={50} />
+            <FofoPronoLogo color={$darkMode ? '#FBFFF1' : '#3C3744'} width={50} />
         </a>
         <nav class="flex flex-row items-center justify-center w-full h-[90%] m12:w-auto">
             <ul class="flex flex-row justify-between w-full gap-5 h-full items-center">
@@ -99,22 +94,17 @@
                     </li>
                 </div>
                 <div class="text-primary dark:text-secondary text-xl flex flex-row items-center gap-5">
-                    <img
-                        src={$darkMode ? nightLightDark : nightLight}
-                        id="night-light"
-                        class="h-8 hover:opacity-70 hover:cursor-pointer m12:hidden"
-                        alt="night-light"
-                        on:click={toggleDarkMode} />
+                    <div alt="night-light" on:click={toggleDarkMode}>
+                        <ThemeIcon style="hover:opacity-70 hover:cursor-pointer m12:hidden" color={$darkMode ? '#FBFFF1' : '#3C3744'} width={40} />
+                    </div>
                     <li class="flex flex-row items-center gap-6">
                         {#if $session.data}
                             <p class="px-2 font-bold text-4xl border shadow-xl w-min max-w-lg m12:max-w-[185px] m12:text-xl truncate text-center">
                                 {$session.data}
                             </p>
-                            <img
-                                src={$darkMode ? logoutPicDark : logoutPic}
-                                class="hover:opacity-70 hover:cursor-pointer h-10"
-                                alt="logout"
-                                on:click={showLogoutConfirm} />
+                            <div alt="logout" on:click={showLogoutConfirm}>
+                                <LogoutIcon style="hover:opacity-70 hover:cursor-pointer" color={$darkMode ? '#FBFFF1' : '#3C3744'} width={40} />
+                            </div>
                         {:else}
                             <a class="px-2 hover:opacity-70 underline" on:click={() => (hamIsOpen = false)} href="/login">Connexion</a>
                         {/if}
