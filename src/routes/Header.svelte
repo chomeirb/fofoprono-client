@@ -1,6 +1,5 @@
 <script lang="ts">
-    import logo from '$lib/images/fplogo.png';
-    import logoDark from '$lib/images/fplogo-dark.png';
+    import FofoPronoLogo from './components/icons/FofopronoLogo.svelte';
     import nightLight from '$lib/images/night-light.png';
     import nightLightDark from '$lib/images/night-light-dark.png';
     import logoutPic from '$lib/images/logout.png';
@@ -81,7 +80,7 @@
 
     <div class="w-full h-full max-w-8xl px-3 flex flex-row justify-center m12:justify-between gap-5 items-center">
         <a href="/{home}" class="h-[50%] hover:-rotate-12 duration-200" on:click={enableCurtain}>
-            <img src={$darkMode ? logoDark : logo} alt="logo" class="h-full" />
+            <FofoPronoLogo color="{$darkMode ? '#FBFFF1' : '#3C3744'}" width={50} />
         </a>
         <nav class="flex flex-row items-center justify-center w-full h-[90%] m12:w-auto">
             <ul class="flex flex-row justify-between w-full gap-5 h-full items-center">
