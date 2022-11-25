@@ -5,7 +5,7 @@
 
     import { games } from '../store';
     import { PUBLIC_API_URL } from '$env/static/public';
-    import { isPassed } from '$lib/utils/display';
+    import { isPast } from '$lib/utils/display';
     import type { ResponseResult } from '$lib/types/returnable';
 
     let submitPronos: Prediction[] = [];
@@ -16,7 +16,7 @@
 
     const submit = async () => {
         const toSubmit = submitPronos.filter((element, index) => {
-            return element !== null && !isPassed($games.data[index][1].time);
+            return element !== null && !isPast($games.data[index][1].time);
         });
 
         if (toSubmit.length > 0) {

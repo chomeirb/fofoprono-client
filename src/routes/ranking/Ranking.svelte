@@ -1,5 +1,5 @@
 <script lang="ts">
-    import PlayersDisplay from './PlayersDisplay.svelte';
+    import PlayersDisplay from '../components/GamesDisplay/PlayersDisplay.svelte';
     import { players } from '../store';
 </script>
 
