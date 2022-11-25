@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { Game } from '$lib/types/game';
     import { PredictionResult, type Prediction, type PronoResult } from '$lib/types/prono';
-    import { displayStage, formatDate, formatTime, getMatchTime, isPassed } from '$lib/utils/display';
+    import { displayStage, formatDate, formatTime, getMatchTime, isPast } from '$lib/utils/display';
 
     export let showOdds = true;
     export let pronoMode = false;
@@ -11,7 +11,6 @@
     export let fetchedGame: Game;
 
     export let prono: Prediction = null!;
-    // export let remove: Prediction = null!;
 
     let input: [number, number] = [null!, null!];
 
@@ -19,7 +18,7 @@
     let showDetails = window.innerWidth > 768;
     let showScore: boolean;
 
-    const passed = isPassed(fetchedGame.time);
+    $: past = isPast(fetchedGame.time);
 
     function enter() {
         showScore = pronoMode && fetchedGame.score_home !== null && fetchedGame.score_away !== null;
@@ -107,7 +106,7 @@
             <p class="w-[40%] m12:text-base">{fetchedGame.team_home.toUpperCase()}</p>
             <div class="flex flex-row justify-center w-1/5">
                 {#if pronoMode}
-                    {#if passed || displayMode}
+                    {#if past || displayMode}
                         {#if fetchedProno}
                             <p class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center mr-3 order-first">
                                 {fetchedProno?.prediction.prediction_home ?? ''}
@@ -129,7 +128,7 @@
                             on:input={handleInputs}
                             class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center mr-3"
                             placeholder={prono?.prediction_home.toString() ?? fetchedProno?.prediction.prediction_home.toString() ?? '...'}
-                            disabled={passed} />
+                            disabled={past} />
                         <input
                             type="number"
                             inputmode="numeric"
@@ -139,7 +138,7 @@
                             on:input={handleInputs}
                             class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center ml-3"
                             placeholder={prono?.prediction_away.toString() ?? fetchedProno?.prediction.prediction_away.toString() ?? '...'}
-                            disabled={passed} />
+                            disabled={past} />
                     {/if}
                 {:else}
                     <p class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center mr-3">

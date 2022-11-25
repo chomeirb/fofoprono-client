@@ -1,8 +1,8 @@
 <script lang="ts">
-    import { getQueryParamsStore } from '../queryParamsStore';
-    import PlayerDisplay from '../components/GamesDisplay/Player.svelte';
-    import Filter from '../components/GamesDisplay/PlayersFilter.svelte';
-    import RankingBanner from '../components/GamesDisplay/PlayersBanner.svelte';
+    import { getQueryParamsStore } from '../../queryParamsStore';
+    import PlayerDisplay from './Player.svelte';
+    import Filter from './PlayersFilter.svelte';
+    import RankingBanner from './PlayersBanner.svelte';
     import { SortType } from '$lib/types/sort';
     import type { ResponseResult } from '$lib/types/returnable';
     import type { RankedUser } from '$lib/types/player';
@@ -18,13 +18,12 @@
     $: localStorage.setItem('player', $queryPlayers);
 
     $: names = $queryPlayers
-        .toUpperCase()
         .split(',')
         .map((name: string) => name.trim())
         .filter((name: string) => name !== '');
 
     $: filteredSorted = players.data
-        .filter((player) => names.length == 0 || names.find((val: string) => player.name.toUpperCase().includes(val)) !== undefined)
+        .filter((player) => names.length == 0 || names.find((val: string) => player.name.includes(val)) !== undefined)
         .sort((player1, player2) => {
             switch (sortType) {
                 case SortType.Score:

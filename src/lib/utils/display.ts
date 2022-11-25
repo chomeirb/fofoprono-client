@@ -1,7 +1,7 @@
 import type { SystemTime } from "$lib/types/game";
 import { Stage } from "$lib/types/game";
 
-export function isPassed(time: SystemTime): boolean {
+export function isPast(time: SystemTime): boolean {
     return new Date(time.secs_since_epoch * 1000 - 3600000) < new Date();
 }
 
