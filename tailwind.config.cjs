@@ -5,10 +5,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // primary: "#121212",
         primary: "#3C3744",
         secondary: "#FBFFF1",
-        tertiary: "#3D52D5",
       },
       boxShadow: {
         'top': '0 -10px 15px -3px rgba(0, 0, 0, 0.2)',
