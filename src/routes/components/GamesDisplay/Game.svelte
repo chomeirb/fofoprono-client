@@ -80,7 +80,7 @@
         <div
             class={`${
                 showDetails ? 'm12:text-sm' : 'm12:text-[0px] m12:gap:0 m12:h-0'
-            } flex flex-col text-lg i1:text-sm  w-[22%] m12:w-full pr-16 m12:pr-0 duration-300`}>
+            } flex flex-col text-lg i1:text-sm w-[22%] m12:w-full pr-16 m12:pr-0 duration-300`}>
             <div class="m12:flex m12:flex-row justify-between gap-5">
                 {#if !getMatchTime(fetchedGame.time)}
                     <div class="flex flex-row m12:w-[44%] w-[90%] justify-between m12:justify-start m12:gap-5">

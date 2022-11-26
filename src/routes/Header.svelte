@@ -53,7 +53,7 @@
 
 <header class="flex flex-row shadow-lg justify-center text-3xl text-secondary dark:text-primary w-full h-[90px] m8:h-[60px]">
     <ul
-        class={`m12:flex overflow-y-auto flex-col justify-start w-[100vw] shadow-in pt-10 bg-secondary dark:bg-primary text-primary dark:text-secondary fixed hidden m8 gap-10 h-[calc(100vh_-_180px)] m8:h-[calc(100vh_-_90px)] ${
+        class={`z-40 m12:flex overflow-y-auto flex-col justify-start w-[100vw] shadow-in pt-10 bg-secondary dark:bg-primary text-primary dark:text-secondary fixed hidden m8 gap-10 h-[calc(100vh_-_180px)] m8:h-[calc(100vh_-_90px)] ${
             !hamIsOpen ? 'translate-x-[100vw]' : ''
         } duration-500 mt-[90px] m8:mt-[60px] items-center`}>
         <li class="w-4/6 py-2 flex flex-col items-center rounded border">
