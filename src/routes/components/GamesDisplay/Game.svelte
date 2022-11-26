@@ -102,7 +102,7 @@
                 {/if}
 
                 <p class="hidden m12:flex">{displayStage(fetchedGame.stage)}</p>
-                <p class={` ${showDetails ? 'text-lg' : ''}`} on:click={toggleDetails}>-</p>
+                <p class={` ${showDetails ? 'text-lg' : ''} hidden m12:flex`} on:click={toggleDetails}>-</p>
             </div>
             <hr class={`${showDetails ? 'w-[77%] text-left opacity-40' : 'opacity-0'}`} />
         </div>
