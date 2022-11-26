@@ -58,7 +58,7 @@
                 return 'text-green-500';
             case PredictionResult.Correct:
                 return 'text-yellow-500';
-            case PredictionResult.Wrong:
+            default:
                 return 'text-red-500';
         }
     }
