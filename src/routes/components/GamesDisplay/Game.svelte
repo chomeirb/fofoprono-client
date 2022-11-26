@@ -104,7 +104,7 @@
                 <p class="hidden m12:flex">{displayStage(fetchedGame.stage)}</p>
                 <p class={` ${showDetails ? 'text-lg' : ''} hidden m12:flex`} on:click={toggleDetails}>-</p>
             </div>
-            <hr class={`${showDetails ? 'w-[77%] text-left opacity-40' : 'opacity-0'}`} />
+            <hr class={`${showDetails ? 'w-[77%] text-left opacity-40' : 'opacity-0'} hidden m12:flex`} />
         </div>
         <div class="flex flex-row justify-between m12:w-full w-[55%]">
             <div class="flex flex-row text-2xl gap-5 m12:gap-2 h-full items-center justify-between m12:justify-start m12:w-[90%] w-full">
