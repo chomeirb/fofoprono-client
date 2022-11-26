@@ -36,7 +36,7 @@
                     return player1.name.localeCompare(player2.name);
             }
         })
-        .sort(() => (sortAsc ? 1 : 0));
+        .sort(() => (sortAsc ? 1 : -1));
 </script>
 
 <div class="w-full h-full flex flex-row m12:flex m12:flex-col m12:items-center">
