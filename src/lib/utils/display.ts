@@ -1,5 +1,6 @@
-import type { SystemTime } from "$lib/types/game";
+import type { Game, SystemTime } from "$lib/types/game";
 import { Stage } from "$lib/types/game";
+import type { PronoResult } from "$lib/types/prono";
 
 export function isPast(time: SystemTime): boolean {
     return new Date(time.secs_since_epoch * 1000) < new Date();
@@ -60,3 +61,44 @@ export function displayStage(stage: Stage): string {
             return 'Finale';
     }
 }
+
+
+export function displayPoints(game: Game, pronoResult: PronoResult): string {
+    if (pronoResult == null || pronoResult.result == 'Wrong') {
+        return '+ 0';
+    }
+    let basePoints = 0;
+    switch (Math.sign(pronoResult.prediction.prediction_home - pronoResult.prediction.prediction_away)) {
+        case 1:
+            basePoints = game.odds_home;
+            break;
+        case 0:
+            basePoints = game.odds_draw;
+            break;
+        case -1:
+            basePoints = game.odds_away;
+            break;
+    }
+    switch (game.stage) {
+        case Stage.Group:
+            basePoints *= 8;
+            break;
+        case Stage.Sixteen:
+            basePoints *= 12;
+            break;
+        case Stage.Quarter:
+            basePoints *= 16;
+            break;
+        case Stage.Semi:
+            basePoints *= 20;
+            break;
+        case Stage.Final:
+            basePoints *= 30;
+            break;
+    }
+    if (pronoResult.result == 'Exact') {
+        basePoints *= 2;
+    }
+    return '+ ' + Math.round(basePoints).toString();
+}
+
