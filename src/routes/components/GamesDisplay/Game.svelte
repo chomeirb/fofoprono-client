@@ -20,6 +20,19 @@
 
     $: past = isPast(fetchedGame.time);
 
+    $: resultColorBg = pronoMode ? getResultColor(fetchedProno?.result) : '';
+    $: resultColorText = pronoMode ? getResultColorText(fetchedProno?.result) : '';
+
+    $: if (input[0] === null && input[1] === null) {
+        prono = null!;
+    } else {
+        prono = {
+            game_id: fetchedGame.id,
+            prediction_home: input[0] ?? fetchedProno?.prediction.prediction_home ?? 0,
+            prediction_away: input[1] ?? fetchedProno?.prediction.prediction_away ?? 0,
+        };
+    }
+
     function enter() {
         showScore = pronoMode && fetchedGame.score_home !== null && fetchedGame.score_away !== null;
     }
@@ -28,10 +41,7 @@
         showScore = false;
     }
 
-    function getResultColorBg(result: PredictionResult) {
-        if (!pronoMode) {
-            return '';
-        }
+    function getResultColor(result: PredictionResult) {
         switch (result) {
             case PredictionResult.Exact:
                 return 'bg-green-500';
@@ -42,32 +52,15 @@
         }
     }
 
-    // Duplicate because tailwind = stupid
     function getResultColorText(result: PredictionResult) {
-        if (!pronoMode) {
-            return '';
-        }
         switch (result) {
             case PredictionResult.Exact:
                 return 'text-green-500';
             case PredictionResult.Correct:
                 return 'text-yellow-500';
-            default:
+            case PredictionResult.Wrong:
                 return 'text-red-500';
         }
-    }
-
-    function handleInputs() {
-        if (input[0] === null && input[1] === null) {
-            prono = null!;
-            return;
-        }
-
-        prono = {
-            game_id: fetchedGame.id,
-            prediction_home: input[0] ?? fetchedProno?.prediction.prediction_home ?? 0,
-            prediction_away: input[1] ?? fetchedProno?.prediction.prediction_away ?? 0,
-        };
     }
 
     function toggleDetails() {
@@ -77,7 +70,7 @@
 </script>
 
 <div class="flex flex-row">
-    <div class={`w-1 ${getResultColorBg(fetchedProno?.result)} py-4 m12:py-3 `}>&nbsp;</div>
+    <div class={`w-1 ${resultColorBg} py-4 m12:py-3 `}>&nbsp;</div>
     <li
         class={`${
             showDetails ? 'm12:gap-2 m12:py-4' : 'm12:gap-0'
@@ -120,10 +113,7 @@
                                     {fetchedProno?.prediction.prediction_away ?? ''}
                                 </p>
                             {/if}
-                            <p
-                                class={`duration-100 flex-none align-middle  ${getResultColorText(fetchedProno?.result)} ${
-                                    showScore ? 'm6:text-lg' : 'text-[0px]'
-                                }`}>
+                            <p class={`duration-100 flex-none align-middle ${resultColorText} ${showScore ? 'm6:text-lg' : 'text-[0px]'}`}>
                                 {fetchedGame.score_home} - {fetchedGame.score_away}
                             </p>
                         {:else}
@@ -133,7 +123,6 @@
                                 min="0"
                                 max="20"
                                 bind:value={input[0]}
-                                on:input={handleInputs}
                                 class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center mr-3 m12:mr-[6px]"
                                 placeholder={prono?.prediction_home.toString() ?? fetchedProno?.prediction.prediction_home.toString() ?? '...'}
                                 disabled={past} />
@@ -143,7 +132,6 @@
                                 min="0"
                                 max="20"
                                 bind:value={input[1]}
-                                on:input={handleInputs}
                                 class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center ml-3 m12:ml-[6px]"
                                 placeholder={prono?.prediction_away.toString() ?? fetchedProno?.prediction.prediction_away.toString() ?? '...'}
                                 disabled={past} />
@@ -173,7 +161,7 @@
             } flex flex-row text-lg i1:text-sm justify-end m12:justify-start w-1/4 m12:w-full duration-300`}>
             <div class="flex flex-row w-[90%] m12:justify-center m12:gap-0 justify-end gap-5">
                 <p class={`m12:hidden align-middle ${showScore ? 'text-[0px] -translate-x-5' : ''} duration-75`}>{displayStage(fetchedGame.stage)}</p>
-                <p class={`m12:hidden ${!showScore ? 'text-[0px]' : '-translate-x-5'} duration-75 ${getResultColorText(fetchedProno?.result)}`}>
+                <p class={`m12:hidden ${!showScore ? 'text-[0px]' : '-translate-x-5'} duration-75 ${resultColorText}`}>
                     {showScore ? displayPoints(fetchedGame, fetchedProno) : ''}
                 </p>
                 {#if showOdds}
@@ -181,7 +169,7 @@
                         <p class={` ${showDetails ? 'border-2 px-1' : ''}`}>{fetchedGame.odds_home.toPrecision(3)}</p>
                         <p class={` ${showDetails ? 'border-2 px-1' : ''}`}>{fetchedGame.odds_draw.toPrecision(3)}</p>
                         <p class={` ${showDetails ? 'border-2 px-1' : ''}`}>{fetchedGame.odds_away.toPrecision(3)}</p>
-                        <p class={`hidden m12:flex ml-10 m6:ml-6 ${!showScore ? 'text-[0px]' : ''} ${getResultColorText(fetchedProno?.result)}`}>
+                        <p class={`hidden m12:flex ml-10 m6:ml-6 ${!showScore ? 'text-[0px]' : ''} ${resultColorText}`}>
                             {showScore ? displayPoints(fetchedGame, fetchedProno) : ''}
                         </p>
                     </div>
