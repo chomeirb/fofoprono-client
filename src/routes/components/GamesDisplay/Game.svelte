@@ -91,7 +91,7 @@
     <li
         class={`${
             showDetails ? 'm12:gap-2 m12:py-4' : 'm12:gap-0'
-        } flex flex-row m12:flex-col text-primary duration-300 dark:text-secondary gap-5 justify-between m12:justify-center w-full items-center shadow-xl border-[3px] border-primary dark:border-secondary rounded-md px-3 py-3 m12:py-1 m12:px-3`}
+        } flex flex-row m12:flex-col text-primary duration-300 dark:text-secondary gap-5 justify-between m12:justify-center w-full items-center shadow-xl border-[3px] border-primary dark:border-secondary rounded-md px-3 py-4 m12:px-3`}
         on:mouseenter={enter}
         on:mouseleave={leave}>
         <div
@@ -118,12 +118,14 @@
         </div>
         <div class="flex flex-row justify-between m12:w-full w-[55%]">
             <div class="flex flex-row text-2xl gap-5 m12:gap-2 h-full items-center justify-between m12:justify-start m12:w-[90%] w-full">
+                <div class="flex flex-row m12:flex-col gap-5 m12:gap-3 items-center w-full">
                 {#if TeamHome.logo}
                 <div class="p-1 bg-primary dark:bg-secondary rounded-xl">
-                    <img src="{TeamHome.logo}" alt="Logo {TeamHome.name}" class="w-[75px] h-[50px] object-cover rounded-md" />
+                    <img src="{TeamHome.logo}" alt="Logo {TeamHome.name}" class="w-[75px] h-[50px] m12:w-[50px] m12:h-[40px] object-cover rounded-md" />
                 </div>
                 {/if}
-                <p class="w-[20%] text-lg m12:text-sm truncate">{TeamHome.name}</p>
+                <p class="text-lg m12:text-sm truncate">{TeamHome.name}</p>
+            </div>
                 <div class="flex flex-row justify-center w-[25%]">
                     {#if pronoMode}
                         {#if past || displayMode}
@@ -167,12 +169,14 @@
                         </p>
                     {/if}
                 </div>
-                <p class="w-[20%] text-right text-lg m12:text-sm truncate">{TeamAway.name}</p>
-                {#if TeamAway.logo}
-                    <div class="p-1 bg-primary dark:bg-secondary rounded-xl">
-                        <img src="{TeamAway.logo}" alt="Logo {TeamAway.name}" class="w-[75px] h-[50px] object-cover rounded-lg" />
-                    </div>
-                {/if}
+                <div class="flex flex-row m12:flex-col-reverse gap-5 m12:gap-3 items-center justify-end w-full">
+                    <p class="text-right text-lg m12:text-sm truncate">{TeamAway.name}</p>
+                    {#if TeamAway.logo}
+                        <div class="p-1 bg-primary dark:bg-secondary rounded-xl">
+                            <img src="{TeamAway.logo}" alt="Logo {TeamAway.name}" class="w-[75px] h-[50px] m12:w-[50px] m12:h-[40px] object-cover rounded-lg" />
+                        </div>
+                    {/if}
+                </div>
             </div>
             <p
                 class={`-translate-y-1 hover:cursor-pointer select-none duration-100 m12:flex hidden ${showDetails ? 'm12:hidden' : ''}`}
