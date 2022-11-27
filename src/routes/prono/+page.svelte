@@ -15,12 +15,12 @@
             <button
                 type="submit"
                 form="Pronos"
-                class="m12:hidden bg-primary dark:bg-secondary text-secondary dark:text-primary py-2 px-5 rounded hover:translate-x-3 duration-300"
+                class="m12:hidden bg-primary dark:bg-secondary text-secondary dark:text-primary py-2 px-5 rounded-3xl hover:translate-x-3 duration-300"
                 >Valider →</button>
             <button
                 type="submit"
                 form="Pronos"
-                class="hidden m12:flex bg-primary dark:bg-secondary text-secondary dark:text-primary py-2 px-5 rounded hover:translate-x-3 duration-300"
+                class="hidden m12:flex bg-primary dark:bg-secondary text-secondary dark:text-primary py-2 px-5 rounded-3xl hover:translate-x-3 duration-300"
                 >✔️</button>
         </div>
         <div class="w-full max-w-8xl px-3 m12:px-0 m12:mt-2 m8:mt-0 h-[83%]">

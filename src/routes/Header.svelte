@@ -53,19 +53,19 @@
 
 <header class="flex flex-row shadow-lg justify-center text-3xl text-secondary dark:text-primary w-full h-[90px] m8:h-[60px]">
     <ul
-        class={`z-40 m12:flex overflow-y-auto flex-col justify-start w-[100vw] shadow-in pt-10 bg-secondary dark:bg-primary text-primary dark:text-secondary fixed hidden m8 gap-10 h-[calc(100vh_-_180px)] m8:h-[calc(100vh_-_90px)] ${
+        class={`z-40 m12:flex overflow-y-auto flex-col justify-center w-[100vw] shadow-in pt-10 bg-secondary dark:bg-primary text-primary dark:text-secondary fixed hidden m8 gap-10 h-[calc(100vh_-_180px)] m8:h-[calc(100vh_-_90px)] ${
             !hamIsOpen ? 'translate-x-[100vw]' : ''
         } duration-500 mt-[90px] m8:mt-[60px] items-center`}>
-        <li class="w-4/6 py-2 flex flex-col items-center rounded border">
+        <li class="w-4/6 py-2 flex flex-col items-center rounded-2xl border-[3px]">
             <a on:click={() => (hamIsOpen = false)} href="/{home}">Accueil</a>
         </li>
-        <li class="w-4/6 py-2 flex flex-col items-center rounded border">
+        <li class="w-4/6 py-2 flex flex-col items-center rounded-2xl border-[3px]">
             <a on:click={() => (hamIsOpen = false)} href="/{prono}">Pronostics</a>
         </li>
-        <li class="w-4/6 py-2 flex flex-col items-center rounded border">
+        <li class="w-4/6 py-2 flex flex-col items-center rounded-2xl border-[3px]">
             <a on:click={() => (hamIsOpen = false)} href="/ranking">Classement</a>
         </li>
-        <li class="w-4/6 py-2 flex flex-col items-center rounded border">
+        <li class="w-4/6 py-2 flex flex-col items-center rounded-2xl border-[3px]">
             <a on:click={() => (hamIsOpen = false)} href="/rules">Règles</a>
         </li>
         <div alt="night-light" on:click={toggleDarkMode}>
@@ -81,16 +81,16 @@
             <ul class="flex flex-row justify-between w-full gap-5 h-full items-center">
                 <div class="flex flex-row gap-5 h-full items-center m12:hidden">
                     <li class="hover:translate-y-2 duration-200">
-                        <a class="bg-primary dark:bg-secondary rounded px-5 py-2" on:click={disableCurtain} href="/{home}">Accueil</a>
+                        <a class="bg-primary dark:bg-secondary rounded-2xl px-5 py-2" on:click={disableCurtain} href="/{home}">Accueil</a>
                     </li>
                     <li class="hover:translate-y-2 duration-200">
-                        <a class="bg-primary dark:bg-secondary rounded px-5 py-2" href="/{prono}">Pronostics</a>
+                        <a class="bg-primary dark:bg-secondary rounded-2xl px-5 py-2" href="/{prono}">Pronostics</a>
                     </li>
                     <li class="hover:translate-y-2 duration-200">
-                        <a class="bg-primary dark:bg-secondary rounded px-5 py-2" href="/ranking">Classement</a>
+                        <a class="bg-primary dark:bg-secondary rounded-2xl px-5 py-2" href="/ranking">Classement</a>
                     </li>
                     <li class="hover:translate-y-2 duration-200">
-                        <a class="bg-primary dark:bg-secondary rounded px-5 py-2" href="/rules">Règles</a>
+                        <a class="bg-primary dark:bg-secondary rounded-2xl px-5 py-2" href="/rules">Règles</a>
                     </li>
                 </div>
                 <div class="text-primary dark:text-secondary text-xl flex flex-row items-center gap-5">
@@ -99,7 +99,7 @@
                     </div>
                     <li class="flex flex-row items-center gap-6">
                         {#if $session.data}
-                            <p class="px-2 font-bold text-4xl border-[3px] rounded-md border-primary dark:border-secondary shadow-xl w-min max-w-lg m12:max-w-[185px] m12:text-xl truncate text-center">
+                            <p class="px-2 font-bold text-4xl border-[3px] rounded-xl border-primary dark:border-secondary shadow-xl w-min max-w-lg m12:max-w-[185px] m12:text-xl truncate text-center">
                                 {$session.data}
                             </p>
                             <div alt="logout" on:click={showLogoutConfirm}>

@@ -51,7 +51,7 @@
     <div class="flex flex-col items-center w-full gap-5 mt-5">
         <input
             type="submit"
-            class="bg-primary dark:bg-secondary text-secondary dark:text-primary px-5 py-2 shadow-xl rounded m12:w-5/6 hover:translate-x-6 hover:cursor-pointer duration-200"
+            class="bg-primary dark:bg-secondary text-secondary dark:text-primary px-5 py-2 shadow-xl rounded-3xl m12:w-5/6 hover:translate-x-6 hover:cursor-pointer duration-200"
             value={submitting ? 'Connexion...' : 'Connexion ➔'} />
     </div>
 </form>
