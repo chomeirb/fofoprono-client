@@ -24,7 +24,8 @@
 
     $: filteredSorted = players.data
         .filter((player) => names.length == 0 || names.find((val: string) => player.name.includes(val)) !== undefined)
-        .sort((player1, player2) => {
+        .sort((a, b) => {
+            const [player1, player2] = sortAsc ? [b, a] : [a, b];
             switch (sortType) {
                 case SortType.Score:
                     return player2.score - player1.score;
@@ -35,8 +36,7 @@
                 case SortType.Name:
                     return player1.name.localeCompare(player2.name);
             }
-        })
-        .sort(() => (sortAsc ? 1 : -1));
+        });
 </script>
 
 <div class="w-full h-full flex flex-row m12:flex m12:flex-col m12:items-center">
