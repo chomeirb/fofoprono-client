@@ -2,6 +2,8 @@
     import type { Game } from '$lib/types/game';
     import { PredictionResult, type Prediction, type PronoResult } from '$lib/types/prono';
     import { displayPoints, displayStage, formatDate, formatTime, getMatchTime, isPast } from '$lib/utils/display';
+    import * as Teams from '$lib/assets/teams';
+
 
     export let showOdds = true;
     export let pronoMode = false;
@@ -67,6 +69,21 @@
         showDetails = !showDetails;
         showDetails ? enter() : leave();
     }
+
+    interface Team {
+        name: string;
+        logo: typeof Teams[keyof typeof Teams];
+    }
+
+    const TeamHome: Team = {
+        name: fetchedGame.team_home.toUpperCase(),
+        logo: Teams[fetchedGame.team_home.replace(/[\s+\-]/g, '') as keyof typeof Teams] ?? null,
+    };
+
+    const TeamAway: Team = {
+        name: fetchedGame.team_away.toUpperCase(),
+        logo: Teams[fetchedGame.team_away.replace(/[\s+\-]/g, '') as keyof typeof Teams] ?? null,
+    };
 </script>
 
 <div class="flex flex-row">
@@ -80,7 +97,7 @@
         <div
             class={`${
                 showDetails ? 'm12:text-sm' : 'm12:text-[0px] m12:gap:0 m12:h-0'
-            } flex flex-col text-lg i1:text-sm w-[22%] m12:w-full pr-16 m12:pr-0 duration-300`}>
+            } flex flex-col text-lg i1:text-sm w-[22%] m12:w-full pr-5 m12:pr-0 duration-300`}>
             <div class="m12:flex m12:flex-row justify-between gap-5">
                 {#if !getMatchTime(fetchedGame.time)}
                     <div class="flex flex-row m12:w-[44%] w-[90%] justify-between m12:justify-start m12:gap-5">
@@ -101,7 +118,10 @@
         </div>
         <div class="flex flex-row justify-between m12:w-full w-[55%]">
             <div class="flex flex-row text-2xl gap-5 m12:gap-2 h-full items-center justify-between m12:justify-start m12:w-[90%] w-full">
-                <p class="w-[40%] m12:text-base truncate">{fetchedGame.team_home.toUpperCase()}</p>
+                {#if TeamHome.logo}
+                <img src="{TeamHome.logo}" alt="Logo {TeamHome.name}" class="w-[75px] h-[45px] object-cover rounded-md" />
+                {/if}
+                <p class="w-[20%] text-lg m12:text-sm truncate">{TeamHome.name}</p>
                 <div class="flex flex-row justify-center w-[25%]">
                     {#if pronoMode}
                         {#if past || displayMode}
@@ -145,9 +165,10 @@
                         </p>
                     {/if}
                 </div>
-                <p class="w-[40%] text-right m12:text-base truncate">
-                    {fetchedGame.team_away.toUpperCase()}
-                </p>
+                <p class="w-[20%] text-right text-lg m12:text-sm truncate">{TeamAway.name}</p>
+                {#if TeamAway.logo}
+                    <img src="{TeamAway.logo}" alt="Logo {TeamAway.name}" class="w-[75px] h-[45px] object-cover rounded-lg" />
+                {/if}
             </div>
             <p
                 class={`-translate-y-1 hover:cursor-pointer select-none duration-100 m12:flex hidden ${showDetails ? 'm12:hidden' : ''}`}
