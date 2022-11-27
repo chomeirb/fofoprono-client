@@ -9,7 +9,7 @@
 </script>
 
 <div
-    class="flex flex-col m12:flex-row gap-3 justify-start m12:justify-around w-[90%] m12:w-full shadow-in mt-4 m12:mt-0 px-4 m12:px-1 py-5 m12:py-2 m12:text-base h-min">
+    class="flex flex-col m12:flex-row gap-3 justify-start m12:justify-around w-[90%] m12:w-full shadow-in mt-4 m12:mt-0 px-4 m12:px-1 py-5 m12:py-2 m12:text-base h-min rounded-md">
     <div class="flex flex-col w-full i2:w-[20%] i3:w-[20%] m8:w-12 m8:text-xs">
         <label for="from">Du</label>
         <input

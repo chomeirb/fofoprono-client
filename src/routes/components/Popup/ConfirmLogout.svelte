@@ -29,11 +29,11 @@
 <div id="window" class="z-50 w-[100vw] h-[100vh] fixed text-3xl m12:text-xl text-secondary bg-primary bg-opacity-50 flex flex-row items-center justify-center">
     <div
         id="popup"
-        class="w-[50vw] m12:w-[90vw] h-[30vh] p-10 m12:p-3 text-center bg-primary flex flex-col justify-around bg-opacity-100 border rounded shadow-xl">
+        class="w-[50vw] m12:w-[90vw] h-[30vh] p-10 m12:p-3 text-center bg-secondary dark:bg-primary text-primary dark:text-secondary flex flex-col justify-around bg-opacity-100 border-4 border-primary dark:border-secondary rounded-3xl shadow-xl">
         <p>Êtes-vous sûr de vouloir vous déconnecter ?</p>
         <div class="flex flex-row justify-between">
-            <button class="bg-secondary text-primary rounded p-2 m-2 w-60 hover:opacity-60" on:click={logout}>Oui</button>
-            <button class="bg-secondary text-primary rounded p-2 m-2 w-60 hover:opacity-60" on:click={hideFunction}>Annuler</button>
+            <button class="bg-primary dark:bg-secondary text-secondary dark:text-primary rounded-3xl p-2 m-2 w-60 hover:opacity-60" on:click={logout}>Oui</button>
+            <button class="bg-primary dark:bg-secondary text-secondary dark:text-primary rounded-3xl p-2 m-2 w-60 hover:opacity-60" on:click={hideFunction}>Annuler</button>
         </div>
     </div>
 </div>

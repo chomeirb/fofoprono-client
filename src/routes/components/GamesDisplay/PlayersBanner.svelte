@@ -13,7 +13,7 @@
     }
 </script>
 
-<div class="flex flex-row justify-between items-center w-full px-10 m12:px-[5%] py-3 shadow-in border h-min">
+<div class="flex flex-row justify-between items-center w-full px-10 m12:px-[5%] py-3 shadow-in border-[3px] border-primary dark:border-secondary rounded-md h-min">
     <p class="text-primary dark:text-secondary w-[10%] m6:text-base m12:w-[25%] text-xl" title="rang">Rang</p>
     <p
         class="text-primary dark:text-secondary w-[60%] m6:text-base text-xl hover:underline hover:opacity-70 hover:cursor-pointer"

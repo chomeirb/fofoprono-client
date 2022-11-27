@@ -24,7 +24,7 @@
             <p class="text-primary dark:text-secondary font-bold">CALENDRIER/RÉSULTATS</p>
             <a
                 href="/prono"
-                class="bg-primary dark:bg-secondary text-secondary dark:text-primary m12:text-lg py-2 px-5 m12:hidden rounded hover:translate-x-3 duration-300"
+                class="bg-primary dark:bg-secondary text-secondary dark:text-primary m12:text-lg py-2 px-5 m12:hidden rounded-3xl hover:translate-x-3 duration-300"
                 >Pronostiquer →</a>
         </div>
         <div class="w-full max-w-8xl px-3 m12:px-0 h-[83%]">

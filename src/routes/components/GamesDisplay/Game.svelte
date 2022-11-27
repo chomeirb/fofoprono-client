@@ -2,6 +2,8 @@
     import type { Game } from '$lib/types/game';
     import { PredictionResult, type Prediction, type PronoResult } from '$lib/types/prono';
     import { displayPoints, displayStage, formatDate, formatTime, getMatchTime, isPast } from '$lib/utils/display';
+    import * as Teams from '$lib/assets/teams';
+
 
     export let showOdds = true;
     export let pronoMode = false;
@@ -20,7 +22,7 @@
 
     $: past = isPast(fetchedGame.time);
 
-    $: resultColorBg = pronoMode ? getResultColor(fetchedProno?.result) : '';
+    $: resultColorBorder = pronoMode ? getResultColor(fetchedProno?.result) : '';
     $: resultColorText = pronoMode ? getResultColorText(fetchedProno?.result) : '';
 
     $: if (input[0] === null && input[1] === null) {
@@ -44,11 +46,11 @@
     function getResultColor(result: PredictionResult) {
         switch (result) {
             case PredictionResult.Exact:
-                return 'bg-green-500';
+                return 'border-green-500';
             case PredictionResult.Correct:
-                return 'bg-yellow-500';
+                return 'border-yellow-500';
             case PredictionResult.Wrong:
-                return 'bg-red-500';
+                return 'border-red-500';
         }
     }
 
@@ -67,20 +69,34 @@
         showDetails = !showDetails;
         showDetails ? enter() : leave();
     }
+
+    interface Team {
+        name: string;
+        logo: typeof Teams[keyof typeof Teams];
+    }
+
+    const TeamHome: Team = {
+        name: fetchedGame.team_home.toUpperCase(),
+        logo: Teams[fetchedGame.team_home.replace(/[\s+\-]/g, '') as keyof typeof Teams] ?? null,
+    };
+
+    const TeamAway: Team = {
+        name: fetchedGame.team_away.toUpperCase(),
+        logo: Teams[fetchedGame.team_away.replace(/[\s+\-]/g, '') as keyof typeof Teams] ?? null,
+    };
 </script>
 
 <div class="flex flex-row">
-    <div class={`w-1 ${resultColorBg} py-4 m12:py-3 `}>&nbsp;</div>
     <li
         class={`${
             showDetails ? 'm12:gap-2 m12:py-4' : 'm12:gap-0'
-        } flex flex-row m12:flex-col text-primary duration-300 dark:text-secondary gap-5 justify-between m12:justify-center w-full items-center shadow-xl border px-3 m12:py-1 m12:px-3`}
+        } flex flex-row m12:flex-col text-primary duration-300 dark:text-secondary gap-5 justify-between m12:justify-center w-full items-center shadow-xl border-[3px] rounded-md px-3 py-4 m12:px-3 ${resultColorBorder ? `${resultColorBorder}` : 'border-primary dark:border-secondary'}`}
         on:mouseenter={enter}
         on:mouseleave={leave}>
         <div
             class={`${
                 showDetails ? 'm12:text-sm' : 'm12:text-[0px] m12:gap:0 m12:h-0'
-            } flex flex-col text-lg i1:text-sm w-[22%] m12:w-full pr-16 m12:pr-0 duration-300`}>
+            } flex flex-col text-lg i1:text-sm w-[22%] m12:w-full pr-5 m12:pr-0 duration-300`}>
             <div class="m12:flex m12:flex-row justify-between gap-5">
                 {#if !getMatchTime(fetchedGame.time)}
                     <div class="flex flex-row m12:w-[44%] w-[90%] justify-between m12:justify-start m12:gap-5">
@@ -95,84 +111,100 @@
                 {/if}
 
                 <p class="hidden m12:flex">{displayStage(fetchedGame.stage)}</p>
-                <p class={` ${showDetails ? 'text-lg' : ''} hidden m12:flex`} on:click={toggleDetails}>-</p>
+                <p class={` ${showDetails ? 'text-2xl' : ''} hidden font-bold m12:flex`} on:click={toggleDetails}>-</p>
             </div>
-            <hr class={`${showDetails ? 'w-[77%] text-left opacity-40' : 'opacity-0'} hidden m12:flex`} />
+            <hr class={`${showDetails ? 'w-full border text-left opacity-75' : 'opacity-0'} hidden m12:flex`} />
         </div>
-        <div class="flex flex-row justify-between m12:w-full w-[55%]">
+        <div class="flex flex-row justify-center m12:w-full w-[55%]">
             <div class="flex flex-row text-2xl gap-5 m12:gap-2 h-full items-center justify-between m12:justify-start m12:w-[90%] w-full">
-                <p class="w-[40%] m12:text-base truncate">{fetchedGame.team_home.toUpperCase()}</p>
+                <div class="flex flex-row m12:flex-col gap-5 m12:gap-3 items-center w-full">
+                    {#if TeamHome.logo}
+                    <div class="p-1 bg-primary dark:bg-secondary rounded-xl">
+                        <img src="{TeamHome.logo}" alt="Logo {TeamHome.name}" class="w-[75px] h-[50px] m12:w-[50px] m12:h-[40px] object-cover rounded-md" />
+                    </div>
+                    {/if}
+                    <p class="text-left m12:text-center text-lg m12:text-sm w-[75%] truncate">{TeamHome.name}</p>
+                </div>
                 <div class="flex flex-row justify-center w-[25%]">
                     {#if pronoMode}
                         {#if past || displayMode}
                             {#if fetchedProno}
-                                <p class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center mr-3 m12:mr-[6px] order-first">
-                                    {fetchedProno?.prediction.prediction_home ?? ''}
-                                </p>
-                                <p class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center ml-3 m12:ml-[6px] order-last">
-                                    {fetchedProno?.prediction.prediction_away ?? ''}
-                                </p>
-                            {/if}
-                            <p class={`duration-100 flex-none align-middle ${resultColorText} ${showScore ? 'm6:text-lg' : 'text-[0px]'}`}>
-                                {fetchedGame.score_home} - {fetchedGame.score_away}
+                            <p class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center mr-3 m12:mr-[6px] order-first">
+                                {fetchedProno?.prediction.prediction_home ?? ''}
                             </p>
+                            <p class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center ml-3 m12:ml-[6px] order-last">
+                                {fetchedProno?.prediction.prediction_away ?? ''}
+                            </p>
+                        {/if}
+                        <p class={`duration-100 flex-none align-middle ${resultColorText} ${showScore ? 'm6:text-lg' : 'text-[0px]'}`}>
+                                {fetchedGame.score_home} - {fetchedGame.score_away}
+                        </p>
                         {:else}
-                            <input
-                                type="number"
-                                inputmode="numeric"
-                                min="0"
-                                max="20"
-                                bind:value={input[0]}
-                                class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center mr-3 m12:mr-[6px]"
-                                placeholder={prono?.prediction_home.toString() ?? fetchedProno?.prediction.prediction_home.toString() ?? '...'}
-                                disabled={past} />
-                            <input
-                                type="number"
-                                inputmode="numeric"
-                                min="0"
-                                max="20"
-                                bind:value={input[1]}
-                                class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center ml-3 m12:ml-[6px]"
-                                placeholder={prono?.prediction_away.toString() ?? fetchedProno?.prediction.prediction_away.toString() ?? '...'}
-                                disabled={past} />
+                        <input
+                            type="number"
+                            inputmode="numeric"
+                            min="0"
+                            max="20"
+                            bind:value={input[0]}
+                            class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center mr-3 m12:mr-[6px]"
+                            placeholder={prono?.prediction_home.toString() ?? fetchedProno?.prediction.prediction_home.toString() ?? '...'}
+                            disabled={past}
+                        />
+                        <input
+                            type="number"
+                            inputmode="numeric"
+                            min="0"
+                            max="20"
+                            bind:value={input[1]}
+                            class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center ml-3 m12:ml-[6px]"
+                            placeholder={prono?.prediction_away.toString() ?? fetchedProno?.prediction.prediction_away.toString() ?? '...'}
+                            disabled={past}
+                        />
                         {/if}
                     {:else}
-                        <p class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center mr-3 m12:mr-[6px]">
-                            {fetchedGame.score_home ?? ''}
-                        </p>
-                        <p class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center ml-3 m12:ml-[6px]">
-                            {fetchedGame.score_away ?? ''}
-                        </p>
+                    <p class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center mr-3 m12:mr-[6px]">
+                        {fetchedGame.score_home ?? ''}
+                    </p>
+                    <p class="w-7 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded text-center ml-3 m12:ml-[6px]">
+                        {fetchedGame.score_away ?? ''}
+                    </p>
                     {/if}
                 </div>
-                <p class="w-[40%] text-right m12:text-base truncate">
-                    {fetchedGame.team_away.toUpperCase()}
-                </p>
+                <div class="flex flex-row m12:flex-col-reverse gap-5 m12:gap-3 items-center justify-end w-full">
+                    <p class="text-right m12:text-center text-lg m12:text-sm w-[75%] truncate">{TeamAway.name}</p>
+                        {#if TeamAway.logo}
+                        <div class="p-1 bg-primary dark:bg-secondary rounded-xl">
+                            <img src="{TeamAway.logo}" alt="Logo {TeamAway.name}" class="w-[75px] h-[50px] m12:w-[50px] m12:h-[40px] object-cover rounded-lg" />
+                        </div>
+                        {/if}
+                </div>
             </div>
             <p
-                class={`-translate-y-1 hover:cursor-pointer select-none duration-100 m12:flex hidden ${showDetails ? 'm12:hidden' : ''}`}
-                on:click={toggleDetails}>
+                class={`-translate-y-1 hover:cursor-pointer select-none duration-100 m12:flex text-2xl hidden ${showDetails ? 'm12:hidden' : ''}`}
+                on:click={toggleDetails}
+            >
                 +
             </p>
         </div>
         <div
             class={`${
                 showDetails ? 'm12:text-sm m12:mt-1' : 'm12:text-[0px] m12:h-0'
-            } flex flex-row text-lg i1:text-sm justify-end m12:justify-start w-1/4 m12:w-full duration-300`}>
+            } flex flex-row text-lg i1:text-sm justify-end m12:justify-center w-1/4 m12:w-full duration-300`}
+        >
             <div class="flex flex-row w-[90%] m12:justify-center m12:gap-0 justify-end gap-5">
                 <p class={`m12:hidden align-middle ${showScore ? 'text-[0px] -translate-x-5' : ''} duration-75`}>{displayStage(fetchedGame.stage)}</p>
                 <p class={`m12:hidden ${!showScore ? 'text-[0px]' : '-translate-x-5'} duration-75 ${resultColorText}`}>
                     {showScore ? displayPoints(fetchedGame, fetchedProno) : ''}
                 </p>
                 {#if showOdds}
-                    <div class="flex flex-row m12:w-full m12:justify-center m12:pl-16 m6:pl-8 gap-1">
-                        <p class={` ${showDetails ? 'border-2 px-1' : ''}`}>{fetchedGame.odds_home.toPrecision(3)}</p>
-                        <p class={` ${showDetails ? 'border-2 px-1' : ''}`}>{fetchedGame.odds_draw.toPrecision(3)}</p>
-                        <p class={` ${showDetails ? 'border-2 px-1' : ''}`}>{fetchedGame.odds_away.toPrecision(3)}</p>
-                        <p class={`hidden m12:flex ml-10 m6:ml-6 ${!showScore ? 'text-[0px]' : ''} ${resultColorText}`}>
-                            {showScore ? displayPoints(fetchedGame, fetchedProno) : ''}
-                        </p>
-                    </div>
+                <div class="flex flex-row m12:w-full m12:justify-center m12:pl-16 m6:pl-8 gap-1">
+                    <p class={` ${showDetails ? 'px-1 border-[3px] border-primary dark:border-secondary rounded-md' : ''}`}>{fetchedGame.odds_home.toPrecision(3)}</p>
+                    <p class={` ${showDetails ? 'px-1 border-[3px] border-primary dark:border-secondary rounded-md' : ''}`}>{fetchedGame.odds_draw.toPrecision(3)}</p>
+                    <p class={` ${showDetails ? 'px-1 border-[3px] border-primary dark:border-secondary rounded-md' : ''}`}>{fetchedGame.odds_away.toPrecision(3)}</p>
+                    <p class={`hidden m12:flex ml-10 m6:ml-6 ${!showScore ? 'text-[0px]' : ''} ${resultColorText}`}>
+                        {showScore ? displayPoints(fetchedGame, fetchedProno) : ''}
+                    </p>
+                </div>
                 {/if}
             </div>
         </div>
