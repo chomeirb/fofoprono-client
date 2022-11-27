@@ -91,7 +91,7 @@
     <li
         class={`${
             showDetails ? 'm12:gap-2 m12:py-4' : 'm12:gap-0'
-        } flex flex-row m12:flex-col text-primary duration-300 dark:text-secondary gap-5 justify-between m12:justify-center w-full items-center shadow-xl border px-3 m12:py-1 m12:px-3`}
+        } flex flex-row m12:flex-col text-primary duration-300 dark:text-secondary gap-5 justify-between m12:justify-center w-full items-center shadow-xl border-[3px] border-primary dark:border-secondary rounded-md px-3 py-3 m12:py-1 m12:px-3`}
         on:mouseenter={enter}
         on:mouseleave={leave}>
         <div
@@ -119,7 +119,9 @@
         <div class="flex flex-row justify-between m12:w-full w-[55%]">
             <div class="flex flex-row text-2xl gap-5 m12:gap-2 h-full items-center justify-between m12:justify-start m12:w-[90%] w-full">
                 {#if TeamHome.logo}
-                <img src="{TeamHome.logo}" alt="Logo {TeamHome.name}" class="w-[75px] h-[45px] object-cover rounded-md" />
+                <div class="p-1 bg-primary dark:bg-secondary rounded-xl">
+                    <img src="{TeamHome.logo}" alt="Logo {TeamHome.name}" class="w-[75px] h-[50px] object-cover rounded-md" />
+                </div>
                 {/if}
                 <p class="w-[20%] text-lg m12:text-sm truncate">{TeamHome.name}</p>
                 <div class="flex flex-row justify-center w-[25%]">
@@ -167,7 +169,9 @@
                 </div>
                 <p class="w-[20%] text-right text-lg m12:text-sm truncate">{TeamAway.name}</p>
                 {#if TeamAway.logo}
-                    <img src="{TeamAway.logo}" alt="Logo {TeamAway.name}" class="w-[75px] h-[45px] object-cover rounded-lg" />
+                    <div class="p-1 bg-primary dark:bg-secondary rounded-xl">
+                        <img src="{TeamAway.logo}" alt="Logo {TeamAway.name}" class="w-[75px] h-[50px] object-cover rounded-lg" />
+                    </div>
                 {/if}
             </div>
             <p
@@ -187,9 +191,9 @@
                 </p>
                 {#if showOdds}
                     <div class="flex flex-row m12:w-full m12:justify-center m12:pl-16 m6:pl-8 gap-1">
-                        <p class={` ${showDetails ? 'border-2 px-1' : ''}`}>{fetchedGame.odds_home.toPrecision(3)}</p>
-                        <p class={` ${showDetails ? 'border-2 px-1' : ''}`}>{fetchedGame.odds_draw.toPrecision(3)}</p>
-                        <p class={` ${showDetails ? 'border-2 px-1' : ''}`}>{fetchedGame.odds_away.toPrecision(3)}</p>
+                        <p class={` ${showDetails ? 'px-1 border-[3px] border-primary dark:border-secondary rounded-md' : ''}`}>{fetchedGame.odds_home.toPrecision(3)}</p>
+                        <p class={` ${showDetails ? 'px-1 border-[3px] border-primary dark:border-secondary rounded-md' : ''}`}>{fetchedGame.odds_draw.toPrecision(3)}</p>
+                        <p class={` ${showDetails ? 'px-1 border-[3px] border-primary dark:border-secondary rounded-md' : ''}`}>{fetchedGame.odds_away.toPrecision(3)}</p>
                         <p class={`hidden m12:flex ml-10 m6:ml-6 ${!showScore ? 'text-[0px]' : ''} ${resultColorText}`}>
                             {showScore ? displayPoints(fetchedGame, fetchedProno) : ''}
                         </p>
