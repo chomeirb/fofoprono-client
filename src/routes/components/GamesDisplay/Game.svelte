@@ -90,7 +90,7 @@
     <li
         class={`${
             showDetails ? 'm12:gap-2 m12:py-4' : 'm12:gap-0'
-        } flex flex-row m12:flex-col text-primary duration-300 dark:text-secondary gap-5 justify-between m12:justify-center w-full items-center shadow-xl border-[3px] rounded-md px-3 py-4 m12:px-3 ${resultColorBg ? `border-${resultColorBg}` : 'border-primary dark-border-primary'}`}
+        } flex flex-row m12:flex-col text-primary duration-300 dark:text-secondary gap-5 justify-between m12:justify-center w-full items-center shadow-xl border-[3px] rounded-md px-3 py-4 m12:px-3 ${resultColorBg ? `border-${resultColorBg}` : 'border-primary dark:border-secondary'}`}
         on:mouseenter={enter}
         on:mouseleave={leave}>
         <div
