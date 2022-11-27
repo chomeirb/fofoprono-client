@@ -5,7 +5,7 @@
 </script>
 
 <a
-    class={`flex flex-row justify-between items-center w-full px-5 py-3 m6:py-1 shadow-xl border hover:opacity-60 ${
+    class={`flex flex-row justify-between items-center w-full px-5 py-3 m6:py-1 shadow-xl border-2 rounded-md border-primary dark:border-secondary hover:opacity-60 ${
         player.user_type === UserType.Current ? 'bg-slate-300 dark:bg-slate-600' : ''
     }`}
     href="/prono/{player.name}">

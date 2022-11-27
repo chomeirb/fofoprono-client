@@ -46,11 +46,11 @@
     function getResultColor(result: PredictionResult) {
         switch (result) {
             case PredictionResult.Exact:
-                return 'bg-green-500';
+                return 'green-500';
             case PredictionResult.Correct:
-                return 'bg-yellow-500';
+                return 'yellow-500';
             case PredictionResult.Wrong:
-                return 'bg-red-500';
+                return 'red-500';
         }
     }
 
@@ -87,11 +87,11 @@
 </script>
 
 <div class="flex flex-row">
-    <div class={`w-1 ${resultColorBg} py-4 m12:py-3 `}>&nbsp;</div>
+    <!-- <div class={`w-1 ${resultColorBg} py-4 m12:py-3 `}>&nbsp;</div> -->
     <li
         class={`${
             showDetails ? 'm12:gap-2 m12:py-4' : 'm12:gap-0'
-        } flex flex-row m12:flex-col text-primary duration-300 dark:text-secondary gap-5 justify-between m12:justify-center w-full items-center shadow-xl border-[3px] border-primary dark:border-secondary rounded-md px-3 py-4 m12:px-3`}
+        } flex flex-row m12:flex-col text-primary duration-300 dark:text-secondary gap-5 justify-between m12:justify-center w-full items-center shadow-xl border-[3px] border-${resultColorBg} rounded-md px-3 py-4 m12:px-3`}
         on:mouseenter={enter}
         on:mouseleave={leave}>
         <div
@@ -112,7 +112,7 @@
                 {/if}
 
                 <p class="hidden m12:flex">{displayStage(fetchedGame.stage)}</p>
-                <p class={` ${showDetails ? 'text-lg' : ''} hidden m12:flex`} on:click={toggleDetails}>-</p>
+                <p class={` ${showDetails ? 'text-2xl' : ''} hidden font-bold m12:flex`} on:click={toggleDetails}>-</p>
             </div>
             <hr class={`${showDetails ? 'w-full border text-left opacity-75' : 'opacity-0'} hidden m12:flex`} />
         </div>
@@ -181,7 +181,7 @@
                 </div>
             </div>
             <p
-                class={`-translate-y-1 hover:cursor-pointer select-none duration-100 m12:flex hidden ${showDetails ? 'm12:hidden' : ''}`}
+                class={`-translate-y-1 hover:cursor-pointer select-none duration-100 m12:flex text-2xl hidden ${showDetails ? 'm12:hidden' : ''}`}
                 on:click={toggleDetails}
             >
                 +

@@ -99,7 +99,7 @@
                     </div>
                     <li class="flex flex-row items-center gap-6">
                         {#if $session.data}
-                            <p class="px-2 font-bold text-4xl border shadow-xl w-min max-w-lg m12:max-w-[185px] m12:text-xl truncate text-center">
+                            <p class="px-2 font-bold text-4xl border-[3px] rounded-md border-primary dark:border-secondary shadow-xl w-min max-w-lg m12:max-w-[185px] m12:text-xl truncate text-center">
                                 {$session.data}
                             </p>
                             <div alt="logout" on:click={showLogoutConfirm}>

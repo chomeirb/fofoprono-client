@@ -56,7 +56,7 @@
             </div>
         </div>
     {:else}
-        <div class="flex flex-col h-full overflow-hidden mt-4 m8:mt-0 w-5/6 m12:w-full">
+        <div class="flex flex-col h-full overflow-hidden rounded-md mt-4 m8:mt-0 w-5/6 m12:w-full">
             <RankingBanner bind:sortType bind:sortAsc />
             <div class="flex flex-col items-center w-full m12:h-full overflow-y-auto shadow-in">
                 <ul class="w-full px-5 h-full flex flex-col gap-3 py-4">
