@@ -116,7 +116,7 @@
             </div>
             <hr class={`${showDetails ? 'w-full border text-left opacity-75' : 'opacity-0'} hidden m12:flex`} />
         </div>
-        <div class="flex flex-row justify-between m12:w-full w-[55%]">
+        <div class="flex flex-row justify-center m12:w-full w-[55%]">
             <div class="flex flex-row text-2xl gap-5 m12:gap-2 h-full items-center justify-between m12:justify-start m12:w-[90%] w-full">
                 <div class="flex flex-row m12:flex-col gap-5 m12:gap-3 items-center w-full">
                     {#if TeamHome.logo}
@@ -190,7 +190,7 @@
         <div
             class={`${
                 showDetails ? 'm12:text-sm m12:mt-1' : 'm12:text-[0px] m12:h-0'
-            } flex flex-row text-lg i1:text-sm justify-end m12:justify-start w-1/4 m12:w-full duration-300`}
+            } flex flex-row text-lg i1:text-sm justify-end m12:justify-center w-1/4 m12:w-full duration-300`}
         >
             <div class="flex flex-row w-[90%] m12:justify-center m12:gap-0 justify-end gap-5">
                 <p class={`m12:hidden align-middle ${showScore ? 'text-[0px] -translate-x-5' : ''} duration-75`}>{displayStage(fetchedGame.stage)}</p>
