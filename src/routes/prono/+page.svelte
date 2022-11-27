@@ -7,7 +7,7 @@
     {#if !$session.data}
         <div class="flex flex-col items-center justify-center gap-10 h-full">
             <p class="text-4xl font-bold text-center items-center w-2/3">Vous devez vous connecter pour effectuer des pronostics !</p>
-            <a href="/login" class="underline text-6xl">Connexion →</a>
+            <a href="/login" class="bg-primary dark:bg-secondary text-secondary dark:text-primary rounded-3xl p-3 text-3xl font-semibold">Connexion →</a>
         </div>
     {:else}
         <div class="text-4xl m12:text-xl flex flex-row justify-between items-center w-full h-[10%] m8:h-[8%] max-w-8xl px-3 m12:px-3">

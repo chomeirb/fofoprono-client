@@ -56,16 +56,16 @@
         class={`z-40 m12:flex overflow-y-auto flex-col justify-center w-[100vw] shadow-in pt-10 bg-secondary dark:bg-primary text-primary dark:text-secondary fixed hidden m8 gap-10 h-[calc(100vh_-_180px)] m8:h-[calc(100vh_-_90px)] ${
             !hamIsOpen ? 'translate-x-[100vw]' : ''
         } duration-500 mt-[90px] m8:mt-[60px] items-center`}>
-        <li class="w-4/6 py-2 flex flex-col items-center rounded-2xl border-[3px]">
+        <li class="w-4/6 py-2 flex flex-col items-center rounded-2xl border-primary dark:border-secondary border-[3px]">
             <a on:click={() => (hamIsOpen = false)} href="/{home}">Accueil</a>
         </li>
-        <li class="w-4/6 py-2 flex flex-col items-center rounded-2xl border-[3px]">
+        <li class="w-4/6 py-2 flex flex-col items-center rounded-2xl border-primary dark:border-secondary border-[3px]">
             <a on:click={() => (hamIsOpen = false)} href="/{prono}">Pronostics</a>
         </li>
-        <li class="w-4/6 py-2 flex flex-col items-center rounded-2xl border-[3px]">
+        <li class="w-4/6 py-2 flex flex-col items-center rounded-2xl border-primary dark:border-secondary border-[3px]">
             <a on:click={() => (hamIsOpen = false)} href="/ranking">Classement</a>
         </li>
-        <li class="w-4/6 py-2 flex flex-col items-center rounded-2xl border-[3px]">
+        <li class="w-4/6 py-2 flex flex-col items-center rounded-2xl border-primary dark:border-secondary border-[3px]">
             <a on:click={() => (hamIsOpen = false)} href="/rules">Règles</a>
         </li>
         <div alt="night-light" on:click={toggleDarkMode}>
@@ -106,7 +106,7 @@
                                 <LogoutIcon style="hover:opacity-70 hover:cursor-pointer" color={$darkMode ? '#FBFFF1' : '#3C3744'} width={40} />
                             </div>
                         {:else}
-                            <a class="px-2 hover:opacity-70 underline" on:click={() => (hamIsOpen = false)} href="/login">Connexion</a>
+                            <a class="px-2 hover:opacity-70 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded-3xl py-2 px-5" on:click={() => (hamIsOpen = false)} href="/login">Connexion</a>
                         {/if}
                     </li>
                     <div class="select-none flex-col hidden m12:flex gap-2 h-full justify-center cursor-pointer" on:click={toggleHam}>
