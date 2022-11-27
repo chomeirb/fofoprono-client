@@ -22,7 +22,7 @@
 
     $: past = isPast(fetchedGame.time);
 
-    $: resultColorBg = pronoMode ? getResultColor(fetchedProno?.result) : '';
+    $: resultColorBorder = pronoMode ? getResultColor(fetchedProno?.result) : '';
     $: resultColorText = pronoMode ? getResultColorText(fetchedProno?.result) : '';
 
     $: if (input[0] === null && input[1] === null) {
@@ -46,11 +46,11 @@
     function getResultColor(result: PredictionResult) {
         switch (result) {
             case PredictionResult.Exact:
-                return 'green-500';
+                return 'border-green-500';
             case PredictionResult.Correct:
-                return 'yellow-500';
+                return 'border-yellow-500';
             case PredictionResult.Wrong:
-                return 'red-500';
+                return 'border-red-500';
         }
     }
 
@@ -90,7 +90,7 @@
     <li
         class={`${
             showDetails ? 'm12:gap-2 m12:py-4' : 'm12:gap-0'
-        } flex flex-row m12:flex-col text-primary duration-300 dark:text-secondary gap-5 justify-between m12:justify-center w-full items-center shadow-xl border-[3px] rounded-md px-3 py-4 m12:px-3 ${resultColorBg ? `border-${resultColorBg}` : 'border-primary dark:border-secondary'}`}
+        } flex flex-row m12:flex-col text-primary duration-300 dark:text-secondary gap-5 justify-between m12:justify-center w-full items-center shadow-xl border-[3px] rounded-md px-3 py-4 m12:px-3 ${resultColorBorder ? `${resultColorBorder}` : 'border-primary dark:border-secondary'}`}
         on:mouseenter={enter}
         on:mouseleave={leave}>
         <div
