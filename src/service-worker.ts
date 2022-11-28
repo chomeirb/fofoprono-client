@@ -59,32 +59,32 @@ worker.addEventListener('activate', (event) => {
   worker.clients.claim();
 });
 
-// Fetch and cache resources.
-worker.addEventListener('fetch', (event) => {
-  const { request } = event;
+// // Fetch and cache resources.
+// worker.addEventListener('fetch', (event) => {
+//   const { request } = event;
 
-  // always fetch non-GET requests from the network
-  if (request.method !== 'GET') {
-    event.respondWith(fetch(request));
-    return;
-  }
+//   // always fetch non-GET requests from the network
+//   if (request.method !== 'GET') {
+//     event.respondWith(fetch(request));
+//     return;
+//   }
 
-  event.respondWith(
-    (async () => {
-      const cached = await caches.match(request);
+//   event.respondWith(
+//     (async () => {
+//       const cached = await caches.match(request);
 
-      if (cached) {
-        console.log('[ServiceWorker] returning cached response', request.url);
-        return cached;
-      }
+//       if (cached) {
+//         console.log('[ServiceWorker] returning cached response', request.url);
+//         return cached;
+//       }
 
-      const response = await fetch(request);
-      const cache = await caches.open(APP_CACHE_NAME);
+//       const response = await fetch(request);
+//       const cache = await caches.open(APP_CACHE_NAME);
       
-      console.log('[ServiceWorker] caching new response', request.url);
-      cache.put(request, response.clone());
+//       console.log('[ServiceWorker] caching new response', request.url);
+//       cache.put(request, response.clone());
 
-      return response;
-    })()
-  );
-});
+//       return response;
+//     })()
+//   );
+// });
