@@ -59,32 +59,44 @@ worker.addEventListener('activate', (event) => {
   worker.clients.claim();
 });
 
-// // Fetch and cache resources.
-// worker.addEventListener('fetch', (event) => {
-//   const { request } = event;
+// Fetch and cache resources.
+worker.addEventListener('fetch', (event) => {
+  const { request } = event;
 
-//   // always fetch non-GET requests from the network
-//   if (request.method !== 'GET') {
-//     event.respondWith(fetch(request));
-//     return;
-//   }
+  // do not cache non-GET requests
+  if (request.method !== 'GET') {
+    event.respondWith(fetch(request));
+    return;
+  }
 
-//   event.respondWith(
-//     (async () => {
-//       const cached = await caches.match(request);
+  // try the network first, falling back to the cache
+  event.respondWith(
+    (async () => {
+      try {
+        const response = await fetch(request);
 
-//       if (cached) {
-//         console.log('[ServiceWorker] returning cached response', request.url);
-//         return cached;
-//       }
+        // cache the response
+        console.log('[ServiceWorker] caching', request.url);
+        const cache = await caches.open(APP_CACHE_NAME);
+        cache.put(request, response.clone());
 
-//       const response = await fetch(request);
-//       const cache = await caches.open(APP_CACHE_NAME);
-      
-//       console.log('[ServiceWorker] caching new response', request.url);
-//       cache.put(request, response.clone());
+        return response;
+      }
+      catch (error) {
+        console.log('[ServiceWorker] network request failed, trying cache');
 
-//       return response;
-//     })()
-//   );
-// });
+        const cached = await caches.match(request);
+
+        if (cached) {
+          console.log('[ServiceWorker] cache hit');
+          return cached;
+        }
+
+        // TODO: return a custom offline page
+        console.log('[ServiceWorker] cache miss, throwing error');
+
+        throw error;
+      }
+    })()
+  );
+});
