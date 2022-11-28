@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { goto } from '$app/navigation';
+	import { goto } from '$app/navigation';
 
-    goto('/home', {
-        replaceState: true,
-    });
+	goto('/home', {
+		replaceState: true
+	});
 </script>

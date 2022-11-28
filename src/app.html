@@ -1,20 +1,23 @@
 <!DOCTYPE html>
-<html lang="fr" class="dark">
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<link rel="icon" href="favicon.svg" />
+		<link rel="manifest" crossorigin="use-credentials" href="manifest.json" />
+		<title>Fofoprono</title>
+		<script>
+			// On page load or when changing themes, best to add inline in `head` to avoid FOUC
+			if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+				document.documentElement.classList.add('dark');
+			} else {
+				document.documentElement.classList.remove('dark');
+			}
+		</script>
+		%sveltekit.head%
+	</head>
 
-<head>
-	<meta charset="utf-8" />
-	<link rel="icon" href="%sveltekit.assets%/favicon.svg" />
-	<link rel="manifest" crossorigin="use-credentials" href="manifest.json" />
-	<meta name="viewport" content="width=device-width" />
-	<title>Fofoprono</title>
-	%sveltekit.head%
-</head>
-
-<body class="bg-secondary dark:bg-primary font-proxima overflow-hidden m8:overflow-y-auto">
-        <script>
-                let FF_FOUC_FIX;
-        </script>
-	<div>%sveltekit.body%</div>
-</body>
-
+	<body class="overflow-hidden bg-secondary font-proxima dark:bg-primary m8:overflow-y-auto">
+		<div>%sveltekit.body%</div>
+	</body>
 </html>

@@ -1,18 +1,18 @@
 {
-    "name": "Fofoprono",
-    "short_name": "Fofoprono",
-    "start_url": "/",
-    "icons": [
-      {
-        "src": "assets/fofoprono-logo-512x512.png",
-        "type": "image/png",
-        "sizes": "512x512",
-        "purpose": "any"
-      }
-    ],
-    "display": "standalone",
-    "scope": "/",
-    "theme_color": "#3C3744",
-    "background_color": "#3C3744",
-    "description": "App to make football pronostics"
+	"name": "Fofoprono",
+	"short_name": "Fofoprono",
+	"start_url": "/",
+	"icons": [
+		{
+			"src": "assets/fofoprono-logo-512x512.png",
+			"type": "image/png",
+			"sizes": "512x512",
+			"purpose": "any"
+		}
+	],
+	"display": "standalone",
+	"scope": "/",
+	"theme_color": "#3C3744",
+	"background_color": "#3C3744",
+	"description": "App to make football pronostics"
 }
