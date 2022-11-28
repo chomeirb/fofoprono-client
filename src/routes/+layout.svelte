@@ -9,7 +9,7 @@
     import { storePlayers } from './fetchRanking';
 
     onMount(async () => {
-        storeSession();
+        // storeSession();
         storeGames();
         storePlayers();
     });
