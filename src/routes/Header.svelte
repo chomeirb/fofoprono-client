@@ -106,7 +106,7 @@
                                 <LogoutIcon style="hover:opacity-70 hover:cursor-pointer" color={$darkMode ? '#FBFFF1' : '#3C3744'} width={40} />
                             </div>
                         {:else}
-                            <a class="px-2 hover:opacity-70 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded-3xl py-2 px-5" on:click={() => (hamIsOpen = false)} href="/login">Connexion</a>
+                            <a class="px-2 hover:opacity-70 bg-primary dark:bg-secondary text-secondary dark:text-primary rounded-3xl py-2" on:click={() => (hamIsOpen = false)} href="/login">Connexion</a>
                         {/if}
                     </li>
                     <div class="select-none flex-col hidden m12:flex gap-2 h-full justify-center cursor-pointer" on:click={toggleHam}>
