@@ -25,11 +25,11 @@ const toCache = new Set(assets);
 
 // Cache all the static assets.
 worker.addEventListener('install', (event) => {
-  console.log('[ServiceWorker] install');
+  console.debug('[ServiceWorker] install');
 
   event.waitUntil((async () => {
     const cache = await caches.open(STATIC_CACHE_NAME);
-    console.log('[ServiceWorker] pre-caching');
+    console.debug('[ServiceWorker] pre-caching');
     await cache.addAll(toCache);
   })());
 
@@ -38,7 +38,7 @@ worker.addEventListener('install', (event) => {
 
 // Clean up old caches.
 worker.addEventListener('activate', (event) => {
-  console.log('[ServiceWorker] activate');
+  console.debug('[ServiceWorker] activate');
 
   event.waitUntil(
     (async () => {
@@ -48,7 +48,7 @@ worker.addEventListener('activate', (event) => {
         cacheNames
           .filter((name) => name !== STATIC_CACHE_NAME && name !== APP_CACHE_NAME)
           .map((name) => {
-            console.log('[ServiceWorker] removing old cache', name);
+            console.debug('[ServiceWorker] removing old cache', name);
             return caches.delete(name);
           })
       );
@@ -76,24 +76,24 @@ worker.addEventListener('fetch', (event) => {
         const response = await fetch(request);
 
         // cache the response
-        console.log('[ServiceWorker] caching', request.url);
+        console.debug('[ServiceWorker] caching', request.url);
         const cache = await caches.open(APP_CACHE_NAME);
         cache.put(request, response.clone());
 
         return response;
       }
       catch (error) {
-        console.log('[ServiceWorker] network request failed, trying cache');
+        console.debug('[ServiceWorker] network request failed, trying cache');
 
         const cached = await caches.match(request);
 
         if (cached) {
-          console.log('[ServiceWorker] cache hit');
+          console.debug('[ServiceWorker] cache hit');
           return cached;
         }
 
         // TODO: return a custom offline page
-        console.log('[ServiceWorker] cache miss, throwing error');
+        console.debug('[ServiceWorker] cache miss, throwing error');
 
         throw error;
       }
