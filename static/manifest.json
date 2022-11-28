@@ -1,0 +1,18 @@
+{
+    "name": "Fofoprono",
+    "short_name": "Fofoprono",
+    "start_url": "/",
+    "icons": [
+      {
+        "src": "assets/fofoprono-logo.png",
+        "type": "image/png",
+        "sizes": "144x144",
+        "purpose": "any"
+      }
+    ],
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#3C3744",
+    "background_color": "#3C3744",
+    "description": "App to make football pronostics"
+}
