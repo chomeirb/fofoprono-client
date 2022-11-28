@@ -4,9 +4,9 @@
     "start_url": "/",
     "icons": [
       {
-        "src": "assets/fofoprono-logo.png",
-        "type": "image/png",
-        "sizes": "144x144",
+        "src": "assets/fofoprono-logo-512x512.svg",
+        "type": "image/svg",
+        "sizes": "512x512",
         "purpose": "any"
       }
     ],
