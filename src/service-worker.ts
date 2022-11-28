@@ -13,78 +13,78 @@ const APP_CACHE_NAME = `cache-app-${version}`;
 const routes = ['/'];
 
 const addDomain = (assets: string[]) =>
-    assets.map((f) => self.location.origin + f);
+  assets.map((f) => self.location.origin + f);
 
 const assets = addDomain([
-    ...files,
-    ...build,
-    ...routes,
+  ...files,
+  ...build,
+  ...routes,
 ]);
 
 const toCache = new Set(assets);
 
 // Cache all the static assets.
 worker.addEventListener('install', (event) => {
-    console.log('[ServiceWorker] install');
+  console.log('[ServiceWorker] install');
 
-    event.waitUntil((async () => {
-        const cache = await caches.open(STATIC_CACHE_NAME);
-        console.log('[ServiceWorker] pre-caching');
-        await cache.addAll(toCache);
-    })());
+  event.waitUntil((async () => {
+    const cache = await caches.open(STATIC_CACHE_NAME);
+    console.log('[ServiceWorker] pre-caching');
+    await cache.addAll(toCache);
+  })());
 
-    worker.skipWaiting();
+  worker.skipWaiting();
 });
 
 // Clean up old caches.
 worker.addEventListener('activate', (event) => {
-    console.log('[ServiceWorker] activate');
+  console.log('[ServiceWorker] activate');
 
-    event.waitUntil(
-        (async () => {
-            const cacheNames = await caches.keys();
+  event.waitUntil(
+    (async () => {
+      const cacheNames = await caches.keys();
 
-            await Promise.all(
-                cacheNames
-                    .filter((name) => name !== STATIC_CACHE_NAME && name !== APP_CACHE_NAME)
-                    .map((name) => {
-                        console.log('[ServiceWorker] removing old cache', name);
-                        return caches.delete(name);
-                    })
-            );
-        })()
-    );
+      await Promise.all(
+        cacheNames
+          .filter((name) => name !== STATIC_CACHE_NAME && name !== APP_CACHE_NAME)
+          .map((name) => {
+            console.log('[ServiceWorker] removing old cache', name);
+            return caches.delete(name);
+          })
+      );
+    })()
+  );
 
-    // tell the active service worker to take control of the page immediately
-    worker.clients.claim();
+  // tell the active service worker to take control of the page immediately
+  worker.clients.claim();
 });
 
-// Fetch and cache resources.
-worker.addEventListener('fetch', (event) => {
-    const { request } = event;
+// // Fetch and cache resources.
+// worker.addEventListener('fetch', (event) => {
+//   const { request } = event;
 
-    // always fetch authenticated requests from the network
-    if (request.credentials === 'include') {
-        event.respondWith(fetch(request));
-        return;
-    }
+//   // always fetch non-GET requests from the network
+//   if (request.method !== 'GET') {
+//     event.respondWith(fetch(request));
+//     return;
+//   }
 
-    event.respondWith(
-        (async () => {
-            const cached = await caches.match(request);
+//   event.respondWith(
+//     (async () => {
+//       const cached = await caches.match(request);
 
-            if (cached) {
-                console.log('[ServiceWorker] returning cached response', request.url);
-                return cached;
-            }
+//       if (cached) {
+//         console.log('[ServiceWorker] returning cached response', request.url);
+//         return cached;
+//       }
 
-            const response = await fetch(request);
-            const cache = await caches.open(APP_CACHE_NAME);
+//       const response = await fetch(request);
+//       const cache = await caches.open(APP_CACHE_NAME);
+      
+//       console.log('[ServiceWorker] caching new response', request.url);
+//       cache.put(request, response.clone());
 
-            console.log('[ServiceWorker] caching new response', request.url);
-            cache.put(request, response.clone());
-
-            return response;
-        })()
-    );
-});
+//       return response;
+//     })()
+//   );
+// });
