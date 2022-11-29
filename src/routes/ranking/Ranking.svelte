@@ -3,6 +3,6 @@
 	import { players } from '../store';
 </script>
 
-<form class="h-full">
+<div class="h-full">
 	<PlayersDisplay players={$players} />
-</form>
+</div>
