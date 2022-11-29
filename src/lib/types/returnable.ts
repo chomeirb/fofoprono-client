@@ -1,5 +1,5 @@
 export type ResponseResult<Data> = {
-    status: number,
-    text: string,
-    data: Data,
-}
+	status: number;
+	text: string;
+	data: Data;
+};

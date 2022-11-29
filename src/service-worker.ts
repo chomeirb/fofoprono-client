@@ -6,97 +6,93 @@ import { build, files, version } from '$service-worker';
 // `files` is an array of everything in the `static` directory
 // `version` is the current version of the app
 
-const worker = (self as unknown) as ServiceWorkerGlobalScope;
+const worker = self as unknown as ServiceWorkerGlobalScope;
 const STATIC_CACHE_NAME = `cache-static-${version}`;
 const APP_CACHE_NAME = `cache-app-${version}`;
 
 const routes = ['/'];
 
-const addDomain = (assets: string[]) =>
-  assets.map((f) => self.location.origin + f);
+const addDomain = (assets: string[]) => assets.map((f) => self.location.origin + f);
 
-const assets = addDomain([
-  ...files,
-  ...build,
-  ...routes,
-]);
+const assets = addDomain([...files, ...build, ...routes]);
 
 const toCache = new Set(assets);
 
 // Cache all the static assets.
 worker.addEventListener('install', (event) => {
-  console.debug('[ServiceWorker] install');
+	console.debug('[ServiceWorker] install');
 
-  event.waitUntil((async () => {
-    const cache = await caches.open(STATIC_CACHE_NAME);
-    console.debug('[ServiceWorker] pre-caching');
-    await cache.addAll(toCache);
-  })());
+	event.waitUntil(
+		(async () => {
+			const cache = await caches.open(STATIC_CACHE_NAME);
+			console.debug('[ServiceWorker] pre-caching');
+			await cache.addAll(toCache);
+		})()
+	);
 
-  worker.skipWaiting();
+	worker.skipWaiting();
 });
 
 // Clean up old caches.
 worker.addEventListener('activate', (event) => {
-  console.debug('[ServiceWorker] activate');
+	console.debug('[ServiceWorker] activate');
 
-  event.waitUntil(
-    (async () => {
-      const cacheNames = await caches.keys();
+	event.waitUntil(
+		(async () => {
+			const cacheNames = await caches.keys();
 
-      await Promise.all(
-        cacheNames
-          .filter((name) => name !== STATIC_CACHE_NAME && name !== APP_CACHE_NAME)
-          .map((name) => {
-            console.debug('[ServiceWorker] removing old cache', name);
-            return caches.delete(name);
-          })
-      );
-    })()
-  );
+			await Promise.all(
+				cacheNames
+					.filter((name) => name !== STATIC_CACHE_NAME && name !== APP_CACHE_NAME)
+					.map((name) => {
+						console.debug('[ServiceWorker] removing old cache', name);
+						return caches.delete(name);
+					})
+			);
+		})()
+	);
 
-  // tell the active service worker to take control of the page immediately
-  worker.clients.claim();
+	// tell the active service worker to take control of the page immediately
+	worker.clients.claim();
 });
 
 // Fetch and cache resources.
 worker.addEventListener('fetch', (event) => {
-  const { request } = event;
+	const { request } = event;
 
-  // do not cache non-GET requests
-  if (request.method !== 'GET') {
-    event.respondWith(fetch(request));
-    return;
-  }
+	// do not cache non-GET requests
+	if (request.method !== 'GET') {
+		event.respondWith(fetch(request));
+		return;
+	}
 
-  // try the network first, falling back to the cache
-  event.respondWith(
-    (async () => {
-      try {
-        const response = await fetch(request);
+	// try the network first, falling back to the cache
+	event.respondWith(
+		(async () => {
+			try {
+				const response = await fetch(request);
 
-        // cache the response
-        console.debug('[ServiceWorker] caching', request.url);
-        const cache = await caches.open(APP_CACHE_NAME);
-        cache.put(request, response.clone());
+				// cache the response
+				console.debug('[ServiceWorker] caching', request.url);
+				const cache = await caches.open(APP_CACHE_NAME);
+				cache.put(request, response.clone());
 
-        return response;
-      }
-      catch (error) {
-        console.debug('[ServiceWorker] network request failed, trying cache');
+				return response;
+			} catch (error) {
+				console.debug('[ServiceWorker] network request failed, trying cache');
 
-        const cached = await caches.match(request);
+				const cached = await caches.match(request);
 
-        if (cached) {
-          console.debug('[ServiceWorker] cache hit');
-          return cached;
-        }
+				if (cached) {
+					console.debug('[ServiceWorker] cache hit');
+					return cached;
+				}
 
-        // TODO: return a custom offline page
-        console.debug('[ServiceWorker] cache miss, throwing error');
+				// TODO: return a custom offline page
+				console.debug('[ServiceWorker] cache miss, throwing error');
 
-        throw error;
-      }
-    })()
-  );
+				throw error;
+			}
+		})()
+	);
 });

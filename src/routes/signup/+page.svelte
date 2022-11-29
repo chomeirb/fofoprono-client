@@ -1,16 +1,16 @@
 <script lang="ts">
-    import Form from './Form.svelte';
+	import Form from './Form.svelte';
 
-    let result = '';
+	let result = '';
 </script>
 
-<div class="flex flex-col items-center justify-start h-full pt-[3%] w-full">
-    <div class="text-4xl flex flex-row h-[10%] m12:justify-center items-center w-full max-w-xl">
-        <p class="font-bold">INSCRIPTION</p>
-    </div>
-    <div class="flex flex-col overflow-auto items-center w-full max-w-xl shadow-in text-2xl gap-5 py-8 px-20 m12:px-5 m12:w-full rounded-xl">
-        <Form bind:result />
-        <p class="text-3xl px-5 rounded text-center font-bold">{result}</p>
-        <a href="/login" class="text-xl px-5 rounded underline text-center hover:opacity-70">Déjà un compte ?</a>
-    </div>
+<div class="flex h-full w-full flex-col items-center justify-start pt-[3%]">
+	<div class="flex h-[10%] w-full max-w-xl flex-row items-center text-4xl m12:justify-center">
+		<p class="font-bold">INSCRIPTION</p>
+	</div>
+	<div class="flex w-full max-w-xl flex-col items-center gap-5 overflow-auto rounded-xl py-8 px-20 text-2xl shadow-in m12:w-full m12:px-5">
+		<Form bind:result />
+		<p class="rounded px-5 text-center text-3xl font-bold">{result}</p>
+		<a href="/login" class="rounded px-5 text-center text-xl underline hover:opacity-70">Déjà un compte ?</a>
+	</div>
 </div>

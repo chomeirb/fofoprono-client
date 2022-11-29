@@ -1,26 +1,26 @@
 [
-    {
-        "label": "chomeirb",
-        "queryUsers": "TO, fofo, paul, parpaing"
-    },
-    {
-        "label": "letiob",
-        "queryUsers": "oel68, fofo, ngel, Nono, Jojo, caro"
-    },
-    {
-        "label": "pentagone",
-        "queryUsers": "Canleskis, Armando, Arno, cdk, fofo"
-    },
-    {
-        "label": "mnechart",
-        "queryUsers": "M'néchart, caro, fofo, ngel, Nono, Jojo, Lubin, Gabin, marie, égé, oel68, Timeo, pasca baba"
-    },
-    {
-        "label": "campsas",
-        "queryUsers": "Christ, caro, fof"
-    },
-    {
-        "label": "chocopote",
-        "queryUsers": "caro, Lele, TO, fofo, paul, parpaing, loulou, Diane, Lore, Alicedenice, Maxoul"
-    }
+	{
+		"label": "chomeirb",
+		"queryUsers": "TO, fofo, paul, parpaing"
+	},
+	{
+		"label": "letiob",
+		"queryUsers": "oel68, fofo, ngel, Nono, Jojo, caro"
+	},
+	{
+		"label": "pentagone",
+		"queryUsers": "Canleskis, Armando, Arno, cdk, fofo"
+	},
+	{
+		"label": "mnechart",
+		"queryUsers": "M'néchart, caro, fofo, ngel, Nono, Jojo, Lubin, Gabin, marie, égé, oel68, Timeo, pasca baba"
+	},
+	{
+		"label": "campsas",
+		"queryUsers": "Christ, caro, fof"
+	},
+	{
+		"label": "chocopote",
+		"queryUsers": "caro, Lele, TO, fofo, paul, parpaing, loulou, Diane, Lore, Alicedenice, Maxoul"
+	}
 ]
