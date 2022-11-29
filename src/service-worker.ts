@@ -14,9 +14,7 @@ const routes = ['/'];
 
 const addDomain = (assets: string[]) => assets.map((f) => self.location.origin + f);
 
-const assets = addDomain([...files, ...build, ...routes]);
-
-const toCache = new Set(assets);
+const assets = new Set(addDomain([...files, ...build, ...routes]));
 
 // Cache all the static assets.
 worker.addEventListener('install', (event) => {
@@ -26,7 +24,7 @@ worker.addEventListener('install', (event) => {
 		(async () => {
 			const cache = await caches.open(STATIC_CACHE_NAME);
 			console.debug('[ServiceWorker] pre-caching');
-			await cache.addAll(toCache);
+			await cache.addAll(assets);
 		})()
 	);
 
@@ -66,8 +64,8 @@ worker.addEventListener('fetch', (event) => {
 		return;
 	}
 
-	// cache images and fonts
-	if (request.url.match(/\.(?:png|jpg|jpeg|svg|gif|woff|woff2|ttf)$/)) {
+	// cache first for images, fonts and static assets
+	if (request.url.match(/\.(?:png|jpg|jpeg|svg|gif|woff|woff2|ttf)$/) || assets.has(request.url)) {
 		event.respondWith(
 			(async () => {
 				const cache = await caches.open(STATIC_CACHE_NAME);
@@ -87,7 +85,7 @@ worker.addEventListener('fetch', (event) => {
 		return;
 	}
 
-	// try the network first, fall back to the cache
+	// network first, fall back to the cache
 	event.respondWith(
 		(async () => {
 			try {
