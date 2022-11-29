@@ -66,26 +66,48 @@ worker.addEventListener('fetch', (event) => {
 		return;
 	}
 
-	// try the network first, falling back to the cache
+	// cache images and fonts
+	if (request.url.match(/\.(?:png|jpg|jpeg|svg|gif|woff|woff2|ttf)$/)) {
+		event.respondWith(
+			(async () => {
+				const cache = await caches.open(STATIC_CACHE_NAME);
+				const cachedResponse = await cache.match(request);
+
+				if (cachedResponse) {
+					console.debug('[Service Woker] cache hit', request.url);
+					return cachedResponse;
+				}
+
+				const response = await fetch(request);
+				console.log('[Service worker] caching response', request.url);
+				await cache.put(request, response.clone());
+				return response;
+			})()
+		);
+		return;
+	}
+
+	// try the network first, fall back to the cache
 	event.respondWith(
 		(async () => {
 			try {
 				const response = await fetch(request);
 
 				// cache the response
-				console.debug('[ServiceWorker] caching', request.url);
+				console.debug('[ServiceWorker] caching response', request.url);
 				const cache = await caches.open(APP_CACHE_NAME);
 				cache.put(request, response.clone());
 
 				return response;
-			} catch (error) {
+			}
+			catch (error) {
 				console.debug('[ServiceWorker] network request failed, trying cache');
 
-				const cached = await caches.match(request);
+				const cachedResponse = await caches.match(request);
 
-				if (cached) {
-					console.debug('[ServiceWorker] cache hit');
-					return cached;
+				if (cachedResponse) {
+					console.debug('[ServiceWorker] cache hit', request.url);
+					return cachedResponse;
 				}
 
 				// TODO: return a custom offline page
