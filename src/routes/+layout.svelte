@@ -30,7 +30,6 @@
 	</style>
 </head>
 
-<!-- <body class="bg-secondary dark:bg-primary font-proxima overflow-hidden m8:overflow-y-auto"> -->
 {#if $session.text !== 'LOADING'}
 	<div class="flex h-[100vh] flex-col font-medium m8:h-[calc(100vh_+_90px)]" transition:fade={{ duration: 250 }}>
 		<Header />
@@ -42,4 +41,3 @@
 		<Footer />
 	</div>
 {/if}
-<!-- </body> -->
