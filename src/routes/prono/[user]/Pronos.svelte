@@ -19,6 +19,6 @@
 	});
 </script>
 
-<form class="h-full">
+<div class="h-full">
 	<GamesDisplay pronoMode={true} displayMode={true} {games} />
-</form>
+</div>
