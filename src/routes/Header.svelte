@@ -59,19 +59,19 @@
 			<FofoPronoLogo />
 		</a>
 		<nav class="flex h-[90%] w-full flex-row items-center justify-center m12:w-auto">
-			<ul class="flex h-full w-full flex-row items-center justify-between gap-5">
+			<ul class="flex h-full dark:text-secondary w-full flex-row items-center justify-between gap-5">
 				<div class="flex h-full flex-row items-center gap-5 m12:hidden">
-					<li class="duration-200 hover:translate-y-2 dark:hover:translate-y-0 translate-y-0">
-						<a class="rounded-2xl bg-primary px-5 py-2 duration-200 dark:hover:shadow-xl-light dark:text-secondary dark:shadow-sm-light" on:click={disableCurtain} href="/home">Accueil</a>
+					<li class="duration-200 hover:translate-y-2 translate-y-0">
+						<a class="rounded-2xl bg-primary text-primary dark:text-secondary px-5 py-2 duration-200 dark:bg-white dark:bg-opacity-10 bg-opacity-20" on:click={disableCurtain} href="/home">Accueil</a>
 					</li>
-					<li class="duration-200 hover:translate-y-2 dark:hover:translate-y-0 translate-y-0">
-						<a class="rounded-2xl bg-primary px-5 py-2 duration-200 dark:hover:shadow-xl-light dark:text-secondary dark:shadow-sm-light" href="/prono">Pronostics</a>
+					<li class="duration-200 hover:translate-y-2 translate-y-0">
+						<a class="rounded-2xl bg-primary text-primary dark:text-secondary px-5 py-2 duration-200 dark:bg-white dark:bg-opacity-10 bg-opacity-20" href="/prono">Pronostics</a>
 					</li>
-					<li class="duration-200 hover:translate-y-2 dark:hover:translate-y-0 translate-y-0">
-						<a class="rounded-2xl bg-primary px-5 py-2 duration-200 dark:hover:shadow-xl-light dark:text-secondary dark:shadow-sm-light" href="/ranking">Classement</a>
+					<li class="duration-200 hover:translate-y-2 translate-y-0">
+						<a class="rounded-2xl bg-primary text-primary dark:text-secondary px-5 py-2 duration-200 dark:bg-white dark:bg-opacity-10 bg-opacity-20" href="/ranking">Classement</a>
 					</li>
-					<li class="duration-200 hover:translate-y-2 dark:hover:translate-y-0 translate-y-0">
-						<a class="rounded-2xl bg-primary px-5 py-2 duration-200 dark:hover:shadow-xl-light dark:text-secondary dark:shadow-sm-light" href="/rules">Règles</a>
+					<li class="duration-200 hover:translate-y-2 translate-y-0">
+						<a class="rounded-2xl bg-primary text-primary dark:text-secondary px-5 py-2 duration-200 dark:bg-white dark:bg-opacity-10 bg-opacity-20" href="/rules">Règles</a>
 					</li>
 				</div>
 				<div class="flex flex-row items-center gap-5 text-xl text-primary dark:text-secondary">
@@ -87,7 +87,7 @@
 								<LogoutIcon width={40} />
 							</button>
 						{:else}
-							<a class="rounded-3xl bg-primary px-2 py-2 text-secondary hover:opacity-70 dark:bg-secondary dark:text-primary" on:click={() => (hamIsOpen = false)} href="/login">Connexion</a>
+							<a class="rounded-3xl bg-primary bg-opacity-20 text-primary px-2 py-2 dark:text-secondary duration-200 hover:translate-y-2 dark:bg-white dark:bg-opacity-10" on:click={() => (hamIsOpen = false)} href="/login">Connexion</a>
 						{/if}
 					</li>
 					<button class="hidden h-full cursor-pointer select-none flex-col justify-center gap-2 m12:flex" on:click={toggleHam}>

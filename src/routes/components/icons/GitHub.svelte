@@ -5,7 +5,7 @@
 	export let style: string = '';
 </script>
 
-<svg class="fill-primary dark:fill-secondary {style}" {width} {height} {viewBox} xmlns="http://www.w3.org/2000/svg">
+<svg class="fill-primary opacity-50 dark:fill-secondary {style}" {width} {height} {viewBox} xmlns="http://www.w3.org/2000/svg">
 	<path
 		opacity="1.000000"
 		stroke="none"

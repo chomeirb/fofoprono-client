@@ -13,7 +13,7 @@
 	}
 </script>
 
-<div class="flex h-min w-full flex-row items-center justify-between rounded-md border-[3px] border-primary px-10 py-3 shadow-in dark:border-secondary m12:px-[5%]">
+<div class="flex h-min w-full flex-row items-center justify-between rounded-md border-[3px] border-primary border-opacity-70 px-10 py-3 shadow-in dark:border-secondary dark:border-opacity-30 m12:px-[5%]">
 	<p class="w-[10%] text-xl text-primary dark:text-secondary m12:w-[25%] m6:text-base" title="rang">Rang</p>
 	<button class="w-[60%] text-left text-xl text-primary hover:cursor-pointer hover:underline hover:opacity-70 dark:text-secondary m6:text-base" on:click={() => setSort(SortType.Name)}>
 		Nom {sortType == SortType.Name ? (sortAsc ? '▲' : '▼') : ''}
