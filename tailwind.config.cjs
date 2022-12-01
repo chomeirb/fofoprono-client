@@ -10,7 +10,9 @@ module.exports = {
 			},
 			boxShadow: {
 				top: '0 -10px 15px -3px rgba(0, 0, 0, 0.2)',
-				in: 'inset 10px 0px 15px 10px rgba(0, 0, 0, 0.2)'
+				in: 'inset 10px 0px 15px 10px rgba(0, 0, 0, 0.2)',
+				'sm-light': '0 0px 25px 10px rgb(255, 255, 255, 0.15)',
+				'xl-light': '0 0px 25px 10px rgb(255, 255, 255, 0.3)'
 			},
 			fontFamily: {
 				sans: ['Inter var', 'sans-serif'],

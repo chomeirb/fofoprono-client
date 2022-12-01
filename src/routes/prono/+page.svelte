@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Checkmark from '../components/icons/Checkmark.svelte';
 	import { session } from '../store';
 	import Pronos from './Pronos.svelte';
 </script>
@@ -12,8 +13,12 @@
 	{:else}
 		<div class="flex h-[10%] w-full max-w-8xl flex-row items-center justify-between px-3 text-4xl m12:px-3 m12:text-xl m8:h-[8%]">
 			<p class="font-bold m12:text-xl">PRONOSTIQUER</p>
-			<button type="submit" form="Pronos" class="rounded-3xl bg-primary py-2 px-5 text-secondary duration-300 hover:translate-x-3 dark:bg-secondary dark:text-primary m12:hidden">Valider →</button>
-			<button type="submit" form="Pronos" class="hidden rounded-3xl bg-primary py-2 px-5 text-secondary duration-300 hover:translate-x-3 dark:bg-secondary dark:text-primary m12:flex">✔️</button>
+			<button
+				type="submit"
+				form="Pronos"
+				class="flex flex-row items-center gap-5 rounded-3xl bg-primary py-2 px-5 text-secondary duration-300 hover:translate-x-3 dark:hover:translate-x-0 translate-x-0 dark:hover:shadow-xl-light dark:shadow-sm-light">
+				<p class="m8:hidden">Valider</p>
+				<Checkmark height={25} /></button>
 		</div>
 		<div class="h-[83%] w-full max-w-8xl px-3 m12:mt-2 m12:px-0 m8:mt-0">
 			<Pronos />

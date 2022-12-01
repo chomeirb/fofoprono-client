@@ -4,7 +4,7 @@
 	import type { PronoResult } from '$lib/types/prono';
 	import type { ResponseResult } from '$lib/types/returnable';
 	import { onMount } from 'svelte';
-	import GamesDisplay from '../../components/GamesDisplay/GamesDisplay.svelte';
+	import GamesDisplay from '../../components/Games/GamesDisplay.svelte';
 	import { getGames } from './fetchPronos';
 
 	let games: ResponseResult<[PronoResult, Game][]> = {

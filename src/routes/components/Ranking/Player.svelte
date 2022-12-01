@@ -8,7 +8,7 @@
 	class={`flex w-full flex-row items-center justify-between rounded-md border-2 border-primary px-5 py-3 shadow-xl hover:opacity-60 dark:border-secondary m6:py-1 ${
 		player.user_type === UserType.Current ? 'bg-slate-300 dark:bg-slate-600' : ''
 	}`}
-	href="/prono/{player.name}">
+	href="/prono/{player.name}?from=2022-11-20">
 	<p class="h-full w-[10%] text-xl text-primary dark:text-secondary m6:text-base">{player.rank}</p>
 	<p class="h-full w-[60%] truncate text-xl text-primary dark:text-secondary m6:text-base">
 		{player.name}

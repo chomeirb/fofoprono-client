@@ -61,17 +61,17 @@
 		<nav class="flex h-[90%] w-full flex-row items-center justify-center m12:w-auto">
 			<ul class="flex h-full w-full flex-row items-center justify-between gap-5">
 				<div class="flex h-full flex-row items-center gap-5 m12:hidden">
-					<li class="duration-200 hover:translate-y-2">
-						<a class="rounded-2xl bg-primary px-5 py-2 dark:bg-secondary" on:click={disableCurtain} href="/home">Accueil</a>
+					<li class="duration-200 hover:translate-y-2 dark:hover:translate-y-0 translate-y-0">
+						<a class="rounded-2xl bg-primary px-5 py-2 duration-200 dark:hover:shadow-xl-light dark:text-secondary dark:shadow-sm-light" on:click={disableCurtain} href="/home">Accueil</a>
 					</li>
-					<li class="duration-200 hover:translate-y-2">
-						<a class="rounded-2xl bg-primary px-5 py-2 dark:bg-secondary" href="/prono">Pronostics</a>
+					<li class="duration-200 hover:translate-y-2 dark:hover:translate-y-0 translate-y-0">
+						<a class="rounded-2xl bg-primary px-5 py-2 duration-200 dark:hover:shadow-xl-light dark:text-secondary dark:shadow-sm-light" href="/prono">Pronostics</a>
 					</li>
-					<li class="duration-200 hover:translate-y-2">
-						<a class="rounded-2xl bg-primary px-5 py-2 dark:bg-secondary" href="/ranking">Classement</a>
+					<li class="duration-200 hover:translate-y-2 dark:hover:translate-y-0 translate-y-0">
+						<a class="rounded-2xl bg-primary px-5 py-2 duration-200 dark:hover:shadow-xl-light dark:text-secondary dark:shadow-sm-light" href="/ranking">Classement</a>
 					</li>
-					<li class="duration-200 hover:translate-y-2">
-						<a class="rounded-2xl bg-primary px-5 py-2 dark:bg-secondary" href="/rules">Règles</a>
+					<li class="duration-200 hover:translate-y-2 dark:hover:translate-y-0 translate-y-0">
+						<a class="rounded-2xl bg-primary px-5 py-2 duration-200 dark:hover:shadow-xl-light dark:text-secondary dark:shadow-sm-light" href="/rules">Règles</a>
 					</li>
 				</div>
 				<div class="flex flex-row items-center gap-5 text-xl text-primary dark:text-secondary">
@@ -83,7 +83,7 @@
 							<p class="w-min max-w-lg truncate rounded-xl border-[3px] border-primary px-2 text-center text-4xl font-bold shadow-xl dark:border-secondary m12:max-w-[185px] m12:text-xl">
 								{$session.data}
 							</p>
-							<button alt="logout" on:click={showLogoutConfirm}>
+							<button class="hover:opacity-70" alt="logout" on:click={showLogoutConfirm}>
 								<LogoutIcon width={40} />
 							</button>
 						{:else}

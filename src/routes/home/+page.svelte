@@ -16,7 +16,7 @@
 	<div class="flex h-full w-full flex-col items-center justify-start pt-3 m8:pt-0" on:mouseenter={slide(-100, 'welcome')}>
 		<div class="flex h-[10%] w-full max-w-8xl flex-row items-center justify-between px-3 text-4xl m12:flex-col m12:justify-center m12:gap-5 m12:text-2xl m8:h-[8%]">
 			<p class="font-bold text-primary dark:text-secondary">CALENDRIER/RÉSULTATS</p>
-			<a href="/prono" class="rounded-3xl bg-primary py-2 px-5 text-secondary duration-300 hover:translate-x-3 dark:bg-secondary dark:text-primary m12:hidden m12:text-lg">Pronostiquer →</a>
+			<a href="/prono" class="rounded-3xl bg-primary py-2 px-5 text-secondary duration-300 hover:translate-x-3 dark:hover:translate-x-0 translate-x-0 dark:hover:shadow-xl-light dark:shadow-sm-light m12:hidden m12:text-lg">Pronostiquer →</a>
 		</div>
 		<div class="h-[83%] w-full max-w-8xl px-3 m12:px-0">
 			<Games />

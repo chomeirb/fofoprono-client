@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Game } from '$lib/types/game';
 	import type { Prediction, PronoResult } from '$lib/types/prono';
-	import GamesDisplay from '../components/GamesDisplay/GamesDisplay.svelte';
+	import GamesDisplay from '../components/Games/GamesDisplay.svelte';
 
 	import { games } from '../store';
 	import { PUBLIC_API_URL } from '$env/static/public';
