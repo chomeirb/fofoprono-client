@@ -34,19 +34,19 @@
 
 <header class="flex h-[90px] w-full flex-row justify-center text-3xl text-secondary shadow-lg dark:text-primary m8:h-[60px]">
 	<ul
-		class={`m8 fixed z-40 hidden h-[calc(100vh_-_180px)] w-[100vw] flex-col justify-center gap-10 overflow-y-auto bg-secondary pt-10 text-primary shadow-in dark:bg-primary dark:text-secondary m12:flex m8:h-[calc(100vh_-_90px)] ${
+		class={`m8 fixed z-40 hidden h-[calc(100vh_-_180px)] w-[100vw] flex-col justify-center gap-10 overflow-y-auto bg-secondary text-primary shadow-in dark:bg-primary dark:text-secondary m12:flex m8:h-[calc(100vh_-_90px)] ${
 			!hamIsOpen ? 'translate-x-[100vw]' : ''
 		} mt-[90px] items-center duration-500 m8:mt-[60px]`}>
-		<li class="flex w-4/6 flex-col items-center rounded-2xl border-[3px] border-primary py-2 dark:border-secondary">
+		<li class="flex w-4/6 flex-col items-center rounded-2xl py-2 bg-primary bg-opacity-20 dark:bg-secondary dark:bg-opacity-10">
 			<a on:click={() => (hamIsOpen = false)} href="/home">Accueil</a>
 		</li>
-		<li class="flex w-4/6 flex-col items-center rounded-2xl border-[3px] border-primary py-2 dark:border-secondary">
+		<li class="flex w-4/6 flex-col items-center rounded-2xl py-2 bg-primary bg-opacity-20 dark:bg-secondary dark:bg-opacity-10">
 			<a on:click={() => (hamIsOpen = false)} href="/prono">Pronostics</a>
 		</li>
-		<li class="flex w-4/6 flex-col items-center rounded-2xl border-[3px] border-primary py-2 dark:border-secondary">
+		<li class="flex w-4/6 flex-col items-center rounded-2xl py-2 bg-primary bg-opacity-20 dark:bg-secondary dark:bg-opacity-10">
 			<a on:click={() => (hamIsOpen = false)} href="/ranking">Classement</a>
 		</li>
-		<li class="flex w-4/6 flex-col items-center rounded-2xl border-[3px] border-primary py-2 dark:border-secondary">
+		<li class="flex w-4/6 flex-col items-center rounded-2xl py-2 bg-primary bg-opacity-20 dark:bg-secondary dark:bg-opacity-10">
 			<a on:click={() => (hamIsOpen = false)} href="/rules">Règles</a>
 		</li>
 		<button alt="night-light" on:click={toggleDarkMode}>
