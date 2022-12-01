@@ -5,7 +5,7 @@
 </script>
 
 <svg
-	class="fill-primary dark:fill-secondary {style}"
+	class="fill-primary opacity-50 dark:fill-secondary {style}"
 	{width}
 	{height}
 	viewBox="0 -28.5 256 256"

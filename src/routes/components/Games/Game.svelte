@@ -78,7 +78,7 @@
 		class={`${
 			showDetails ? 'm12:gap-2 m12:py-4' : 'm12:gap-0'
 		} flex w-full flex-row items-center justify-between gap-5 rounded-md border-[3px] px-3 py-4 text-primary shadow-xl duration-300 dark:text-secondary m12:flex-col m12:justify-center m12:px-3 ${
-			resultColorBorder ? `${resultColorBorder}` : 'border-primary dark:border-secondary'
+			resultColorBorder ? `${resultColorBorder}` : 'border-primary dark:border-secondary border-opacity-30 dark:border-opacity-30'
 		}`}
 		on:mouseenter={enter}
 		on:mouseleave={leave}>

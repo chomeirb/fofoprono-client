@@ -8,7 +8,7 @@
 	{#if !$session.data}
 		<div class="flex h-full flex-col items-center justify-center gap-10">
 			<p class="w-2/3 items-center text-center text-4xl font-bold">Vous devez vous connecter pour effectuer des pronostics !</p>
-			<a href="/login" class="rounded-3xl bg-primary p-3 text-3xl font-semibold text-secondary dark:bg-secondary dark:text-primary">Connexion →</a>
+			<a href="/login" class="rounded-3xl bg-primary bg-opacity-20 p-3 text-3xl font-semibold dark:bg-white dark:bg-opacity-10 hover:translate-x-5 duration-200">Connexion →</a>
 		</div>
 	{:else}
 		<div class="flex h-[10%] w-full max-w-8xl flex-row items-center justify-between px-3 text-4xl m12:px-3 m12:text-xl m8:h-[8%]">
@@ -16,7 +16,7 @@
 			<button
 				type="submit"
 				form="Pronos"
-				class="flex flex-row items-center gap-5 rounded-3xl bg-primary py-2 px-5 text-secondary duration-300 hover:translate-x-3 dark:hover:translate-x-0 translate-x-0 dark:hover:shadow-xl-light dark:shadow-sm-light">
+				class="flex flex-row items-center gap-5 rounded-3xl bg-primary text-primary py-2 px-5 dark:text-secondary duration-300 hover:translate-x-3 dark:bg-white dark:bg-opacity-10 bg-opacity-20">
 				<p class="m8:hidden">Valider</p>
 				<Checkmark height={25} /></button>
 		</div>
