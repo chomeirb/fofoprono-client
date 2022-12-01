@@ -1,11 +1,17 @@
-<script>
+<script lang="ts">
 	import { PUBLIC_API_URL } from '$env/static/public';
+	import ClosedEye from '../components/icons/ClosedEye.svelte';
+	import OpenedEye from '../components/icons/OpenedEye.svelte';
 
 	export let result;
 	let submitting = false;
 
 	let id = '';
 	let password = '';
+
+	let showPassword: boolean = false;
+
+	$: showPassword ? document.getElementById('password')?.setAttribute('type', 'text') : document.getElementById('password')?.setAttribute('type', 'password');
 
 	const submit = async () => {
 		if (!(id && password)) {
@@ -46,7 +52,21 @@
 	</div>
 	<div class="flex w-full flex-col justify-start">
 		<p class="font-bold text-primary dark:text-secondary">Mot de passe</p>
-		<input autocomplete="current-password" type="password" class="h-10 w-full rounded border px-2 shadow-lg" bind:value={password} />
+		<div class="flex flex-rox shadow-lg border rounded">
+			<input autocomplete="current-password" type="password" id="password" class="h-10 w-full px-2" bind:value={password} />
+			<button
+				type="button"
+				class="bg-white px-1 duration-200 hover:shadow-in"
+				on:click={() => {
+					showPassword = !showPassword;
+				}}>
+				{#if !showPassword}
+					<ClosedEye width={30} />
+				{:else}
+					<OpenedEye width={30} />
+				{/if}
+			</button>
+		</div>
 	</div>
 	<div class="mt-5 flex w-full flex-col items-center gap-5">
 		<input
