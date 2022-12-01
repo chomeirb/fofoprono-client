@@ -4,7 +4,7 @@
 	export let style: string = '';
 </script>
 
-<svg class="fill-primary" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 442.04 442.04" {style} {width} {height} xml:space="preserve">
+<svg class="fill-primary {style}" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 442.04 442.04" {width} {height} xml:space="preserve">
 	<g>
 		<g>
 			<path
