@@ -15,9 +15,13 @@
 	export let pronoMode: boolean;
 	export let displayMode: boolean;
 
+	const currentDate = new Date();
+	currentDate.setDate(currentDate.getDate() - 1);
+	const date = currentDate.toISOString().split('T')[0];
+
 	let queryTeam = getQueryParamsStore('team');
 	let queryStage = getQueryParamsStore('stage');
-	let queryFrom = getQueryParamsStore('from');
+	let queryFrom = getQueryParamsStore('from', date);
 	let queryTo = getQueryParamsStore('to');
 
 	$: filtered = games.data

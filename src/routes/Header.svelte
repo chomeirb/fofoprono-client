@@ -30,13 +30,6 @@
 	function hideLogoutConfirm() {
 		confirmLogout = false;
 	}
-
-	const currentDate = new Date();
-	currentDate.setDate(currentDate.getDate() - 1);
-	const date = currentDate.toISOString().split('T')[0];
-
-	const home = 'home?from=' + date;
-	const prono = 'prono?from=' + date;
 </script>
 
 <header class="flex h-[90px] w-full flex-row justify-center text-3xl text-secondary shadow-lg dark:text-primary m8:h-[60px]">
@@ -45,10 +38,10 @@
 			!hamIsOpen ? 'translate-x-[100vw]' : ''
 		} mt-[90px] items-center duration-500 m8:mt-[60px]`}>
 		<li class="flex w-4/6 flex-col items-center rounded-2xl border-[3px] border-primary py-2 dark:border-secondary">
-			<a on:click={() => (hamIsOpen = false)} href="/{home}">Accueil</a>
+			<a on:click={() => (hamIsOpen = false)} href="/home">Accueil</a>
 		</li>
 		<li class="flex w-4/6 flex-col items-center rounded-2xl border-[3px] border-primary py-2 dark:border-secondary">
-			<a on:click={() => (hamIsOpen = false)} href="/{prono}">Pronostics</a>
+			<a on:click={() => (hamIsOpen = false)} href="/prono">Pronostics</a>
 		</li>
 		<li class="flex w-4/6 flex-col items-center rounded-2xl border-[3px] border-primary py-2 dark:border-secondary">
 			<a on:click={() => (hamIsOpen = false)} href="/ranking">Classement</a>
@@ -62,17 +55,17 @@
 	</ul>
 
 	<div class="flex h-full w-full max-w-8xl flex-row items-center justify-center gap-5 px-3 m12:justify-between">
-		<a href="/{home}" class="h-[50%] w-[50px] duration-200 hover:-rotate-12 m8:w-[35px]" on:click={enableCurtain}>
+		<a href="/home" class="h-[50%] w-[50px] duration-200 hover:-rotate-12 m8:w-[35px]" on:click={enableCurtain}>
 			<FofoPronoLogo />
 		</a>
 		<nav class="flex h-[90%] w-full flex-row items-center justify-center m12:w-auto">
 			<ul class="flex h-full w-full flex-row items-center justify-between gap-5">
 				<div class="flex h-full flex-row items-center gap-5 m12:hidden">
 					<li class="duration-200 hover:translate-y-2">
-						<a class="rounded-2xl bg-primary px-5 py-2 dark:bg-secondary" on:click={disableCurtain} href="/{home}">Accueil</a>
+						<a class="rounded-2xl bg-primary px-5 py-2 dark:bg-secondary" on:click={disableCurtain} href="/home">Accueil</a>
 					</li>
 					<li class="duration-200 hover:translate-y-2">
-						<a class="rounded-2xl bg-primary px-5 py-2 dark:bg-secondary" href="/{prono}">Pronostics</a>
+						<a class="rounded-2xl bg-primary px-5 py-2 dark:bg-secondary" href="/prono">Pronostics</a>
 					</li>
 					<li class="duration-200 hover:translate-y-2">
 						<a class="rounded-2xl bg-primary px-5 py-2 dark:bg-secondary" href="/ranking">Classement</a>
