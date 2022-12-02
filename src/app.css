@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .button {
+    @apply bg-primary dark:bg-secondary bg-opacity-20 dark:bg-opacity-10 hover:bg-opacity-40 dark:hover:bg-opacity-25 rounded-2xl text-primary dark:text-secondary px-5 py-2 duration-200;
+  }
+}
