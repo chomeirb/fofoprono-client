@@ -9,20 +9,21 @@
 	import { flip } from 'svelte/animate';
 	import { fade } from 'svelte/transition';
 
-	export let games: ResponseResult<[PronoResult, Game][]>;
-	export let pronos: Prediction[] = games.data.map(() => null!);
+	export let games: ResponseResult<[prono: PronoResult, game: Game][]> | ResponseResult<[prono: never, game: Game][]>;
+	export let inputs: Record<number, [number, number]> = {};
 
 	export let pronoMode: boolean;
-	export let displayMode: boolean;
+
+	let queryTeam = getQueryParamsStore('team');
+	let queryStage = getQueryParamsStore('stage');
+	let queryFrom = getQueryParamsStore('from');
+	let queryTo = getQueryParamsStore('to');
 
 	const currentDate = new Date();
 	currentDate.setDate(currentDate.getDate() - 1);
 	const date = currentDate.toISOString().split('T')[0];
 
-	let queryTeam = getQueryParamsStore('team');
-	let queryStage = getQueryParamsStore('stage');
-	let queryFrom = getQueryParamsStore('from', date);
-	let queryTo = getQueryParamsStore('to');
+	$: if (!$queryFrom) $queryFrom = date;
 
 	$: filtered = games.data
 		.filter(([, game]) => game.team_home.concat(' ', game.team_away).toUpperCase().includes($queryTeam.toUpperCase()))
@@ -32,7 +33,7 @@
 </script>
 
 <div class="grid h-full w-full grid-cols-20-80 m12:flex m12:flex-col m12:items-center">
-	<Filter bind:queryTeam bind:queryStage bind:queryFrom bind:queryTo />
+	<Filter bind:queryTeam bind:queryStage bind:queryFrom bind:queryTo requiredFrom={$queryFrom === date} />
 	{#if games.text === 'LOADING'}
 		<div class="mt-4 flex h-full w-full place-content-center items-center overflow-y-auto shadow-in m12:overflow-x-hidden m8:mt-0 m8:border-t">
 			<p>Loading...</p>
@@ -50,12 +51,12 @@
 	{:else}
 		<div class="mt-4 flex h-full w-full flex-col items-center overflow-y-auto rounded-md shadow-in m12:overflow-x-hidden m8:mt-0 m8:border-t">
 			<ul class="flex h-full w-full flex-col gap-5 px-5 py-4">
-				{#each filtered as [fetchedProno, fetchedGame] (fetchedGame.id)}
+				{#each filtered as [prono, game] (game.id)}
 					<div animate:flip={{ duration: 500 }} in:fade>
 						{#if pronoMode}
-							<PronoDisplay {pronoMode} {displayMode} {fetchedProno} {fetchedGame} bind:prono={pronos[fetchedGame.id - 1]} />
+							<PronoDisplay {prono} {game} bind:input={inputs[game.id]} />
 						{:else}
-							<PronoDisplay {fetchedGame} />
+							<PronoDisplay {game} />
 						{/if}
 					</div>
 				{/each}

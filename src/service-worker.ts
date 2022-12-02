@@ -97,8 +97,7 @@ worker.addEventListener('fetch', (event) => {
 				cache.put(request, response.clone());
 
 				return response;
-			}
-			catch (error) {
+			} catch (error) {
 				console.debug('[ServiceWorker] network request failed, trying cache');
 
 				const cachedResponse = await caches.match(request);

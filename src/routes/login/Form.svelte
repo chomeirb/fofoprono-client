@@ -48,15 +48,24 @@
 <form class="flex flex-col gap-5 text-primary" on:submit|preventDefault={submit} on:input={() => (result = '')}>
 	<div class="flex w-full flex-col justify-start">
 		<p class="font-bold text-primary dark:text-secondary">Pseudo ou adresse email</p>
-		<input autocomplete="username" type="text" class="h-10 w-full bg-primary bg-opacity-20 dark:bg-white dark:bg-opacity-10 dark:text-secondary rounded border border-primary dark:border-secondary px-2 shadow-lg" bind:value={id} />
+		<input
+			autocomplete="username"
+			type="text"
+			class="h-10 w-full rounded border border-primary bg-primary bg-opacity-20 px-2 shadow-lg dark:border-secondary dark:bg-white dark:bg-opacity-10 dark:text-secondary"
+			bind:value={id} />
 	</div>
 	<div class="flex w-full flex-col justify-start">
 		<p class="font-bold text-primary dark:text-secondary">Mot de passe</p>
-		<div class="flex flex-rox shadow-lg border rounded border-primary dark:border-secondary">
-			<input autocomplete="current-password" type="password" id="password" class="h-10 w-full px-2 bg-primary bg-opacity-20 dark:bg-white dark:bg-opacity-10 dark:text-secondary " bind:value={password} />
+		<div class="flex-rox flex rounded border border-primary shadow-lg dark:border-secondary">
+			<input
+				autocomplete="current-password"
+				type="password"
+				id="password"
+				class="h-10 w-full bg-primary bg-opacity-20 px-2 dark:bg-white dark:bg-opacity-10 dark:text-secondary "
+				bind:value={password} />
 			<button
 				type="button"
-				class="bg-primary bg-opacity-20 dark:bg-white dark:bg-opacity-10 dark:text-secondary px-1 duration-200 hover:shadow-in"
+				class="bg-primary bg-opacity-20 px-1 duration-200 hover:shadow-in dark:bg-white dark:bg-opacity-10 dark:text-secondary"
 				on:click={() => {
 					showPassword = !showPassword;
 				}}>
@@ -71,7 +80,7 @@
 	<div class="mt-5 flex w-full flex-col items-center gap-5">
 		<input
 			type="submit"
-			class="rounded-3xl bg-primary bg-opacity-20 text-primary px-5 py-2 dark:text-secondary duration-200 hover:translate-x-6 hover:cursor-pointer dark:bg-secondary dark:bg-opacity-10 m12:w-5/6"
+			class="rounded-3xl bg-primary bg-opacity-20 px-5 py-2 text-primary duration-200 hover:translate-x-6 hover:cursor-pointer dark:bg-secondary dark:bg-opacity-10 dark:text-secondary m12:w-5/6"
 			value={submitting ? 'Connexion...' : 'Connexion ➔'} />
 	</div>
 </form>

@@ -3,6 +3,18 @@ import { PUBLIC_API_URL } from '$env/static/public';
 
 export async function storeGames() {
 	try {
+		games.set(await getGames());
+	} catch (error: any) {
+		games.set({
+			status: 500,
+			text: error.toString(),
+			data: []
+		});
+	}
+}
+
+export async function getGames() {
+	try {
 		const response = await fetch(`${PUBLIC_API_URL}/prono`, {
 			method: 'GET',
 			credentials: 'include'
@@ -18,12 +30,12 @@ export async function storeGames() {
 			result.data = await response.json();
 		}
 
-		games.set(result);
+		return result;
 	} catch (error: any) {
-		games.set({
+		return {
 			status: 500,
 			text: error.toString(),
 			data: []
-		});
+		};
 	}
 }

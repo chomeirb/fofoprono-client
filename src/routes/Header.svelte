@@ -1,6 +1,5 @@
 <script lang="ts">
 	import FofoPronoLogo from './components/icons/Fofoprono.svelte';
-	import { onMount } from 'svelte';
 	import { disableCurtain, enableCurtain, session } from './store';
 	import LogoutIcon from './components/icons/Logout.svelte';
 	import ThemeIcon from './components/icons/Theme.svelte';
@@ -37,16 +36,16 @@
 		class={`m8 fixed z-40 hidden h-[calc(100vh_-_180px)] w-[100vw] flex-col justify-center gap-10 overflow-y-auto bg-secondary text-primary shadow-in dark:bg-primary dark:text-secondary m12:flex m8:h-[calc(100vh_-_90px)] ${
 			!hamIsOpen ? 'translate-x-[100vw]' : ''
 		} mt-[90px] items-center duration-500 m8:mt-[60px]`}>
-		<li class="flex w-4/6 flex-col items-center rounded-2xl py-2 bg-primary bg-opacity-20 dark:bg-secondary dark:bg-opacity-10">
+		<li class="button flex w-4/6 flex-col items-center">
 			<a on:click={() => (hamIsOpen = false)} href="/home">Accueil</a>
 		</li>
-		<li class="flex w-4/6 flex-col items-center rounded-2xl py-2 bg-primary bg-opacity-20 dark:bg-secondary dark:bg-opacity-10">
+		<li class="button flex w-4/6 flex-col items-center">
 			<a on:click={() => (hamIsOpen = false)} href="/prono">Pronostics</a>
 		</li>
-		<li class="flex w-4/6 flex-col items-center rounded-2xl py-2 bg-primary bg-opacity-20 dark:bg-secondary dark:bg-opacity-10">
+		<li class="button flex w-4/6 flex-col items-center">
 			<a on:click={() => (hamIsOpen = false)} href="/ranking">Classement</a>
 		</li>
-		<li class="flex w-4/6 flex-col items-center rounded-2xl py-2 bg-primary bg-opacity-20 dark:bg-secondary dark:bg-opacity-10">
+		<li class="button flex w-4/6 flex-col items-center">
 			<a on:click={() => (hamIsOpen = false)} href="/rules">Règles</a>
 		</li>
 		<button alt="night-light" on:click={toggleDarkMode}>
@@ -59,19 +58,19 @@
 			<FofoPronoLogo />
 		</a>
 		<nav class="flex h-[90%] w-full flex-row items-center justify-center m12:w-auto">
-			<ul class="flex h-full dark:text-secondary w-full flex-row items-center justify-between gap-5">
+			<ul class="flex h-full w-full flex-row items-center justify-between gap-5 dark:text-secondary">
 				<div class="flex h-full flex-row items-center gap-5 m12:hidden">
-					<li class="duration-200 hover:translate-y-2 translate-y-0">
-						<a class="rounded-2xl bg-primary text-primary dark:text-secondary px-5 py-2 duration-200 dark:bg-white dark:bg-opacity-10 bg-opacity-20" on:click={disableCurtain} href="/home">Accueil</a>
+					<li>
+						<a class="button" on:click={disableCurtain} href="/home">Accueil</a>
 					</li>
-					<li class="duration-200 hover:translate-y-2 translate-y-0">
-						<a class="rounded-2xl bg-primary text-primary dark:text-secondary px-5 py-2 duration-200 dark:bg-white dark:bg-opacity-10 bg-opacity-20" href="/prono">Pronostics</a>
+					<li>
+						<a class="button" href="/prono">Pronostics</a>
 					</li>
-					<li class="duration-200 hover:translate-y-2 translate-y-0">
-						<a class="rounded-2xl bg-primary text-primary dark:text-secondary px-5 py-2 duration-200 dark:bg-white dark:bg-opacity-10 bg-opacity-20" href="/ranking">Classement</a>
+					<li>
+						<a class="button" href="/ranking">Classement</a>
 					</li>
-					<li class="duration-200 hover:translate-y-2 translate-y-0">
-						<a class="rounded-2xl bg-primary text-primary dark:text-secondary px-5 py-2 duration-200 dark:bg-white dark:bg-opacity-10 bg-opacity-20" href="/rules">Règles</a>
+					<li>
+						<a class="button" href="/rules">Règles</a>
 					</li>
 				</div>
 				<div class="flex flex-row items-center gap-5 text-xl text-primary dark:text-secondary">
@@ -87,7 +86,7 @@
 								<LogoutIcon width={40} />
 							</button>
 						{:else}
-							<a class="rounded-3xl bg-primary bg-opacity-20 text-primary px-2 py-2 dark:text-secondary duration-200 hover:translate-y-2 dark:bg-white dark:bg-opacity-10" on:click={() => (hamIsOpen = false)} href="/login">Connexion</a>
+							<a class="button" on:click={() => (hamIsOpen = false)} href="/login">Connexion</a>
 						{/if}
 					</li>
 					<button class="hidden h-full cursor-pointer select-none flex-col justify-center gap-2 m12:flex" on:click={toggleHam}>

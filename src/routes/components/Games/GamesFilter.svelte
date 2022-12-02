@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { Stage } from '$lib/types/game';
 	import { displayStage } from '$lib/utils/display';
 
@@ -6,24 +6,37 @@
 	export let queryStage;
 	export let queryFrom;
 	export let queryTo;
+
+	export let requiredFrom = false;
+	export let requiredTo = false;
 </script>
 
 <div class="mt-4 flex h-min w-[90%] flex-col justify-start gap-3 rounded-md px-4 py-5 shadow-in m12:mt-0 m12:w-full m12:flex-row m12:justify-around m12:px-1 m12:py-2 m12:text-base">
 	<div class="flex w-full flex-col i2:w-[20%] i3:w-[20%] m8:w-12 m8:text-xs">
 		<label for="from">Du</label>
-		<input id="from" type="date" class="h-10 w-full rounded bg-primary px-3 py-1 bg-opacity-20 text-primary dark:text-secondary dark:bg-white dark:bg-opacity-10 m8:text-lg" bind:value={$queryFrom} />
+		<input
+			id="from"
+			type="date"
+			class="h-10 w-full rounded bg-primary bg-opacity-20 px-3 py-1 text-primary dark:bg-white dark:bg-opacity-10 dark:text-secondary m8:text-lg"
+			bind:value={$queryFrom}
+			required={requiredFrom} />
 	</div>
 	<div class="flex w-full flex-col i2:w-[20%] i3:w-[20%] m8:w-12 m8:text-xs">
 		<label for="to">Au</label>
-		<input id="to" type="date" class="h-10 w-full rounded bg-primary px-3 py-1 bg-opacity-20 text-primary dark:text-secondary dark:bg-white dark:bg-opacity-10 m8:text-lg" bind:value={$queryTo} />
+		<input
+			id="to"
+			type="date"
+			class="h-10 w-full rounded bg-primary bg-opacity-20 px-3 py-1 text-primary dark:bg-white dark:bg-opacity-10 dark:text-secondary m8:text-lg"
+			bind:value={$queryTo}
+			required={requiredTo} />
 	</div>
 	<div class="flex w-full flex-col m12:w-[20%] m8:w-[33%] m8:text-xs">
 		<label for="team">Équipe</label>
-		<input id="team" type="text" class="h-10 w-full rounded bg-primary px-3 py-1 bg-opacity-20 text-primary dark:text-secondary dark:bg-white dark:bg-opacity-10" bind:value={$queryTeam} />
+		<input id="team" type="text" class="h-10 w-full rounded bg-primary bg-opacity-20 px-3 py-1 text-primary dark:bg-white dark:bg-opacity-10 dark:text-secondary" bind:value={$queryTeam} />
 	</div>
 	<div class="flex w-full flex-col m12:w-[20%] m8:w-[25%] m8:text-xs">
 		<label for="stage">Étape</label>
-		<select id="stage" type="text" class="h-10 w-full rounded bg-primary bg-opacity-20 text-primary px-3 py-1 dark:text-secondary dark:bg-white dark:bg-opacity-10" bind:value={$queryStage}>
+		<select id="stage" type="text" class="h-10 w-full rounded bg-primary bg-opacity-20 px-3 py-1 text-primary dark:bg-white dark:bg-opacity-10 dark:text-secondary" bind:value={$queryStage}>
 			<option class="bg-primary bg-opacity-20 dark:bg-opacity-90" value="">Tous</option>
 			{#each Object.values(Stage) as stage}
 				<option class="bg-primary bg-opacity-20 dark:bg-opacity-90" value={stage}>{displayStage(stage)}</option>

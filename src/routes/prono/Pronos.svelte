@@ -1,41 +1,36 @@
 <script lang="ts">
-	import type { Game } from '$lib/types/game';
-	import type { Prediction, PronoResult } from '$lib/types/prono';
-	import GamesDisplay from '../components/Games/GamesDisplay.svelte';
-
-	import { games } from '../store';
 	import { PUBLIC_API_URL } from '$env/static/public';
-	import { isPast } from '$lib/utils/display';
-	import type { ResponseResult } from '$lib/types/returnable';
 
-	let submitPronos: Prediction[] = [];
+	import { GamesDisplay, pronos } from '../components/Games';
+	import { getGames } from '../fetchGames';
+	import { games } from '../store';
 
-	games.subscribe((value: ResponseResult<[PronoResult, Game][]>) => {
-		submitPronos = value.data.map(() => null!);
+	let inputs: Record<number, [number, number]> = {};
+	games.subscribe(({ data }) => {
+		data.forEach(([, game]) => (inputs[game.id] = [null!, null!]));
 	});
 
 	const submit = async () => {
-		const toSubmit = submitPronos.filter((element, index) => {
-			return element !== null && !isPast($games.data[index][1].time);
-		});
+		const submitPronos = Object.values($pronos);
+		submitPronos.forEach((prediction) => (inputs[prediction.game_id] = null!));
 
-		if (toSubmit.length > 0) {
-			const response = await fetch(`${PUBLIC_API_URL}/prono`, {
+		if (submitPronos.length > 0) {
+			await fetch(`${PUBLIC_API_URL}/prono`, {
 				method: 'POST',
 				credentials: 'include',
 				headers: {
 					'Content-Type': 'application/json'
 				},
-				body: JSON.stringify(toSubmit)
+				body: JSON.stringify(submitPronos)
 			});
 
-			if (response.ok) {
-				window.location.href = window.location.href;
-			}
+			$games = await getGames();
+		} else {
+			$games = $games;
 		}
 	};
 </script>
 
 <form class="h-full" id="Pronos" on:submit|preventDefault={submit}>
-	<GamesDisplay pronoMode={true} displayMode={false} games={$games} bind:pronos={submitPronos} />
+	<GamesDisplay pronoMode={true} games={$games} bind:inputs />
 </form>

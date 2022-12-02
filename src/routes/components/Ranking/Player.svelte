@@ -5,7 +5,7 @@
 </script>
 
 <a
-	class={`flex w-full flex-row items-center justify-between rounded-md border-2 border-primary border-opacity-70 dark:border-opacity-30 px-5 py-3 shadow-xl hover:opacity-60 dark:border-secondary m6:py-1 ${
+	class={`flex w-full flex-row items-center justify-between rounded-md border-2 border-primary border-opacity-70 px-5 py-3 shadow-xl hover:opacity-60 dark:border-secondary dark:border-opacity-30 m6:py-1 ${
 		player.user_type === UserType.Current ? 'bg-primary bg-opacity-20 dark:bg-white dark:bg-opacity-10' : ''
 	}`}
 	href="/prono/{player.name}?from=2022-11-20">
