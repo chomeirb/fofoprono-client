@@ -5,11 +5,11 @@
 	import { getGames } from '../fetchGames';
 	import { games } from '../store';
 
-    let inputs: Record<number, [number, number]> = {};
-    games.subscribe(({data}) => {
-        data.forEach(([, game]) => inputs[game.id] = [null!, null!]);
-    })
-    
+	let inputs: Record<number, [number, number]> = {};
+	games.subscribe(({ data }) => {
+		data.forEach(([, game]) => (inputs[game.id] = [null!, null!]));
+	});
+
 	const submit = async () => {
 		const submitPronos = Object.values($pronos);
 		submitPronos.forEach((prediction) => (inputs[prediction.game_id] = null!));
@@ -24,10 +24,10 @@
 				body: JSON.stringify(submitPronos)
 			});
 
-            $games = await getGames();
+			$games = await getGames();
 		} else {
-            $games = $games
-        }
+			$games = $games;
+		}
 	};
 </script>
 

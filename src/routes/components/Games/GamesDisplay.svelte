@@ -8,22 +8,22 @@
 	import type { ResponseResult } from '$lib/types/returnable';
 	import { flip } from 'svelte/animate';
 	import { fade } from 'svelte/transition';
-    
+
 	export let games: ResponseResult<[prono: PronoResult, game: Game][]> | ResponseResult<[prono: never, game: Game][]>;
-    export let inputs: Record<number, [number, number]> = {};
-    
+	export let inputs: Record<number, [number, number]> = {};
+
 	export let pronoMode: boolean;
-    
+
 	let queryTeam = getQueryParamsStore('team');
 	let queryStage = getQueryParamsStore('stage');
 	let queryFrom = getQueryParamsStore('from');
 	let queryTo = getQueryParamsStore('to');
 
-    const currentDate = new Date();
+	const currentDate = new Date();
 	currentDate.setDate(currentDate.getDate() - 1);
 	const date = currentDate.toISOString().split('T')[0];
 
-    $: if (!$queryFrom) $queryFrom = date;
+	$: if (!$queryFrom) $queryFrom = date;
 
 	$: filtered = games.data
 		.filter(([, game]) => game.team_home.concat(' ', game.team_away).toUpperCase().includes($queryTeam.toUpperCase()))

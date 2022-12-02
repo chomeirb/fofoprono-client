@@ -15,7 +15,7 @@
 	// showDetails should be true if the window is wide enough
 	let showDetails = window.innerWidth > 768;
 	let showScore: boolean;
-    let animate: boolean;
+	let animate: boolean;
 
 	const past = isPast(game.time);
 
@@ -25,7 +25,7 @@
 	const FlagHome = Teams[game.team_home.replace(/[\s+\-]/g, '') as keyof typeof Teams] ?? null;
 	const FlagAway = Teams[game.team_away.replace(/[\s+\-]/g, '') as keyof typeof Teams] ?? null;
 
-    $: if (input === null)  animate = !animate;
+	$: if (input === null) animate = !animate;
 
 	$: if (!past && (input?.[0] != null || input?.[1] != null)) {
 		$pronos[game.id] = {
@@ -118,7 +118,7 @@
 					<div class="flex w-[25%] flex-row justify-center">
 						{#if prono}
 							{#if past || !input}
-                                <!-- Hide prono box when user had no prediction -->
+								<!-- Hide prono box when user had no prediction -->
 								{#if prono.prediction}
 									<p class="order-first mr-3 w-7 rounded bg-primary text-center text-secondary dark:bg-secondary dark:text-primary m12:mr-[6px]">
 										{prono.prediction?.prediction_home ?? ''}

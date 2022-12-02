@@ -32,14 +32,14 @@
 
 <div class="flex h-[100vh] flex-col font-medium m8:h-[calc(100vh_+_90px)]">
 	{#if $session.text !== 'LOADING'}
-    <div transition:fade={{ duration: 250 }}>
-		<Header />
+		<div transition:fade={{ duration: 250 }}>
+			<Header />
 
-		<main class="h-[calc(100vh_-_180px)] overflow-y-auto text-primary dark:text-secondary m8:h-[calc(100vh_-_60px)]">
-			<slot />
-		</main>
+			<main class="h-[calc(100vh_-_180px)] overflow-y-auto text-primary dark:text-secondary m8:h-[calc(100vh_-_60px)]">
+				<slot />
+			</main>
 
-		<Footer />
-    </div>
+			<Footer />
+		</div>
 	{/if}
 </div>

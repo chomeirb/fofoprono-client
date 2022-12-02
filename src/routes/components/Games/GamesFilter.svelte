@@ -17,7 +17,7 @@
 		<input
 			id="from"
 			type="date"
-			class="h-10 w-full rounded bg-primary px-3 py-1 bg-opacity-20 text-primary dark:text-secondary dark:bg-white dark:bg-opacity-10 m8:text-lg"
+			class="h-10 w-full rounded bg-primary bg-opacity-20 px-3 py-1 text-primary dark:bg-white dark:bg-opacity-10 dark:text-secondary m8:text-lg"
 			bind:value={$queryFrom}
 			required={requiredFrom} />
 	</div>
@@ -26,17 +26,17 @@
 		<input
 			id="to"
 			type="date"
-			class="h-10 w-full rounded bg-primary px-3 py-1 bg-opacity-20 text-primary dark:text-secondary dark:bg-white dark:bg-opacity-10 m8:text-lg"
+			class="h-10 w-full rounded bg-primary bg-opacity-20 px-3 py-1 text-primary dark:bg-white dark:bg-opacity-10 dark:text-secondary m8:text-lg"
 			bind:value={$queryTo}
 			required={requiredTo} />
 	</div>
 	<div class="flex w-full flex-col m12:w-[20%] m8:w-[33%] m8:text-xs">
 		<label for="team">Équipe</label>
-		<input id="team" type="text" class="h-10 w-full rounded bg-primary px-3 py-1 bg-opacity-20 text-primary dark:text-secondary dark:bg-white dark:bg-opacity-10" bind:value={$queryTeam} />
+		<input id="team" type="text" class="h-10 w-full rounded bg-primary bg-opacity-20 px-3 py-1 text-primary dark:bg-white dark:bg-opacity-10 dark:text-secondary" bind:value={$queryTeam} />
 	</div>
 	<div class="flex w-full flex-col m12:w-[20%] m8:w-[25%] m8:text-xs">
 		<label for="stage">Étape</label>
-		<select id="stage" type="text" class="h-10 w-full rounded bg-primary bg-opacity-20 text-primary px-3 py-1 dark:text-secondary dark:bg-white dark:bg-opacity-10" bind:value={$queryStage}>
+		<select id="stage" type="text" class="h-10 w-full rounded bg-primary bg-opacity-20 px-3 py-1 text-primary dark:bg-white dark:bg-opacity-10 dark:text-secondary" bind:value={$queryStage}>
 			<option class="bg-primary bg-opacity-20 dark:bg-opacity-90" value="">Tous</option>
 			{#each Object.values(Stage) as stage}
 				<option class="bg-primary bg-opacity-20 dark:bg-opacity-90" value={stage}>{displayStage(stage)}</option>

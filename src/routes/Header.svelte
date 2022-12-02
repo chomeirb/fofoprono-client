@@ -58,7 +58,7 @@
 			<FofoPronoLogo />
 		</a>
 		<nav class="flex h-[90%] w-full flex-row items-center justify-center m12:w-auto">
-			<ul class="flex h-full dark:text-secondary w-full flex-row items-center justify-between gap-5">
+			<ul class="flex h-full w-full flex-row items-center justify-between gap-5 dark:text-secondary">
 				<div class="flex h-full flex-row items-center gap-5 m12:hidden">
 					<li>
 						<a class="button" on:click={disableCurtain} href="/home">Accueil</a>
