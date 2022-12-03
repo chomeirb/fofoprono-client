@@ -1,4 +1,4 @@
-Fofoprono est une webapp sur laquelle vous pourrez saisir vos pronostiques de la coupe du monde 2022 et voir qui de vous ou vos proches est le plus fin connaisseur !
+Fofoprono est une webapp sur laquelle vous pourrez saisir vos pronostics de la coupe du monde 2022 et voir qui de vous ou vos proches est le plus fin connaisseur !
 
 # create-svelte
 
