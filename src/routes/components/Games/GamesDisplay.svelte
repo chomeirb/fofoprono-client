@@ -9,7 +9,7 @@
 	import { flip } from 'svelte/animate';
 	import { fade } from 'svelte/transition';
 
-	export let games: ResponseResult<[prono: PronoResult, game: Game][]> | ResponseResult<[prono: never, game: Game][]>;
+	export let games: ResponseResult<[prono: PronoResult, game: Game][]>;
 	export let inputs: Record<number, [number, number]> = {};
 
 	export let pronoMode: boolean;
