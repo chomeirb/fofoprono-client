@@ -48,6 +48,9 @@
 		<li class="button flex w-4/6 flex-col items-center">
 			<a on:click={() => (hamIsOpen = false)} href="/rules">Règles</a>
 		</li>
+		<li class="button flex w-4/6 flex-col items-center">
+			<a on:click={() => (hamIsOpen = false)} href="/contact">Contact</a>
+		</li>
 		<button alt="night-light" on:click={toggleDarkMode}>
 			<ThemeIcon style="hover:opacity-70 hover:cursor-pointer" width={40} />
 		</button>
@@ -71,6 +74,9 @@
 					</li>
 					<li>
 						<a class="button" href="/rules">Règles</a>
+					</li>
+					<li>
+						<a class="button" href="/contact">Contact</a>
 					</li>
 				</div>
 				<div class="flex flex-row items-center gap-5 text-xl text-primary dark:text-secondary">
