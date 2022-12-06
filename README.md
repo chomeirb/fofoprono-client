@@ -1,3 +1,5 @@
+Fofoprono est une webapp sur laquelle vous pourrez saisir vos pronostics de la coupe du monde 2022 et voir qui de vous ou vos proches est le plus fin connaisseur !
+
 # create-svelte
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).

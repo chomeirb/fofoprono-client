@@ -22,7 +22,7 @@
 		submitting = true;
 
 		try {
-			const body = JSON.stringify([id, password]);
+			const body = JSON.stringify([id.trim(), password]);
 			const res = await fetch(`${PUBLIC_API_URL}/login`, {
 				method: 'POST',
 				credentials: 'include',

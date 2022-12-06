@@ -23,7 +23,7 @@
 		submitting = true;
 
 		try {
-			const body = JSON.stringify({ name, mail, password });
+			const body = JSON.stringify({ name: name.trim(), mail, password });
 			const res = await fetch(`${PUBLIC_API_URL}/signup`, {
 				method: 'POST',
 				headers: {

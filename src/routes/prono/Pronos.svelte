@@ -3,7 +3,7 @@
 
 	import { GamesDisplay, pronos } from '../components/Games';
 	import { getGames } from '../fetchGames';
-	import { games } from '../store';
+	import { games, session } from '../store';
 
 	let inputs: Record<number, [number, number]> = {};
 	games.subscribe(({ data }) => {
@@ -32,5 +32,9 @@
 </script>
 
 <form class="h-full" id="Pronos" on:submit|preventDefault={submit}>
-	<GamesDisplay pronoMode={true} games={$games} bind:inputs />
+	{#if $session.data}
+		<GamesDisplay games={$games} bind:inputs />
+	{:else}
+		<GamesDisplay games={$games} />
+	{/if}
 </form>

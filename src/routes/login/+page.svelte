@@ -1,16 +1,24 @@
 <script lang="ts">
 	import Form from './Form.svelte';
+	import { session } from '../store';
+	import { goto } from '$app/navigation';
+
+	if ($session.data) {
+		goto('/prono');
+	}
 
 	let result = '';
 </script>
 
-<div class="flex h-full w-full flex-col items-center justify-start pt-[3%]">
-	<div class="flex h-[10%] w-full max-w-xl flex-row items-center text-4xl m12:justify-center">
-		<p class="font-bold">CONNEXION</p>
+{#if !$session.data}
+	<div class="flex h-full w-full flex-col items-center justify-start pt-[3%]">
+		<div class="flex h-[10%] w-full max-w-xl flex-row items-center text-4xl m12:justify-center">
+			<p class="font-bold">CONNEXION</p>
+		</div>
+		<div class="flex w-full max-w-xl flex-col items-center gap-5 overflow-auto rounded-xl py-8 px-20 text-2xl shadow-in m12:w-full m12:px-5">
+			<Form bind:result />
+			<p class="rounded px-5 text-center text-3xl font-bold">{result}</p>
+			<a href="/signup" class="rounded px-5 text-center text-xl underline hover:opacity-70">Pas encore de compte ?</a>
+		</div>
 	</div>
-	<div class="flex w-full max-w-xl flex-col items-center gap-5 overflow-auto rounded-xl py-8 px-20 text-2xl shadow-in m12:w-full m12:px-5">
-		<Form bind:result />
-		<p class="rounded px-5 text-center text-3xl font-bold">{result}</p>
-		<a href="/signup" class="rounded px-5 text-center text-xl underline hover:opacity-70">Pas encore de compte ?</a>
-	</div>
-</div>
+{/if}
