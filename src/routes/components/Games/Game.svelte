@@ -131,13 +131,13 @@
 					</p>
 
 					<p class="w-1/3 cursor-default text-center {!pointsGain[1] || resultColorText}">
-						<Tooltip tooltip={pointsGain[1] ? displayOdds(game.odds_home) : displayPotentialPoints(pointsPotential[1])}>
+						<Tooltip tooltip={pointsGain[1] ? displayOdds(game.odds_draw) : displayPotentialPoints(pointsPotential[1])}>
 							{pointsGain[1] || game.odds_draw.toPrecision(3)}
 						</Tooltip>
 					</p>
 
 					<p class="w-1/3 cursor-default text-center {!pointsGain[2] || resultColorText}">
-						<Tooltip tooltip={pointsGain[2] ? displayOdds(game.odds_home) : displayPotentialPoints(pointsPotential[2])}>
+						<Tooltip tooltip={pointsGain[2] ? displayOdds(game.odds_away) : displayPotentialPoints(pointsPotential[2])}>
 							{pointsGain[2] || game.odds_away.toPrecision(3)}
 						</Tooltip>
 					</p>
