@@ -16,13 +16,13 @@
 
 	const past = isPast(game.time);
 
-	const resultColorBorder = prono.result ? `${getResultColorBorder(prono.result)}` : `border-primary dark:border-secondary ${past ? '' : 'border-opacity-30 dark:border-opacity-30'}`;
-	const resultColorText = prono.result ? `${getResultColorText(prono.result)}` : 'text-primary dark:text-secondary';
+	const [resultColorBorder, resultColorText] = getResultColors(prono.result, past);
 
 	const FlagHome = Teams[game.team_home.replace(/[\s+\-]/g, '') as keyof typeof Teams] ?? null;
 	const FlagAway = Teams[game.team_away.replace(/[\s+\-]/g, '') as keyof typeof Teams] ?? null;
 
-	const pointsPotential = potentialPoints(game);
+	const odds: [number, number, number] = [game.odds_home, game.odds_draw, game.odds_away];
+	const pointsPotential = potentialPoints(odds, game.stage);
 	const pointsGain = userPoints(pointsPotential, prono.prediction?.prediction_home, prono.prediction?.prediction_away, prono.result);
 
 	$: if (!input) animate = !animate;
@@ -40,25 +40,16 @@
 		});
 	}
 
-	function getResultColorBorder(result: PredictionResult) {
+	function getResultColors(result: PredictionResult, pastGame: boolean) {
 		switch (result) {
 			case PredictionResult.Exact:
-				return 'border-green-500';
+				return ['border-green-500', 'text-green-500'];
 			case PredictionResult.Correct:
-				return 'border-yellow-500';
+				return ['border-yellow-500', 'text-yellow-500'];
 			case PredictionResult.Wrong:
-				return 'border-red-500';
-		}
-	}
-
-	function getResultColorText(result: PredictionResult) {
-		switch (result) {
-			case PredictionResult.Exact:
-				return 'text-green-500';
-			case PredictionResult.Correct:
-				return 'text-yellow-500';
-			case PredictionResult.Wrong:
-				return 'text-red-500';
+				return ['border-red-500', 'text-red-500'];
+			default:
+				return [`border-primary dark:border-secondary ${pastGame ? '' : 'border-opacity-30 dark:border-opacity-30'}`, 'text-primary dark:text-secondary'];
 		}
 	}
 </script>
@@ -77,13 +68,13 @@
 			<div class="flex w-[40%] min-w-[20rem] items-center justify-between pt-2 text-center m8:w-full m8:pt-0 m8:pb-4">
 				<div class="order-first flex w-24 flex-col items-center gap-2 m8:text-sm">
 					<div class="rounded-xl bg-primary p-1 dark:bg-secondary">
-						<img src={FlagHome} alt="Logo {game.team_home}" class="h-[50px] w-[75px] rounded-lg object-cover" />
+						<img src={FlagHome} alt="Flag {game.team_home}" class="h-[50px] w-[75px] rounded-lg object-cover" />
 					</div>
 					<p class="truncate">{game.team_home}</p>
 				</div>
 				<div class="order-last flex w-24 flex-col items-center gap-2 m8:text-sm">
 					<div class="rounded-xl bg-primary p-1 dark:bg-secondary">
-						<img src={FlagAway} alt="Logo {game.team_away}" class="h-[50px] w-[75px] rounded-lg object-cover" />
+						<img src={FlagAway} alt="Flag {game.team_away}" class="h-[50px] w-[75px] rounded-lg object-cover" />
 					</div>
 					<p class="truncate">{game.team_away}</p>
 				</div>
@@ -125,23 +116,13 @@
 
 			<div class="flex w-[30%] place-content-end m8:w-full">
 				<div class="flex w-2/3 min-w-[10rem] divide-x-[3px] divide-primary rounded-md border-[3px] border-primary dark:divide-secondary dark:border-secondary m8:w-full">
-					<p class="w-1/3 cursor-default text-center {pointsGain[0] ? resultColorText : ''}">
-						<Tooltip tooltip={displayPotentialPoints(pointsPotential[0]) + (pointsGain[0] ? ' ' + displayOdds(game.odds_home) : '')}>
-							{pointsGain[0] || game.odds_home.toPrecision(3)}
-						</Tooltip>
-					</p>
-
-					<p class="w-1/3 cursor-default text-center {pointsGain[1] ? resultColorText : ''}">
-						<Tooltip tooltip={displayPotentialPoints(pointsPotential[1]) + (pointsGain[1] ? ' ' + displayOdds(game.odds_draw) : '')}>
-							{pointsGain[1] || game.odds_draw.toPrecision(3)}
-						</Tooltip>
-					</p>
-
-					<p class="w-1/3 cursor-default text-center {pointsGain[2] ? resultColorText : ''}">
-						<Tooltip tooltip={displayPotentialPoints(pointsPotential[2]) + (pointsGain[2] ? ' ' + displayOdds(game.odds_away) : '')}>
-							{pointsGain[2] || game.odds_away.toPrecision(3)}
-						</Tooltip>
-					</p>
+					{#each odds as odd, index}
+						<p class="w-1/3 cursor-default text-center {pointsGain[index] ? resultColorText : ''}">
+							<Tooltip tooltip={displayPotentialPoints(pointsPotential[index]) + (pointsGain[index] ? ' ' + displayOdds(odd) : '')}>
+								{pointsGain[index] || odd.toPrecision(3)}
+							</Tooltip>
+						</p>
+					{/each}
 				</div>
 			</div>
 		</div>

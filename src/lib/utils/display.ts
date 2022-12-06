@@ -68,10 +68,9 @@ type Points = {
 };
 
 // Returned array always of length 3
-export function potentialPoints(game: Game): Points[] {
-	let odds = [game.odds_home, game.odds_draw, game.odds_away];
+export function potentialPoints(odds: [number, number, number], stage: Stage): Points[] {
 	let points;
-	switch (game.stage) {
+	switch (stage) {
 		case Stage.Group:
 			points = odds.map((odd) => odd * 8);
 			break;
@@ -107,7 +106,7 @@ export function displayOdds(odds: number): string {
 
 // Returned array always of length 3
 export function userPoints(potentialPoints: Points[], score_home: number, score_away: number, result: PredictionResult): string[] {
-	let gain = ['', '', ''];
+	let gain = potentialPoints.map(() => '');
 	if (result) {
 		const i = 1 - Math.sign(score_home - score_away);
 		gain[i] = `+${resultToPoints(potentialPoints[i], result)}`;
