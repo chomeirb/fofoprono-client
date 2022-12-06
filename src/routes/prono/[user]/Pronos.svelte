@@ -20,5 +20,5 @@
 </script>
 
 <div class="h-full">
-	<GamesDisplay pronoMode={true} {games} />
+	<GamesDisplay {games} />
 </div>

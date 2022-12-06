@@ -12,8 +12,6 @@
 	export let games: ResponseResult<[PronoResult, Game][]>;
 	export let inputs: Record<number, [number, number]> = {};
 
-	export let pronoMode: boolean;
-
 	let queryTeam = getQueryParamsStore('team');
 	let queryStage = getQueryParamsStore('stage');
 	let queryFrom = getQueryParamsStore('from');
@@ -53,11 +51,7 @@
 			<ul class="flex h-full w-full flex-col gap-2 px-5 py-2 m8:px-2">
 				{#each filtered as [prono, game] (game.id)}
 					<div animate:flip={{ duration: 500 }} in:fade>
-						{#if pronoMode}
-							<PronoDisplay {prono} {game} bind:input={inputs[game.id]} />
-						{:else}
-							<PronoDisplay {game} />
-						{/if}
+						<PronoDisplay {prono} {game} bind:input={inputs[game.id]} />
 					</div>
 				{/each}
 			</ul>

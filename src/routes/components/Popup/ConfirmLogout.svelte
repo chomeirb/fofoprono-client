@@ -11,7 +11,7 @@
 			});
 
 			if (res.ok) {
-				window.location.href = '/home';
+				window.location.href = '/prono';
 			}
 		} catch (err) {
 			console.error(err);

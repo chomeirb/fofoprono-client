@@ -9,21 +9,21 @@
 	import Tooltip from '../Tooltip.svelte';
 
 	export let input: [number, number] = null!;
-	export let prono: PronoResult = null!;
+	export let prono: PronoResult;
 	export let game: Game;
 
 	let animate: boolean;
 
 	const past = isPast(game.time);
 
-	const resultColorBorder = prono?.result ? `${getResultColorBorder(prono.result)}` : `border-primary dark:border-secondary ${past ? '' : 'border-opacity-30 dark:border-opacity-30'}`;
-	const resultColorText = prono?.result ? `${getResultColorText(prono.result)}` : 'text-primary dark:text-secondary';
+	const resultColorBorder = prono.result ? `${getResultColorBorder(prono.result)}` : `border-primary dark:border-secondary ${past ? '' : 'border-opacity-30 dark:border-opacity-30'}`;
+	const resultColorText = prono.result ? `${getResultColorText(prono.result)}` : 'text-primary dark:text-secondary';
 
 	const FlagHome = Teams[game.team_home.replace(/[\s+\-]/g, '') as keyof typeof Teams] ?? null;
 	const FlagAway = Teams[game.team_away.replace(/[\s+\-]/g, '') as keyof typeof Teams] ?? null;
 
 	const pointsPotential = potentialPoints(game);
-	const pointsGain = userPoints(pointsPotential, prono?.prediction?.prediction_home, prono?.prediction?.prediction_away, prono?.result);
+	const pointsGain = userPoints(pointsPotential, prono.prediction?.prediction_home, prono.prediction?.prediction_away, prono.result);
 
 	$: if (!input) animate = !animate;
 
@@ -98,7 +98,7 @@
 								max="20"
 								bind:value={input[0]}
 								class="w-7 rounded bg-primary text-center text-secondary dark:bg-secondary dark:text-primary"
-								placeholder={$pronos[game.id]?.prediction_home.toString() ?? prono?.prediction?.prediction_home.toString() ?? '...'} />
+								placeholder={$pronos[game.id]?.prediction_home.toString() ?? prono.prediction?.prediction_home.toString() ?? '...'} />
 							<p class="text-center">−</p>
 							<input
 								type="number"
@@ -107,8 +107,8 @@
 								max="20"
 								bind:value={input[1]}
 								class="w-7 rounded bg-primary text-center text-secondary dark:bg-secondary dark:text-primary"
-								placeholder={$pronos[game.id]?.prediction_away.toString() ?? prono?.prediction?.prediction_away.toString() ?? '...'} />
-						{:else if prono?.prediction}
+								placeholder={$pronos[game.id]?.prediction_away.toString() ?? prono.prediction?.prediction_away.toString() ?? '...'} />
+						{:else if prono.prediction}
 							<!-- Display mode -->
 							<p class="w-7 rounded bg-primary text-center text-secondary dark:bg-secondary dark:text-primary">{prono.prediction.prediction_home}</p>
 							<p class="text-center">−</p>

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import FofoPronoLogo from './components/icons/Fofoprono.svelte';
-	import { disableCurtain, enableCurtain, session } from './store';
+	import { session } from './store';
 	import LogoutIcon from './components/icons/Logout.svelte';
 	import ThemeIcon from './components/icons/Theme.svelte';
 	import PopupConfirmLogout from './components/Popup/ConfirmLogout.svelte';
@@ -33,12 +33,9 @@
 
 <header class="flex h-[90px] w-full flex-row justify-center text-3xl text-secondary shadow-lg dark:text-primary m8:h-[60px]">
 	<ul
-		class={`m8 fixed z-40 hidden h-[calc(100vh_-_180px)] w-[100vw] flex-col justify-center gap-10 overflow-y-auto bg-secondary text-primary shadow-in dark:bg-primary dark:text-secondary m12:flex m8:h-[calc(100vh_-_90px)] ${
+		class={`m8 fixed z-40 mt-[90px] hidden h-[calc(100vh_-_180px)] w-[100vw] flex-col items-center justify-center gap-10 overflow-y-auto bg-secondary text-primary shadow-in duration-500 dark:bg-primary dark:text-secondary m12:flex m8:mt-[60px] m8:h-[calc(100vh_-_90px)] ${
 			!hamIsOpen ? 'translate-x-[100vw]' : ''
-		} mt-[90px] items-center duration-500 m8:mt-[60px]`}>
-		<li class="button flex w-4/6 flex-col items-center">
-			<a on:click={() => (hamIsOpen = false)} href="/home">Accueil</a>
-		</li>
+		}`}>
 		<li class="button flex w-4/6 flex-col items-center">
 			<a on:click={() => (hamIsOpen = false)} href="/prono">Pronostics</a>
 		</li>
@@ -57,15 +54,12 @@
 	</ul>
 
 	<div class="flex h-full w-full max-w-8xl flex-row items-center justify-center gap-5 px-3 m12:justify-between">
-		<a href="/home" class="h-[50%] w-[50px] duration-200 hover:-rotate-12 m8:w-[35px]" on:click={enableCurtain}>
+		<a href="/prono" class="h-[50%] w-[50px] duration-200 hover:-rotate-12 m8:w-[35px]">
 			<FofoPronoLogo />
 		</a>
 		<nav class="flex h-[90%] w-full flex-row items-center justify-center m12:w-auto">
 			<ul class="flex h-full w-full flex-row items-center justify-between gap-5 dark:text-secondary">
 				<div class="flex h-full flex-row items-center gap-5 m12:hidden">
-					<li>
-						<a class="button" on:click={disableCurtain} href="/home">Accueil</a>
-					</li>
 					<li>
 						<a class="button" href="/prono">Pronostics</a>
 					</li>
