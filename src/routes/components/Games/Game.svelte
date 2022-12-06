@@ -125,20 +125,20 @@
 
 			<div class="flex w-[30%] place-content-end m8:w-full">
 				<div class="flex w-2/3 min-w-[10rem] divide-x-[3px] divide-primary rounded-md border-[3px] border-primary dark:divide-secondary dark:border-secondary m8:w-full">
-					<p class="w-1/3 cursor-default text-center {!pointsGain[0] || resultColorText}">
-						<Tooltip tooltip={pointsGain[0] ? displayPotentialPoints(pointsPotential[0]) + ' ' + displayOdds(game.odds_home) : displayPotentialPoints(pointsPotential[0])}>
+					<p class="w-1/3 cursor-default text-center {pointsGain[0] ? resultColorText : ''}">
+						<Tooltip tooltip={displayPotentialPoints(pointsPotential[0]) + (pointsGain[0] ? ' ' + displayOdds(game.odds_home) : '')}>
 							{pointsGain[0] || game.odds_home.toPrecision(3)}
 						</Tooltip>
 					</p>
 
-					<p class="w-1/3 cursor-default text-center {!pointsGain[1] || resultColorText}">
-						<Tooltip tooltip={pointsGain[1] ? displayPotentialPoints(pointsPotential[1]) + ' ' + displayOdds(game.odds_draw) : displayPotentialPoints(pointsPotential[1])}>
+					<p class="w-1/3 cursor-default text-center {pointsGain[1] ? resultColorText : ''}">
+						<Tooltip tooltip={displayPotentialPoints(pointsPotential[1]) + (pointsGain[1] ? ' ' + displayOdds(game.odds_draw) : '')}>
 							{pointsGain[1] || game.odds_draw.toPrecision(3)}
 						</Tooltip>
 					</p>
 
-					<p class="w-1/3 cursor-default text-center {!pointsGain[2] || resultColorText}">
-						<Tooltip tooltip={pointsGain[2] ? displayPotentialPoints(pointsPotential[2]) + ' ' + displayOdds(game.odds_away) : displayPotentialPoints(pointsPotential[2])}>
+					<p class="w-1/3 cursor-default text-center {pointsGain[2] ? resultColorText : ''}">
+						<Tooltip tooltip={displayPotentialPoints(pointsPotential[2]) + (pointsGain[2] ? ' ' + displayOdds(game.odds_away) : '')}>
 							{pointsGain[2] || game.odds_away.toPrecision(3)}
 						</Tooltip>
 					</p>
