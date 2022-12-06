@@ -4,7 +4,7 @@ import { PUBLIC_API_URL } from '$env/static/public';
 export async function storePlayers() {
 	try {
 		const response = await fetch(`${PUBLIC_API_URL}/ranking`, {
-			method: 'GET',
+			method: 'GET'
 		});
 
 		let result = {

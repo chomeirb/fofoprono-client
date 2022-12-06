@@ -15,7 +15,7 @@ export async function storeGames() {
 
 export async function getGames(user?: string) {
 	try {
-        const userPath = user ? `/${user}` : ''
+		const userPath = user ? `/${user}` : '';
 		const response = await fetch(`${PUBLIC_API_URL}/prono${userPath}`, {
 			method: 'GET',
 			credentials: 'include'
