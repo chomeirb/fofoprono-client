@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { displayStage, formatDate, formatTime, getMatchTime, isPast, potentialPoints, displayPotentialPoints, userPoints, displayOdds } from '$lib/utils/display';
+	import { displayStage, formatDate, formatTime, isPast, potentialPoints, displayPotentialPoints, userPoints, displayOdds } from '$lib/utils/display';
 	import { PredictionResult, type PronoResult } from '$lib/types/prono';
 	import type { Game } from '$lib/types/game';
 	import * as Teams from '$lib/assets/teams';
@@ -23,7 +23,7 @@
 	const FlagAway = Teams[game.team_away.replace(/[\s+\-]/g, '') as keyof typeof Teams] ?? null;
 
 	const pointsPotential = potentialPoints(game);
-	const pointsGain = userPoints(pointsPotential, game.score_home, game.score_away, prono?.result);
+	const pointsGain = userPoints(pointsPotential, prono?.prediction?.prediction_home, prono?.prediction?.prediction_away, prono?.result);
 
 	$: if (!input) animate = !animate;
 
@@ -65,15 +65,16 @@
 
 {#key animate}
 	<div transition:slide|local={{ duration: 1000, easing: quintOut }}>
-		<div class="flex items-center rounded-md border-[3px] m8:flex-col {resultColorBorder} justify-between p-2 text-lg font-semibold text-primary dark:text-secondary">
-			<div class="order-1 flex w-[30%] flex-row border-primary dark:border-secondary m8:w-full m8:border-b-2">
-				<p class="w-2/3 text-left">{formatDate(game.time)}</p>
-				<p class="w-1/3 text-center m8:text-right">{formatTime(game.time)}</p>
+		<div class="flex items-center justify-between rounded-md border-[3px] p-2 px-4 text-lg font-semibold text-primary dark:text-secondary m8:flex-col m8:px-2 {resultColorBorder}">
+			<div class="flex w-[30%] flex-row m8:w-full m8:flex-col">
+				<div class="flex w-1/2 flex-col border-primary dark:border-secondary m8:w-full m8:flex-row m8:border-b-2">
+					<p class="w-2/3 text-left">{formatDate(game.time)}</p>
+					<p class="w-1/3 text-left m8:text-right">{formatTime(game.time)}</p>
+				</div>
+				<p class="w-1/2 truncate text-left m8:w-full m8:text-center">{displayStage(game.stage)}</p>
 			</div>
 
-			<p class="order-4 w-[10%] truncate text-center m8:order-2 m8:w-full">{displayStage(game.stage)}</p>
-
-			<div class="order-3 flex w-[40%] min-w-[20rem] items-center justify-between pt-2 text-center m8:w-full m8:pt-0 m8:pb-4">
+			<div class="flex w-[40%] min-w-[20rem] items-center justify-between pt-2 text-center m8:w-full m8:pt-0 m8:pb-4">
 				<div class="order-first flex w-24 flex-col items-center gap-2 m8:text-sm">
 					<div class="rounded-xl bg-primary p-1 dark:bg-secondary">
 						<img src={FlagHome} alt="Logo {game.team_home}" class="h-[50px] w-[75px] rounded-lg object-cover" />
@@ -122,22 +123,22 @@
 				</div>
 			</div>
 
-			<div class="order-5 flex w-[20%] place-content-end m8:w-full">
-				<div class="flex w-3/4 min-w-[8rem] divide-x-[3px] divide-primary rounded-md border-[3px] border-primary dark:divide-secondary dark:border-secondary m8:w-full">
+			<div class="flex w-[30%] place-content-end m8:w-full">
+				<div class="flex w-2/3 min-w-[10rem] divide-x-[3px] divide-primary rounded-md border-[3px] border-primary dark:divide-secondary dark:border-secondary m8:w-full">
 					<p class="w-1/3 cursor-default text-center {!pointsGain[0] || resultColorText}">
-						<Tooltip tooltip={pointsGain[0] ? displayOdds(game.odds_home) : displayPotentialPoints(pointsPotential[0])}>
+						<Tooltip tooltip={pointsGain[0] ? displayPotentialPoints(pointsPotential[0]) + ' ' + displayOdds(game.odds_home) : displayPotentialPoints(pointsPotential[0])}>
 							{pointsGain[0] || game.odds_home.toPrecision(3)}
 						</Tooltip>
 					</p>
 
 					<p class="w-1/3 cursor-default text-center {!pointsGain[1] || resultColorText}">
-						<Tooltip tooltip={pointsGain[1] ? displayOdds(game.odds_draw) : displayPotentialPoints(pointsPotential[1])}>
+						<Tooltip tooltip={pointsGain[1] ? displayPotentialPoints(pointsPotential[1]) + ' ' + displayOdds(game.odds_draw) : displayPotentialPoints(pointsPotential[1])}>
 							{pointsGain[1] || game.odds_draw.toPrecision(3)}
 						</Tooltip>
 					</p>
 
 					<p class="w-1/3 cursor-default text-center {!pointsGain[2] || resultColorText}">
-						<Tooltip tooltip={pointsGain[2] ? displayOdds(game.odds_away) : displayPotentialPoints(pointsPotential[2])}>
+						<Tooltip tooltip={pointsGain[2] ? displayPotentialPoints(pointsPotential[2]) + ' ' + displayOdds(game.odds_away) : displayPotentialPoints(pointsPotential[2])}>
 							{pointsGain[2] || game.odds_away.toPrecision(3)}
 						</Tooltip>
 					</p>
