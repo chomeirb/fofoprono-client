@@ -9,7 +9,7 @@
 	import { flip } from 'svelte/animate';
 	import { fade } from 'svelte/transition';
 
-	export let games: ResponseResult<[prono: PronoResult, game: Game][]>;
+	export let games: ResponseResult<[PronoResult, Game][]>;
 	export let inputs: Record<number, [number, number]> = {};
 
 	export let pronoMode: boolean;
@@ -49,8 +49,8 @@
 			</div>
 		</div>
 	{:else}
-		<div class="mt-4 flex h-full w-full flex-col items-center overflow-y-auto rounded-md shadow-in m12:overflow-x-hidden m8:mt-0 m8:border-t">
-			<ul class="flex h-full w-full flex-col gap-5 px-5 py-4">
+		<div class="mt-4 flex h-full w-full flex-col items-center overflow-y-auto overflow-x-hidden rounded-md shadow-in m8:mt-0 m8:border-t">
+			<ul class="flex h-full w-full flex-col gap-2 px-5 py-2 m8:px-2">
 				{#each filtered as [prono, game] (game.id)}
 					<div animate:flip={{ duration: 500 }} in:fade>
 						{#if pronoMode}

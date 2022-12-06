@@ -1,6 +1,6 @@
 import type { Game, SystemTime } from '$lib/types/game';
 import { Stage } from '$lib/types/game';
-import type { PronoResult } from '$lib/types/prono';
+import { PredictionResult } from '$lib/types/prono';
 
 export function isPast(time: SystemTime): boolean {
 	return new Date(time.secs_since_epoch * 1000) < new Date();
@@ -62,41 +62,66 @@ export function displayStage(stage: Stage): string {
 	}
 }
 
-export function displayPoints(game: Game, pronoResult: PronoResult): string {
-	if (pronoResult == null || pronoResult.result == 'Wrong') {
-		return '+ 0';
-	}
-	let basePoints = 0;
-	switch (Math.sign(pronoResult.prediction.prediction_home - pronoResult.prediction.prediction_away)) {
-		case 1:
-			basePoints = game.odds_home;
-			break;
-		case 0:
-			basePoints = game.odds_draw;
-			break;
-		case -1:
-			basePoints = game.odds_away;
-			break;
-	}
+type Points = {
+	correct: number;
+	exact: number;
+};
+
+// Returned array always of length 3
+export function potentialPoints(game: Game): Points[] {
+	let odds = [game.odds_home, game.odds_draw, game.odds_away];
+	let points;
 	switch (game.stage) {
 		case Stage.Group:
-			basePoints *= 8;
+			points = odds.map((odd) => odd * 8);
 			break;
 		case Stage.Sixteen:
-			basePoints *= 12;
+			points = odds.map((odd) => odd * 12);
 			break;
 		case Stage.Quarter:
-			basePoints *= 16;
+			points = odds.map((odd) => odd * 16);
 			break;
 		case Stage.Semi:
-			basePoints *= 20;
+			points = odds.map((odd) => odd * 20);
 			break;
 		case Stage.Final:
-			basePoints *= 30;
+			points = odds.map((odd) => odd * 30);
 			break;
 	}
-	if (pronoResult.result == 'Exact') {
-		basePoints *= 2;
+
+	return points.map((point) => {
+		return {
+			correct: Math.round(point),
+			exact: Math.round(point * 2)
+		};
+	});
+}
+
+export function displayPotentialPoints(points: Points): string {
+	return `Partiel : ${points.correct} pts Exact : ${points.exact} pts`;
+}
+
+export function displayOdds(odds: number): string {
+	return `Côte : ${odds.toPrecision(3)}`;
+}
+
+// Returned array always of length 3
+export function userPoints(potentialPoints: Points[], score_home: number, score_away: number, result: PredictionResult): string[] {
+	let gain = ['', '', ''];
+	if (result) {
+		const i = 1 - Math.sign(score_home - score_away);
+		gain[i] = `+${resultToPoints(potentialPoints[i], result)}`;
 	}
-	return '+ ' + Math.round(basePoints).toString();
+	return gain;
+}
+
+function resultToPoints(potentialPoints: Points, result: PredictionResult): number {
+	switch (result) {
+		case PredictionResult.Exact:
+			return potentialPoints.exact;
+		case PredictionResult.Correct:
+			return potentialPoints.correct;
+		case PredictionResult.Wrong:
+			return 0;
+	}
 }

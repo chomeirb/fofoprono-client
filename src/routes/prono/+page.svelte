@@ -13,10 +13,7 @@
 	{:else}
 		<div class="flex h-[10%] w-full max-w-8xl flex-row items-center justify-between px-3 text-4xl m12:px-3 m12:text-xl m8:h-[8%]">
 			<p class="font-bold m12:text-xl">PRONOSTIQUER</p>
-			<button
-				type="submit"
-				form="Pronos"
-				class="flex flex-row items-center gap-5 button ">
+			<button type="submit" form="Pronos" class="button flex flex-row items-center gap-5 ">
 				<p class="m8:hidden">Valider</p>
 				<Checkmark height={25} /></button>
 		</div>

@@ -16,7 +16,7 @@
 				return;
 			}
 		} else {
-			if (!(message)) {
+			if (!message) {
 				result = 'Veuillez saisir un message !';
 				return;
 			}
@@ -47,9 +47,9 @@
 	};
 </script>
 
-<form class="flex flex-col text-primary w-full m8:h-full" on:submit|preventDefault={submit} on:input={() => (result = '')}>
+<form class="flex w-full flex-col text-primary m8:h-full" on:submit|preventDefault={submit} on:input={() => (result = '')}>
 	{#if !$session.data}
-		<div class="flex flex-row m8:flex-col gap-5 mb-5">
+		<div class="mb-5 flex flex-row gap-5 m8:flex-col">
 			<div class="flex w-full flex-col justify-start">
 				<p class="font-bold text-primary dark:text-secondary">Nom</p>
 				<input
@@ -68,11 +68,11 @@
 			</div>
 		</div>
 	{/if}
-	<div class="flex w-full m8:h-full gap-5 flex-col justify-between">
+	<div class="flex w-full flex-col justify-between gap-5 m8:h-full">
 		<div class="flex flex-col m8:h-full">
 			<p class="font-bold text-primary dark:text-secondary">Message</p>
-			<div class="flex-rox m8:h-full flex rounded border border-primary shadow-lg dark:border-secondary">
-				<textarea type="text" class="h-40 m8:h-full w-full bg-primary bg-opacity-20 px-2 dark:bg-white dark:bg-opacity-10 dark:text-secondary " bind:value={message} />
+			<div class="flex-rox flex rounded border border-primary shadow-lg dark:border-secondary m8:h-full">
+				<textarea type="text" class="h-40 w-full bg-primary bg-opacity-20 px-2 dark:bg-white dark:bg-opacity-10 dark:text-secondary m8:h-full " bind:value={message} />
 			</div>
 		</div>
 		<div class="flex w-full flex-col items-center">
