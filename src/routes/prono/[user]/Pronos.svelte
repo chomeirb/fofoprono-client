@@ -5,7 +5,7 @@
 	import type { ResponseResult } from '$lib/types/returnable';
 	import { onMount } from 'svelte';
 	import GamesDisplay from '../../components/Games/GamesDisplay.svelte';
-	import { getGames } from './fetchPronos';
+	import { getGames } from '../../fetchGames';
 
 	let games: ResponseResult<[PronoResult, Game][]> = {
 		status: undefined!,

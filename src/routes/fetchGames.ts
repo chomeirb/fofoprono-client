@@ -13,9 +13,10 @@ export async function storeGames() {
 	}
 }
 
-export async function getGames() {
+export async function getGames(user?: string) {
 	try {
-		const response = await fetch(`${PUBLIC_API_URL}/prono`, {
+        const userPath = user ? `/${user}` : ''
+		const response = await fetch(`${PUBLIC_API_URL}/prono${userPath}`, {
 			method: 'GET',
 			credentials: 'include'
 		});
@@ -29,9 +30,9 @@ export async function getGames() {
 		if (response.ok) {
 			result.data = await response.json();
 		}
-
 		return result;
 	} catch (error: any) {
+		console.error(error);
 		return {
 			status: 500,
 			text: error.toString(),
