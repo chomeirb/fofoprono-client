@@ -72,6 +72,7 @@
 					{#each filteredSorted as player}
 						<PlayerDisplay {player} />
 					{/each}
+					<div class="mt-20">&nbsp;</div>
 				</ul>
 			</div>
 		</div>
