@@ -4,6 +4,7 @@
 	import LogoutIcon from './components/icons/Logout.svelte';
 	import ThemeIcon from './components/icons/Theme.svelte';
 	import PopupConfirmLogout from './components/Popup/ConfirmLogout.svelte';
+	import Footer from './Footer.svelte';
 
 	let hamIsOpen = false;
 	let confirmLogout = false;
@@ -32,27 +33,6 @@
 </script>
 
 <header class="flex h-[90px] w-full flex-row justify-center text-3xl text-secondary shadow-lg dark:text-primary m8:h-[60px]">
-	<ul
-		class={`m8 fixed z-40 mt-[90px] hidden h-[calc(100vh_-_180px)] w-[100vw] flex-col items-center justify-center gap-10 overflow-y-auto bg-secondary text-primary shadow-in duration-500 dark:bg-primary dark:text-secondary m12:flex m8:mt-[60px] m8:h-[calc(100vh_-_90px)] ${
-			!hamIsOpen ? 'translate-x-[100vw]' : ''
-		}`}>
-		<li class="button flex w-4/6 flex-col items-center">
-			<a on:click={() => (hamIsOpen = false)} href="/prono">Pronostics</a>
-		</li>
-		<li class="button flex w-4/6 flex-col items-center">
-			<a on:click={() => (hamIsOpen = false)} href="/ranking">Classement</a>
-		</li>
-		<li class="button flex w-4/6 flex-col items-center">
-			<a on:click={() => (hamIsOpen = false)} href="/rules">Règles</a>
-		</li>
-		<li class="button flex w-4/6 flex-col items-center">
-			<a on:click={() => (hamIsOpen = false)} href="/contact">Contact</a>
-		</li>
-		<button alt="night-light" on:click={toggleDarkMode}>
-			<ThemeIcon style="hover:opacity-70 hover:cursor-pointer" width={40} />
-		</button>
-	</ul>
-
 	<div class="flex h-full w-full max-w-8xl flex-row items-center justify-center gap-5 px-3 m12:justify-between">
 		<a href="/prono" class="h-[50%] w-[50px] duration-200 hover:-rotate-12 m8:w-[35px]">
 			<FofoPronoLogo />
@@ -98,6 +78,29 @@
 			</ul>
 		</nav>
 	</div>
+	<ul
+		class={`fixed z-40 hidden w-[100vw] flex-col items-center justify-center gap-10 overflow-y-auto bg-secondary text-primary shadow-in duration-500 dark:bg-primary dark:text-secondary m12:flex top-[90px] m8:top-[60px] h-[calc(100%_-_60px)] ${
+			!hamIsOpen ? 'translate-x-[100vw]' : ''
+		}`}>
+		<li class="button flex w-4/6 flex-col items-center hover:cursor-pointer">
+			<a on:click={() => (hamIsOpen = false)} href="/prono">Pronostics</a>
+		</li>
+		<li class="button flex w-4/6 flex-col items-center hover:cursor-pointer">
+			<a on:click={() => (hamIsOpen = false)} href="/ranking">Classement</a>
+		</li>
+		<li class="button flex w-4/6 flex-col items-center hover:cursor-pointer">
+			<a on:click={() => (hamIsOpen = false)} href="/rules">Règles</a>
+		</li>
+		<li class="button flex w-4/6 flex-col items-center hover:cursor-pointer">
+			<a on:click={() => (hamIsOpen = false)} href="/contact">Contact</a>
+		</li>
+		<button alt="night-light" on:click={toggleDarkMode}>
+			<ThemeIcon style="hover:opacity-70 hover:cursor-pointer" width={40} />
+		</button>
+		<div>
+			<Footer />
+		</div>
+	</ul>
 </header>
 
 {#if confirmLogout}

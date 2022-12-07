@@ -4,8 +4,8 @@
 	import ChomeirbIcon from './components/icons/Chomeirb.svelte';
 </script>
 
-<div class="flex h-[90px] w-full flex-row items-center justify-around text-primary shadow-top dark:text-secondary m8:flex-col">
-	<div class="flex flex-row items-center justify-end m8:w-full m8:justify-center m8:text-center m6:flex-col">
+<div class="flex h-[90px] m12:pt-20 m12:h-min w-full flex-row items-center justify-around text-primary shadow-top m12:shadow-none dark:text-secondary m12:flex-col m12:gap-5">
+	<div class="m12:text-xl m6:text-lg flex flex-row items-center justify-end m8:w-full m8:justify-center m8:text-center m6:flex-col">
 		<div class="flex flex-row">
 			<p>© 2022&nbsp;</p>
 			<a href="https://github.com/fboitel" class="underline" target="_blank" rel="noreferrer">fboitel</a>/<a href="https://github.com/canleskis" class="underline" target="_blank" rel="noreferrer"

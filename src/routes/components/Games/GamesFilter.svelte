@@ -11,8 +11,8 @@
 	export let requiredTo = false;
 </script>
 
-<div class="mt-4 flex h-min w-[90%] flex-col justify-start gap-3 rounded-md px-4 py-5 shadow-in m12:mt-0 m12:w-full m12:flex-row m12:justify-around m12:px-1 m12:py-2 m12:text-base">
-	<div class="flex w-full flex-col i2:w-[20%] i3:w-[20%] m8:w-12 m8:text-xs">
+<div class="mt-4 flex h-min w-[90%] flex-col justify-start gap-3 rounded-md px-4 py-5 shadow-in">
+	<div class="flex w-full flex-col">
 		<label for="from">Du</label>
 		<input
 			id="from"
@@ -21,20 +21,20 @@
 			bind:value={$queryFrom}
 			required={requiredFrom} />
 	</div>
-	<div class="flex w-full flex-col i2:w-[20%] i3:w-[20%] m8:w-12 m8:text-xs">
+	<div class="flex w-full flex-col">
 		<label for="to">Au</label>
 		<input
 			id="to"
 			type="date"
-			class="h-10 w-full rounded bg-primary bg-opacity-20 px-3 py-1 text-primary dark:bg-white dark:bg-opacity-10 dark:text-secondary m8:text-lg"
+			class="h-10 w-full rounded bg-primary bg-opacity-20 px-3 py-1 text-primary dark:bg-white dark:bg-opacity-10 dark:text-secondary"
 			bind:value={$queryTo}
 			required={requiredTo} />
 	</div>
-	<div class="flex w-full flex-col m12:w-[20%] m8:w-[33%] m8:text-xs">
+	<div class="flex w-full flex-col">
 		<label for="team">Équipe</label>
 		<input id="team" type="text" class="h-10 w-full rounded bg-primary bg-opacity-20 px-3 py-1 text-primary dark:bg-white dark:bg-opacity-10 dark:text-secondary" bind:value={$queryTeam} />
 	</div>
-	<div class="flex w-full flex-col m12:w-[20%] m8:w-[25%] m8:text-xs">
+	<div class="flex w-full flex-col">
 		<label for="stage">Étape</label>
 		<select id="stage" type="text" class="h-10 w-full rounded bg-primary bg-opacity-20 px-3 py-1 text-primary dark:bg-white dark:bg-opacity-10 dark:text-secondary" bind:value={$queryStage}>
 			<option class="bg-primary bg-opacity-20 dark:bg-opacity-90" value="">Tous</option>

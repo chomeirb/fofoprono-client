@@ -29,12 +29,14 @@
 			$games = $games;
 		}
 	};
+
+	export let showFilter: boolean;
 </script>
 
 <form class="h-full" id="Pronos" on:submit|preventDefault={submit}>
 	{#if $session.data}
-		<GamesDisplay games={$games} bind:inputs />
+		<GamesDisplay bind:showFilter games={$games} bind:inputs />
 	{:else}
-		<GamesDisplay games={$games} />
+		<GamesDisplay bind:showFilter games={$games} />
 	{/if}
 </form>
