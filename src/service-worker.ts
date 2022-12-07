@@ -91,12 +91,6 @@ worker.addEventListener('fetch', (event) => {
 			try {
 				const response = await fetch(request);
 
-                await caches.keys().then(function(keyList) {
-                    return Promise.all(keyList.map(function(key) {
-                      return caches.delete(key);
-                    }));
-                  })
-
 				// cache the response
 				console.debug('[ServiceWorker] caching response', request.url);
 				const cache = await caches.open(APP_CACHE_NAME);
