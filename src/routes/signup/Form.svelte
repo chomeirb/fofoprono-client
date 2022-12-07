@@ -83,7 +83,7 @@
 	<div class="mt-5 flex w-full flex-col items-center gap-5">
 		<input
 			type="submit"
-			class="rounded-3xl bg-primary bg-opacity-20 px-5 py-2 text-primary duration-200 hover:translate-x-6 hover:cursor-pointer dark:bg-secondary dark:bg-opacity-20 dark:text-secondary m12:w-5/6"
-			value={submitting ? 'Envoie...' : "M'inscrire ➔"} />
+			class="button"
+			value={submitting ? 'Envoi...' : "M'inscrire ➔"} />
 	</div>
 </form>
