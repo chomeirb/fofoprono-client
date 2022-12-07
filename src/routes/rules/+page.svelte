@@ -1,8 +1,8 @@
-<div class="flex w-full flex-col items-center justify-center px-3 pt-3 m8:justify-start m8:pt-0">
+<div class="flex w-full h-full flex-col items-center justify-center px-3 pt-3 m8:justify-start m8:pt-0">
 	<div class="flex h-[10%] w-full max-w-8xl flex-row items-center justify-start text-4xl m12:justify-center m8:py-2">
 		<p class="font-bold">RÈGLES DU JEU</p>
 	</div>
-	<div class="mt-5 mb-10 flex h-full w-full max-w-8xl flex-col justify-start gap-8 overflow-y-auto rounded-md p-8 px-10 text-2xl shadow-in m12:px-4 m12:text-lg m8:mt-0">
+	<div class="mt-5 m12:h-[90%] mb-10 flex h-full w-full max-w-8xl flex-col justify-start gap-8 overflow-y-auto rounded-md p-8 px-10 text-2xl shadow-in m12:px-4 m12:text-lg m8:mt-0">
 		<p>
 			● Un pronostic est <b>exact</b> lorsque celui-ci et le score à l'issue du match sont <b>égaux</b>. Il est <b>partiel</b> lorsque seulement le <b>vainqueur du match a été trouvé</b>. Il est
 			<b>faux</b> autrement ou si aucun pronostic n'a été soumis.
