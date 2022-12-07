@@ -32,8 +32,8 @@
 		class="flex h-[30vh] w-[50vw] flex-col justify-around rounded-3xl border-4 border-primary bg-secondary bg-opacity-100 p-10 text-center text-primary shadow-xl dark:border-secondary dark:bg-primary dark:text-secondary m12:w-[90vw] m12:p-3">
 		<p>Êtes-vous sûr de vouloir vous déconnecter&nbsp;?</p>
 		<div class="flex flex-row justify-between">
-			<button class="m-2 w-60 rounded-3xl bg-primary bg-opacity-20 p-2 text-primary hover:opacity-60 dark:bg-secondary dark:bg-opacity-10 dark:text-secondary" on:click={logout}>Oui</button>
-			<button class="m-2 w-60 rounded-3xl bg-primary bg-opacity-20 p-2 text-primary hover:opacity-60 dark:bg-secondary dark:bg-opacity-10 dark:text-secondary" on:click={hideFunction}>Annuler</button>
+			<button class="button" on:click={logout}>Oui</button>
+			<button class="button" on:click={hideFunction}>Annuler</button>
 		</div>
 	</div>
 </div>
