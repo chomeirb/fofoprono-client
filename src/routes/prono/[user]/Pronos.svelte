@@ -17,8 +17,10 @@
 		const user = $page.params.user;
 		games = await getGames(user);
 	});
+
+	export let showFilter: boolean;
 </script>
 
 <div class="h-full">
-	<GamesDisplay {games} />
+	<GamesDisplay bind:showFilter {games} />
 </div>

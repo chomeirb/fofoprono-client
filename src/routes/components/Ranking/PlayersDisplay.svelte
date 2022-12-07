@@ -2,10 +2,17 @@
 	import { getQueryParamsStore } from '../../queryParamsStore';
 	import PlayerDisplay from './Player.svelte';
 	import Filter from './PlayersFilter.svelte';
+	import FilterPopup from '../Popup/PlayerFilter.svelte';
 	import RankingBanner from './PlayersBanner.svelte';
 	import { SortType } from '$lib/types/sort';
 	import type { ResponseResult } from '$lib/types/returnable';
 	import type { RankedUser } from '$lib/types/player';
+
+	export let showFilter: boolean;
+
+	function hideFilter() {
+		showFilter = false;
+	}
 
 	export let players: ResponseResult<RankedUser[]>;
 
@@ -40,7 +47,9 @@
 </script>
 
 <div class="flex h-full w-full flex-row m12:flex m12:flex-col m12:items-center">
-	<Filter bind:queryPlayers />
+	<div class="flex m12:hidden">
+		<Filter bind:queryPlayers />
+	</div>
 	{#if players.text === 'LOADING'}
 		<div class="mt-4 flex h-full w-full place-content-center items-center overflow-y-auto shadow-in m12:overflow-x-hidden m8:mt-0 m8:border-t">
 			<p>Loading...</p>
@@ -63,8 +72,13 @@
 					{#each filteredSorted as player}
 						<PlayerDisplay {player} />
 					{/each}
+					<div class="mt-20">&nbsp;</div>
 				</ul>
 			</div>
 		</div>
 	{/if}
 </div>
+
+{#if showFilter}
+	<FilterPopup hideFunction={hideFilter} bind:queryPlayers />
+{/if}

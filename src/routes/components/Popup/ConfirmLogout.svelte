@@ -26,10 +26,10 @@
 	});
 </script>
 
-<div id="window" class="fixed z-50 flex h-[100vh] w-[100vw] flex-row items-center justify-center bg-primary bg-opacity-50 text-3xl text-secondary m12:text-xl">
+<div id="window" class="fixed bottom-0 left-0 z-50 flex h-[100vh] w-[100vw] flex-row items-center justify-center bg-primary bg-opacity-50 text-3xl text-secondary m12:text-xl">
 	<div
 		id="popup"
-		class="flex h-[30vh] w-[50vw] flex-col justify-around rounded-3xl border-4 border-primary bg-secondary bg-opacity-100 p-10 text-center text-primary shadow-xl dark:border-secondary dark:bg-primary dark:text-secondary m12:w-[90vw] m12:p-3">
+		class="flex gap-20 mx-4 flex-col justify-between rounded-3xl border-4 border-primary bg-secondary bg-opacity-100 p-10 text-center text-primary shadow-xl dark:border-secondary dark:bg-primary dark:text-secondary">
 		<p>Êtes-vous sûr de vouloir vous déconnecter&nbsp;?</p>
 		<div class="flex flex-row justify-between">
 			<button class="button" on:click={logout}>Oui</button>

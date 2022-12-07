@@ -2,8 +2,6 @@
 	import { UserType, type RankedUser } from '$lib/types/player';
 
 	export let player: RankedUser;
-
-	$: console.log(player.user_type === UserType.Current);
 </script>
 
 <a

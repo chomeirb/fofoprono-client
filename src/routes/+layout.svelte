@@ -30,16 +30,18 @@
 	</style>
 </head>
 
-<div class="flex h-[100vh] flex-col font-medium m8:h-[calc(100vh_+_90px)]">
+<div class="flex h-[100vh] flex-col font-medium">
 	{#if $session.text !== 'LOADING'}
 		<div transition:fade={{ duration: 250 }}>
 			<Header />
 
-			<main class="h-[calc(100vh_-_180px)] overflow-y-auto text-primary dark:text-secondary m8:h-[calc(100vh_-_60px)]">
+			<main class="h-[calc(100vh_-_180px)] text-primary dark:text-secondary m12:h-[calc(100vh_-_60px)]">
 				<slot />
 			</main>
 
-			<Footer />
+			<div class="m12:hidden">
+				<Footer />
+			</div>
 		</div>
 	{/if}
 </div>
