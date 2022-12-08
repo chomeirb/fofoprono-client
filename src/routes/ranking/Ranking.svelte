@@ -3,7 +3,6 @@
 	import { players } from '../store';
 
 	export let showFilter: boolean;
-
 </script>
 
 <div class="h-full">

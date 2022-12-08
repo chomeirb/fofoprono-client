@@ -4,7 +4,6 @@
 	export let style: string = '';
 </script>
 
-
 <svg
 	class="fill-primary dark:fill-secondary {style}"
 	{width}

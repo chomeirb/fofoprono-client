@@ -79,7 +79,7 @@
 		</nav>
 	</div>
 	<ul
-		class={`fixed z-40 hidden w-[100vw] flex-col items-center justify-center gap-10 overflow-y-auto bg-secondary text-primary shadow-in duration-500 dark:bg-primary dark:text-secondary m12:flex top-[90px] m8:top-[60px] h-[calc(100%_-_60px)] ${
+		class={`fixed top-[90px] z-40 hidden h-[calc(100%_-_60px)] w-[100vw] flex-col items-center justify-center gap-10 overflow-y-auto bg-secondary text-primary shadow-in duration-500 dark:bg-primary dark:text-secondary m12:flex m8:top-[60px] ${
 			!hamIsOpen ? 'translate-x-[100vw]' : ''
 		}`}>
 		<li class="button flex w-4/6 flex-col items-center hover:cursor-pointer">
