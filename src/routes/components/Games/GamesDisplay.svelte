@@ -61,8 +61,8 @@
 					<div animate:flip={{ duration: 500 }} in:fade>
 						<PronoDisplay {prono} {game} bind:input={inputs[game.id]} />
 					</div>
-					{/each}
-					<div class="mt-4">&nbsp;</div>
+				{/each}
+				<div class="mt-4">&nbsp;</div>
 			</ul>
 		</div>
 	{/if}

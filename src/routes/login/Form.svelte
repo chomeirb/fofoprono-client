@@ -78,9 +78,6 @@
 		</div>
 	</div>
 	<div class="mt-5 flex w-full flex-col items-center gap-5">
-		<input
-			type="submit"
-			class="button"
-			value={submitting ? 'Connexion...' : 'Connexion ➔'} />
+		<input type="submit" class="button" value={submitting ? 'Connexion...' : 'Connexion ➔'} />
 	</div>
 </form>

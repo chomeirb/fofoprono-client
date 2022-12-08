@@ -29,7 +29,7 @@
 <div id="window" class="fixed bottom-0 left-0 z-50 flex h-[100vh] w-[100vw] flex-row items-center justify-center bg-primary bg-opacity-50 text-3xl text-secondary m12:text-xl">
 	<div
 		id="popup"
-		class="flex gap-20 mx-4 flex-col justify-between rounded-3xl border-4 border-primary bg-secondary bg-opacity-100 p-10 text-center text-primary shadow-xl dark:border-secondary dark:bg-primary dark:text-secondary">
+		class="mx-4 flex flex-col justify-between gap-20 rounded-3xl border-4 border-primary bg-secondary bg-opacity-100 p-10 text-center text-primary shadow-xl dark:border-secondary dark:bg-primary dark:text-secondary">
 		<p>Êtes-vous sûr de vouloir vous déconnecter&nbsp;?</p>
 		<div class="flex flex-row justify-between">
 			<button class="button" on:click={logout}>Oui</button>

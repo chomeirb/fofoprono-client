@@ -5,7 +5,7 @@ export async function storePlayers() {
 	try {
 		const response = await fetch(`${PUBLIC_API_URL}/ranking`, {
 			method: 'GET',
-            credentials: 'include'
+			credentials: 'include'
 		});
 
 		let result = {
