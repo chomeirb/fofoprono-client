@@ -79,9 +79,9 @@
 					<p class="truncate">{game.team_away}</p>
 				</div>
 				<div class="flex w-24 flex-col items-center gap-2 font-bold">
-					<div class="flex w-full min-w-min flex-row justify-between text-2xl">
-						{#if !past && input}
-							<!-- Input mode -->
+					{#if !past && input}
+						<!-- Input mode -->
+						<div class="flex w-full min-w-min flex-row justify-between text-2xl">
 							<input
 								type="number"
 								inputmode="numeric"
@@ -99,13 +99,15 @@
 								bind:value={input[1]}
 								class="w-7 rounded bg-primary text-center text-secondary dark:bg-secondary dark:text-primary"
 								placeholder={$pronos[game.id]?.prediction_away.toString() ?? prono.prediction?.prediction_away.toString() ?? '...'} />
-						{:else if prono.prediction}
-							<!-- Display mode -->
+						</div>
+					{:else if prono.prediction}
+						<!-- Display mode -->
+						<div class="flex w-full min-w-min flex-row justify-between text-2xl">
 							<p class="w-7 rounded bg-primary text-center text-secondary dark:bg-secondary dark:text-primary">{prono.prediction.prediction_home}</p>
 							<p class="text-center">−</p>
 							<p class="w-7 rounded bg-primary text-center text-secondary dark:bg-secondary dark:text-primary">{prono.prediction.prediction_away}</p>
-						{/if}
-					</div>
+						</div>
+					{/if}
 					<div class="flex w-5/6 min-w-min flex-row justify-between text-center {resultColorText} {game.score_home == null || game.score_away == null ? 'invisible' : ''}">
 						<p class="w-5">{game.score_home}</p>
 						<p class="w-5">−</p>
