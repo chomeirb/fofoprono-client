@@ -57,6 +57,8 @@ export function displayStage(stage: Stage): string {
 			return 'Quart';
 		case Stage.Semi:
 			return 'Demi';
+		case Stage.ThirdPlace:
+			return 'Petite finale';
 		case Stage.Final:
 			return 'Finale';
 	}
@@ -81,6 +83,9 @@ export function potentialPoints(odds: [number, number, number], stage: Stage): P
 			points = odds.map((odd) => odd * 16);
 			break;
 		case Stage.Semi:
+			points = odds.map((odd) => odd * 20);
+			break;
+		case Stage.ThirdPlace:
 			points = odds.map((odd) => odd * 20);
 			break;
 		case Stage.Final:

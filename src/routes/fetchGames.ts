@@ -1,5 +1,8 @@
 import { games } from './store';
 import { PUBLIC_API_URL } from '$env/static/public';
+import { Stage, type Game } from '$lib/types/game';
+import type { PronoResult } from '$lib/types/prono';
+import type { ResponseResult } from '$lib/types/returnable';
 
 export async function storeGames() {
 	try {
@@ -21,7 +24,7 @@ export async function getGames(user?: string) {
 			credentials: 'include'
 		});
 
-		let result = {
+		let result: ResponseResult<[PronoResult, Game][]> = {
 			status: response.status,
 			text: response.statusText,
 			data: []
@@ -29,6 +32,11 @@ export async function getGames(user?: string) {
 
 		if (response.ok) {
 			result.data = await response.json();
+			result.data.forEach(([, game]) => {
+				if (game.id === 66) {
+					game.stage = Stage.ThirdPlace;
+				}
+			});
 		}
 		return result;
 	} catch (error: any) {
