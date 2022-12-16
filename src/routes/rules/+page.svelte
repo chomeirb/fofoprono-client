@@ -21,7 +21,7 @@
 			● Pour les <b>quarts de finale</b>, un pronostic <b>partiel</b> octroie <b>16 points</b>, tandis qu'un pronostic <b>exact</b> octroie <b>32 points</b>
 		</p>
 		<p>
-			● Pour les <b>demi-finales</b>, un pronostic <b>partiel</b> octroie <b>20 points</b>, tandis qu'un pronostic <b>exact</b> octroie <b>40 points</b>
+			● Pour les <b>demi-finales et la petite finale</b>, un pronostic <b>partiel</b> octroie <b>20 points</b>, tandis qu'un pronostic <b>exact</b> octroie <b>40 points</b>
 		</p>
 		<p>
 			● Pour la <b>finale</b>, un pronostic <b>partiel</b> octroie <b>30 points</b>, tandis qu'un pronostic <b>exact</b> octroie <b>60 points</b>
