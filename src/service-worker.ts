@@ -16,7 +16,7 @@ const addDomain = (assets: string[]) => assets.map((f) => self.location.origin +
 
 const assets = new Set(addDomain([...files, ...build, ...routes]));
 
-// Cache all the static assets.
+// Cache all the static assets
 worker.addEventListener('install', (event) => {
 	console.debug('[ServiceWorker] install');
 
@@ -31,7 +31,7 @@ worker.addEventListener('install', (event) => {
 	worker.skipWaiting();
 });
 
-// Clean up old caches.
+// Clean up old caches
 worker.addEventListener('activate', (event) => {
 	console.debug('[ServiceWorker] activate');
 
@@ -50,22 +50,22 @@ worker.addEventListener('activate', (event) => {
 		})()
 	);
 
-	// tell the active service worker to take control of the page immediately
+	// Tell the active service worker to take control of the page immediately
 	worker.clients.claim();
 });
 
-// Fetch and cache resources.
+// Fetch and cache resources
 worker.addEventListener('fetch', (event) => {
 	const { request } = event;
 
-	// do not cache non-GET requests
-	if (request.method !== 'GET') {
+	// Do not cache non GET and non HTTP requests
+	if (request.method !== 'GET' || !/^https?:\/\//.test(request.url)) {
 		event.respondWith(fetch(request));
 		return;
 	}
 
-	// cache first for images, fonts and static assets
-	if (request.url.match(/\.(?:png|jpg|jpeg|svg|gif|woff|woff2|ttf)$/) || assets.has(request.url)) {
+	// Cache first for images, fonts and static assets
+	if (/\.(?:png|jpg|jpeg|svg|gif|woff|woff2|ttf)$/.test(request.url) || assets.has(request.url)) {
 		event.respondWith(
 			(async () => {
 				const cache = await caches.open(STATIC_CACHE_NAME);
@@ -85,13 +85,13 @@ worker.addEventListener('fetch', (event) => {
 		return;
 	}
 
-	// network first, fall back to the cache
+	// Network first, fall back to the cache
 	event.respondWith(
 		(async () => {
 			try {
 				const response = await fetch(request);
 
-				// cache the response
+				// Cache the response
 				console.debug('[ServiceWorker] caching response', request.url);
 				const cache = await caches.open(APP_CACHE_NAME);
 				cache.put(request, response.clone());
