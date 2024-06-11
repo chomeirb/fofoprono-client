@@ -23,15 +23,15 @@
 
 	const odds: [number, number, number] = [game.odds_home, game.odds_draw, game.odds_away];
 	const pointsPotential = potentialPoints(odds, game.stage);
-	const pointsGain = userPoints(pointsPotential, prono?.prediction.home, prono?.prediction.away, prono?.result);
+	const pointsGain = userPoints(pointsPotential, prono?.prediction.prediction_home, prono?.prediction.prediction_away, prono?.result);
 
 	$: if (!input) animate = !animate;
 
 	$: if (!past && (input?.[0] != null || input?.[1] != null)) {
 		$pronos[game.id] = {
 			game_id: game.id,
-			home: input[0] ?? prono?.prediction.home ?? 0,
-			away: input[1] ?? prono?.prediction.away ?? 0
+			prediction_home: input[0] ?? prono?.prediction.prediction_home ?? 0,
+			prediction_away: input[1] ?? prono?.prediction.prediction_away ?? 0
 		};
 	} else {
 		pronos.update((record) => {
@@ -89,7 +89,7 @@
 								max="20"
 								bind:value={input[0]}
 								class="w-7 rounded bg-primary text-center text-secondary dark:bg-secondary dark:text-primary"
-								placeholder={$pronos[game.id]?.home.toString() ?? prono?.prediction.home.toString() ?? '...'} />
+								placeholder={$pronos[game.id]?.prediction_home.toString() ?? prono?.prediction.prediction_home.toString() ?? '...'} />
 							<p class="text-center">−</p>
 							<input
 								type="number"
@@ -98,14 +98,14 @@
 								max="20"
 								bind:value={input[1]}
 								class="w-7 rounded bg-primary text-center text-secondary dark:bg-secondary dark:text-primary"
-								placeholder={$pronos[game.id]?.away.toString() ?? prono?.prediction.away.toString() ?? '...'} />
+								placeholder={$pronos[game.id]?.prediction_away.toString() ?? prono?.prediction.prediction_away.toString() ?? '...'} />
 						</div>
 					{:else if prono}
 						<!-- Display mode -->
 						<div class="flex w-full min-w-min flex-row justify-between text-2xl">
-							<p class="w-7 rounded bg-primary text-center text-secondary dark:bg-secondary dark:text-primary">{prono.prediction.home}</p>
+							<p class="w-7 rounded bg-primary text-center text-secondary dark:bg-secondary dark:text-primary">{prono.prediction.prediction_home}</p>
 							<p class="text-center">−</p>
-							<p class="w-7 rounded bg-primary text-center text-secondary dark:bg-secondary dark:text-primary">{prono.prediction.away}</p>
+							<p class="w-7 rounded bg-primary text-center text-secondary dark:bg-secondary dark:text-primary">{prono.prediction.prediction_away}</p>
 						</div>
 					{/if}
 					<div class="flex w-5/6 min-w-min flex-row justify-between text-center {resultColorText} {game.score_home == null || game.score_away == null ? 'invisible' : ''}">
