@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { displayStage, formatDate, formatTime, isPast, potentialPoints, displayPotentialPoints, userPoints, displayOdds } from '$lib/utils/display';
-	import { PredictionResult, type PronoResult } from '$lib/types/prono';
+	import { PronoResult, type Prono } from '$lib/types/prono';
 	import type { Game } from '$lib/types/game';
 	import * as Teams from '$lib/assets/teams';
 	import { slide } from 'svelte/transition';
@@ -9,29 +9,29 @@
 	import Tooltip from '../Tooltip.svelte';
 
 	export let input: [number, number] = null!;
-	export let prono: PronoResult;
+	export let prono: Prono;
 	export let game: Game;
 
 	let animate: boolean;
 
 	const past = isPast(game.time);
 
-	const [resultColorBorder, resultColorText] = getResultColors(prono.result, past);
+	const [resultColorBorder, resultColorText] = getResultColors(prono?.result, past);
 
 	const FlagHome = Teams[game.team_home.replace(/[\s+\-]/g, '') as keyof typeof Teams] ?? null;
 	const FlagAway = Teams[game.team_away.replace(/[\s+\-]/g, '') as keyof typeof Teams] ?? null;
 
 	const odds: [number, number, number] = [game.odds_home, game.odds_draw, game.odds_away];
 	const pointsPotential = potentialPoints(odds, game.stage);
-	const pointsGain = userPoints(pointsPotential, prono.prediction?.prediction_home, prono.prediction?.prediction_away, prono.result);
+	const pointsGain = userPoints(pointsPotential, prono?.prediction.home, prono?.prediction.away, prono?.result);
 
 	$: if (!input) animate = !animate;
 
 	$: if (!past && (input?.[0] != null || input?.[1] != null)) {
 		$pronos[game.id] = {
 			game_id: game.id,
-			prediction_home: input[0] ?? prono.prediction?.prediction_home ?? 0,
-			prediction_away: input[1] ?? prono.prediction?.prediction_away ?? 0
+			home: input[0] ?? prono?.prediction.home ?? 0,
+			away: input[1] ?? prono?.prediction.away ?? 0
 		};
 	} else {
 		pronos.update((record) => {
@@ -40,13 +40,13 @@
 		});
 	}
 
-	function getResultColors(result: PredictionResult, pastGame: boolean) {
+	function getResultColors(result: PronoResult, pastGame: boolean) {
 		switch (result) {
-			case PredictionResult.Exact:
+			case PronoResult.Exact:
 				return ['border-green-500', 'text-green-500'];
-			case PredictionResult.Correct:
+			case PronoResult.Correct:
 				return ['border-yellow-500', 'text-yellow-500'];
-			case PredictionResult.Wrong:
+			case PronoResult.Wrong:
 				return ['border-red-500', 'text-red-500'];
 			default:
 				return [`border-primary dark:border-secondary ${pastGame ? '' : 'border-opacity-30 dark:border-opacity-30'}`, 'text-primary dark:text-secondary'];
@@ -89,7 +89,7 @@
 								max="20"
 								bind:value={input[0]}
 								class="w-7 rounded bg-primary text-center text-secondary dark:bg-secondary dark:text-primary"
-								placeholder={$pronos[game.id]?.prediction_home.toString() ?? prono.prediction?.prediction_home.toString() ?? '...'} />
+								placeholder={$pronos[game.id]?.home.toString() ?? prono?.prediction.home.toString() ?? '...'} />
 							<p class="text-center">−</p>
 							<input
 								type="number"
@@ -98,14 +98,14 @@
 								max="20"
 								bind:value={input[1]}
 								class="w-7 rounded bg-primary text-center text-secondary dark:bg-secondary dark:text-primary"
-								placeholder={$pronos[game.id]?.prediction_away.toString() ?? prono.prediction?.prediction_away.toString() ?? '...'} />
+								placeholder={$pronos[game.id]?.away.toString() ?? prono?.prediction.away.toString() ?? '...'} />
 						</div>
-					{:else if prono.prediction}
+					{:else if prono}
 						<!-- Display mode -->
 						<div class="flex w-full min-w-min flex-row justify-between text-2xl">
-							<p class="w-7 rounded bg-primary text-center text-secondary dark:bg-secondary dark:text-primary">{prono.prediction.prediction_home}</p>
+							<p class="w-7 rounded bg-primary text-center text-secondary dark:bg-secondary dark:text-primary">{prono.prediction.home}</p>
 							<p class="text-center">−</p>
-							<p class="w-7 rounded bg-primary text-center text-secondary dark:bg-secondary dark:text-primary">{prono.prediction.prediction_away}</p>
+							<p class="w-7 rounded bg-primary text-center text-secondary dark:bg-secondary dark:text-primary">{prono.prediction.away}</p>
 						</div>
 					{/if}
 					<div class="flex w-5/6 min-w-min flex-row justify-between text-center {resultColorText} {game.score_home == null || game.score_away == null ? 'invisible' : ''}">

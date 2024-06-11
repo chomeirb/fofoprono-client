@@ -35,7 +35,7 @@
 			const [player1, player2] = sortAsc ? [b, a] : [a, b];
 			switch (sortType) {
 				case SortType.Score:
-					return player2.score - player1.score;
+					return player2.points - player1.points;
 				case SortType.Perfect:
 					return player2.results_perfect - player1.results_perfect;
 				case SortType.Correct:

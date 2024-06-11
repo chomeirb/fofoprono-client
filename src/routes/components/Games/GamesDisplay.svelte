@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getQueryParamsStore } from '../../queryParamsStore';
 	import type { Game } from '$lib/types/game';
-	import type { Prediction, PronoResult } from '$lib/types/prono';
+	import type { Prono } from '$lib/types/prono';
 	import { sysTimeToDate } from '$lib/utils/display';
 	import PronoDisplay from './Game.svelte';
 	import Filter from './GamesFilter.svelte';
@@ -9,7 +9,7 @@
 	import { flip } from 'svelte/animate';
 	import { fade } from 'svelte/transition';
 	import FilterPopup from '../Popup/GameFilter.svelte';
-	export let games: ResponseResult<[PronoResult, Game][]>;
+	export let games: ResponseResult<[Prono, Game][]>;
 	export let inputs: Record<number, [number, number]> = {};
 
 	export let showFilter: boolean;

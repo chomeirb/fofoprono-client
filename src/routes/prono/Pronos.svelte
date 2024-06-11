@@ -3,7 +3,7 @@
 
 	import { GamesDisplay, pronos } from '../components/Games';
 	import { getGames } from '../fetchGames';
-	import { games, session } from '../store';
+	import { games, session, selected_competition } from '../store';
 
 	let inputs: Record<number, [number, number]> = {};
 	games.subscribe(({ data }) => {
@@ -24,7 +24,7 @@
 				body: JSON.stringify(submitPronos)
 			});
 
-			$games = await getGames();
+			$games = await getGames($selected_competition);
 		} else {
 			$games = $games;
 		}

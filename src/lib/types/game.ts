@@ -3,7 +3,7 @@ export enum Stage {
 	Sixteen = 'Sixteen',
 	Quarter = 'Quarter',
 	Semi = 'Semi',
-    ThirdPlace = 'ThirdPlace',
+	ThirdPlace = 'ThirdPlace',
 	Final = 'Final'
 }
 

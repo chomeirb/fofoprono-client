@@ -3,16 +3,31 @@
 	import Header from './Header.svelte';
 	import Footer from './Footer.svelte';
 	import { onMount } from 'svelte';
-	import { session } from './store';
+	import { session, competitions, selected_competition, games, players } from './store';
 	import { storeGames } from './fetchGames';
 	import { storeSession } from './fetchSession';
 	import { storePlayers } from './fetchRanking';
+	import { storeCompetitions } from './fetchCompetitions';
 	import { fade } from 'svelte/transition';
+	import { get } from 'svelte/store';
 
 	onMount(() => {
 		storeSession();
-		storeGames();
-		storePlayers();
+		storeCompetitions();
+        competitions.subscribe((value) => {
+			// If competitions are loading or there is an error, than games and players too.
+            if (value.text !== 'OK') {
+				games.set({ ...value, data: [] });
+				players.set({ ...value, data: [] });
+            }
+        });
+
+		selected_competition.subscribe((value) => {
+			if (value) {
+				storeGames(value);
+				storePlayers(value);
+			}
+		});
 	});
 </script>
 
@@ -31,7 +46,7 @@
 </head>
 
 <div class="flex h-[100vh] flex-col font-medium">
-	{#if $session.text !== 'LOADING'}
+	{#if $session.text !== 'LOADING' && $competitions.text !== 'LOADING'}
 		<div transition:fade={{ duration: 250 }}>
 			<Header />
 

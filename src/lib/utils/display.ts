@@ -1,6 +1,6 @@
 import type { Game, SystemTime } from '$lib/types/game';
 import { Stage } from '$lib/types/game';
-import { PredictionResult } from '$lib/types/prono';
+import { PronoResult } from '$lib/types/prono';
 
 export function isPast(time: SystemTime): boolean {
 	return new Date(time.secs_since_epoch * 1000) < new Date();
@@ -110,7 +110,7 @@ export function displayOdds(odds: number): string {
 }
 
 // Returned array always of length 3
-export function userPoints(potentialPoints: Points[], score_home: number, score_away: number, result: PredictionResult): string[] {
+export function userPoints(potentialPoints: Points[], score_home: number, score_away: number, result: PronoResult): string[] {
 	let gain = potentialPoints.map(() => '');
 	if (result) {
 		const i = 1 - Math.sign(score_home - score_away);
@@ -119,13 +119,13 @@ export function userPoints(potentialPoints: Points[], score_home: number, score_
 	return gain;
 }
 
-function resultToPoints(potentialPoints: Points, result: PredictionResult): number {
+function resultToPoints(potentialPoints: Points, result: PronoResult): number {
 	switch (result) {
-		case PredictionResult.Exact:
+		case PronoResult.Exact:
 			return potentialPoints.exact;
-		case PredictionResult.Correct:
+		case PronoResult.Correct:
 			return potentialPoints.correct;
-		case PredictionResult.Wrong:
+		case PronoResult.Wrong:
 			return 0;
 	}
 }

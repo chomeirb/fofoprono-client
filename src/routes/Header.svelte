@@ -1,13 +1,23 @@
 <script lang="ts">
 	import FofoPronoLogo from './components/icons/Fofoprono.svelte';
-	import { session } from './store';
+	import { session, competitions, selected_competition } from './store';
 	import LogoutIcon from './components/icons/Logout.svelte';
 	import ThemeIcon from './components/icons/Theme.svelte';
 	import PopupConfirmLogout from './components/Popup/ConfirmLogout.svelte';
 	import Footer from './Footer.svelte';
+	import { browser } from '$app/environment';
 
 	let hamIsOpen = false;
 	let confirmLogout = false;
+
+	if ($competitions.data.length > 0) {
+		selected_competition.set(parseInt(localStorage.competition) || lastCompetition());
+		selected_competition.subscribe((value) => {
+			if (browser && value) {
+				localStorage.setItem('competition', value.toString());
+			}
+		});
+	}
 
 	function toggleDarkMode() {
 		if (document.documentElement.classList.contains('dark')) {
@@ -30,6 +40,11 @@
 	function hideLogoutConfirm() {
 		confirmLogout = false;
 	}
+
+	function lastCompetition() {
+		const data = $competitions.data;
+		return data[data.length - 1]?.id;
+	}
 </script>
 
 <header class="flex h-[90px] w-full flex-row justify-center text-3xl text-secondary shadow-lg dark:text-primary m8:h-[60px]">
@@ -39,30 +54,37 @@
 		</a>
 		<nav class="flex h-[90%] w-full flex-row items-center justify-center m12:w-auto">
 			<ul class="flex h-full w-full flex-row items-center justify-between gap-5 dark:text-secondary">
-				<div class="flex h-full flex-row items-center gap-5 m12:hidden">
+				<div class="box-border flex h-full flex-row items-center gap-5 m12:hidden">
 					<li>
-						<a class="button" href="/prono">Pronostics</a>
+						<select class="button inline-block h-14" name="competition" id="" bind:value={$selected_competition}>
+							{#each $competitions.data as competition}
+								<option class="dark:bg-primary" value={competition.id}>{competition.name}</option>
+							{/each}
+						</select>
 					</li>
 					<li>
-						<a class="button" href="/ranking">Classement</a>
+						<a class="button inline-block h-14" href="/prono">Pronostics</a>
 					</li>
 					<li>
-						<a class="button" href="/rules">Règles</a>
+						<a class="button inline-block h-14" href="/ranking">Classement</a>
 					</li>
 					<li>
-						<a class="button" href="/contact">Contact</a>
+						<a class="button inline-block h-14" href="/rules">Règles</a>
+					</li>
+					<li>
+						<a class="button inline-block h-14" href="/contact">Contact</a>
 					</li>
 				</div>
 				<div class="flex flex-row items-center gap-5 text-xl text-primary dark:text-secondary">
-					<button alt="night-light" on:click={toggleDarkMode}>
-						<ThemeIcon style="hover:opacity-70 hover:cursor-pointer m12:hidden" width={40} />
+					<button on:click={toggleDarkMode}>
+						<ThemeIcon style="hover:opacity-70 m12:hidden" width={40} />
 					</button>
 					<li class="flex flex-row items-center gap-6">
 						{#if $session.data}
 							<p class="w-min max-w-lg truncate rounded-xl border-[3px] border-primary px-2 text-center text-4xl font-bold shadow-xl dark:border-secondary m12:max-w-[185px] m12:text-xl">
 								{$session.data}
 							</p>
-							<button class="hover:opacity-70" alt="logout" on:click={showLogoutConfirm}>
+							<button class="hover:opacity-70" on:click={showLogoutConfirm}>
 								<LogoutIcon width={40} />
 							</button>
 						{:else}
@@ -78,29 +100,28 @@
 			</ul>
 		</nav>
 	</div>
-	<ul
+	<div
 		class={`fixed top-[90px] z-40 hidden h-[calc(100%_-_60px)] w-[100vw] flex-col items-center justify-center gap-10 overflow-y-auto bg-secondary text-primary shadow-in duration-500 dark:bg-primary dark:text-secondary m12:flex m8:top-[60px] ${
 			!hamIsOpen ? 'translate-x-[100vw]' : ''
 		}`}>
-		<li class="button flex w-4/6 flex-col items-center hover:cursor-pointer">
-			<a on:click={() => (hamIsOpen = false)} href="/prono">Pronostics</a>
-		</li>
-		<li class="button flex w-4/6 flex-col items-center hover:cursor-pointer">
-			<a on:click={() => (hamIsOpen = false)} href="/ranking">Classement</a>
-		</li>
-		<li class="button flex w-4/6 flex-col items-center hover:cursor-pointer">
-			<a on:click={() => (hamIsOpen = false)} href="/rules">Règles</a>
-		</li>
-		<li class="button flex w-4/6 flex-col items-center hover:cursor-pointer">
-			<a on:click={() => (hamIsOpen = false)} href="/contact">Contact</a>
-		</li>
-		<button alt="night-light" on:click={toggleDarkMode}>
-			<ThemeIcon style="hover:opacity-70 hover:cursor-pointer" width={40} />
+		<!-- <div class="gap-10"> -->
+		<!-- <li class=""> -->
+		<select class="button inline-block h-14  w-4/6 text-center" name="competition" id="" bind:value={$selected_competition}>
+			{#each $competitions.data as competition}
+				<option class="dark:bg-primary" value={competition.id}>{competition.name}</option>
+			{/each}
+		</select>
+		<a class="button inline-block h-14 w-4/6 text-center" on:click={() => (hamIsOpen = false)} href="/prono">Pronostics</a>
+		<a class="button inline-block h-14 w-4/6 text-center" on:click={() => (hamIsOpen = false)} href="/ranking">Classement</a>
+		<a class="button inline-block h-14 w-4/6 text-center" on:click={() => (hamIsOpen = false)} href="/rules">Règles</a>
+		<a class="button inline-block h-14 w-4/6 text-center" on:click={() => (hamIsOpen = false)} href="/contact">Contact</a>
+		<button on:click={toggleDarkMode}>
+			<ThemeIcon style="hover:opacity-70" width={40} />
 		</button>
 		<div>
 			<Footer />
 		</div>
-	</ul>
+	</div>
 </header>
 
 {#if confirmLogout}

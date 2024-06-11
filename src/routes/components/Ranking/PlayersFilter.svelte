@@ -12,7 +12,7 @@
 		</div>
 		<div class="flex w-full flex-col">
 			<label for="stage">Groupe</label>
-			<select id="stage" type="text" class="h-10 w-full rounded bg-primary bg-opacity-20 px-3 py-1 text-primary dark:bg-white dark:bg-opacity-10 dark:text-secondary" bind:value={$queryPlayers}>
+			<select id="stage" class="h-10 w-full rounded bg-primary bg-opacity-20 px-3 py-1 text-primary dark:bg-white dark:bg-opacity-10 dark:text-secondary" bind:value={$queryPlayers}>
 				<option class="bg-primary bg-opacity-20 dark:bg-opacity-90" value="">Tous</option>
 				{#each groups as group}
 					<option class="bg-primary bg-opacity-20 dark:bg-opacity-90" value={group.queryUsers}>{group.label}</option>

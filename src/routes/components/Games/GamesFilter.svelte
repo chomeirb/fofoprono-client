@@ -36,7 +36,7 @@
 	</div>
 	<div class="flex w-full flex-col">
 		<label for="stage">Étape</label>
-		<select id="stage" type="text" class="h-10 w-full rounded bg-primary bg-opacity-20 px-3 py-1 text-primary dark:bg-white dark:bg-opacity-10 dark:text-secondary" bind:value={$queryStage}>
+		<select id="stage" class="h-10 w-full rounded bg-primary bg-opacity-20 px-3 py-1 text-primary dark:bg-white dark:bg-opacity-10 dark:text-secondary" bind:value={$queryStage}>
 			<option class="bg-primary bg-opacity-20 dark:bg-opacity-90" value="">Tous</option>
 			{#each Object.values(Stage) as stage}
 				<option class="bg-primary bg-opacity-20 dark:bg-opacity-90" value={stage}>{displayStage(stage)}</option>
