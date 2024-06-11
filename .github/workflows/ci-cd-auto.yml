@@ -1,4 +1,4 @@
-name: Automatic CI/CD
+name: Build and deploy app (automatic)
 
 on:
   push:

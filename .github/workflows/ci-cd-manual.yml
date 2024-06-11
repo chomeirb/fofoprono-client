@@ -1,4 +1,4 @@
-name: Manual CI/CD
+name: Build and deploy app (manual)
 
 on:
   workflow_dispatch:
