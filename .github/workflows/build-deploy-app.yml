@@ -28,4 +28,4 @@ jobs:
           output_location: 'build'
           app_build_command: 'npm run build'
         env:
-          PUBLIC_API_URL: ${{ vars.PUBLIC_API_URL }}
+          PUBLIC_API_URL: ${{ vars.API_URL }}
