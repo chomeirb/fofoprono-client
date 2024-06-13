@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { displayStage, formatDate, formatTime, isPast, potentialPoints, displayPotentialPoints, userPoints, displayOdds } from '$lib/utils/display';
+	import { stageToString, formatDate, formatTime, isPast, userPoints, potentialPoints } from '$lib/utils/display';
 	import { PronoResult, type Prono } from '$lib/types/prono';
 	import type { Game } from '$lib/types/game';
 	import * as Teams from '$lib/assets/teams';
@@ -21,17 +21,13 @@
 	const FlagHome = Teams[game.team_home.replace(/[\s+\-]/g, '') as keyof typeof Teams] ?? null;
 	const FlagAway = Teams[game.team_away.replace(/[\s+\-]/g, '') as keyof typeof Teams] ?? null;
 
-	const odds: [number, number, number] = [game.odds_home, game.odds_draw, game.odds_away];
-	const pointsPotential = potentialPoints(odds, game.stage);
-	const pointsGain = userPoints(pointsPotential, prono?.prediction.prediction_home, prono?.prediction.prediction_away, prono?.result);
-
 	$: if (!input) animate = !animate;
 
 	$: if (!past && (input?.[0] != null || input?.[1] != null)) {
 		$pronos[game.id] = {
 			game_id: game.id,
-			prediction_home: input[0] ?? prono?.prediction.prediction_home ?? 0,
-			prediction_away: input[1] ?? prono?.prediction.prediction_away ?? 0
+			home: input[0] ?? prono?.prediction.home ?? 0,
+			away: input[1] ?? prono?.prediction.away ?? 0
 		};
 	} else {
 		pronos.update((record) => {
@@ -62,7 +58,7 @@
 					<p class="w-2/3 text-left">{formatDate(game.time)}</p>
 					<p class="w-1/3 text-left m8:text-right">{formatTime(game.time)}</p>
 				</div>
-				<p class="w-1/2 truncate text-left m8:w-full m8:text-center">{displayStage(game.stage)}</p>
+				<p class="w-1/2 truncate text-left m8:w-full m8:text-center">{stageToString(game.stage)}</p>
 			</div>
 
 			<div class="flex w-[40%] min-w-[20rem] items-center justify-between pt-2 text-center m8:w-full m8:pt-0 m8:pb-4">
@@ -89,7 +85,7 @@
 								max="20"
 								bind:value={input[0]}
 								class="w-7 rounded bg-primary text-center text-secondary dark:bg-secondary dark:text-primary"
-								placeholder={$pronos[game.id]?.prediction_home.toString() ?? prono?.prediction.prediction_home.toString() ?? '...'} />
+								placeholder={$pronos[game.id]?.home.toString() ?? prono?.prediction.home.toString() ?? '...'} />
 							<p class="text-center">−</p>
 							<input
 								type="number"
@@ -98,14 +94,14 @@
 								max="20"
 								bind:value={input[1]}
 								class="w-7 rounded bg-primary text-center text-secondary dark:bg-secondary dark:text-primary"
-								placeholder={$pronos[game.id]?.prediction_away.toString() ?? prono?.prediction.prediction_away.toString() ?? '...'} />
+								placeholder={$pronos[game.id]?.away.toString() ?? prono?.prediction.away.toString() ?? '...'} />
 						</div>
 					{:else if prono}
 						<!-- Display mode -->
 						<div class="flex w-full min-w-min flex-row justify-between text-2xl">
-							<p class="w-7 rounded bg-primary text-center text-secondary dark:bg-secondary dark:text-primary">{prono.prediction.prediction_home}</p>
+							<p class="w-7 rounded bg-primary text-center text-secondary dark:bg-secondary dark:text-primary">{prono.prediction.home}</p>
 							<p class="text-center">−</p>
-							<p class="w-7 rounded bg-primary text-center text-secondary dark:bg-secondary dark:text-primary">{prono.prediction.prediction_away}</p>
+							<p class="w-7 rounded bg-primary text-center text-secondary dark:bg-secondary dark:text-primary">{prono.prediction.away}</p>
 						</div>
 					{/if}
 					<div class="flex w-5/6 min-w-min flex-row justify-between text-center {resultColorText} {game.score_home == null || game.score_away == null ? 'invisible' : ''}">
@@ -118,12 +114,22 @@
 
 			<div class="flex w-[30%] place-content-end m8:w-full">
 				<div class="flex w-2/3 min-w-[10rem] divide-x-[3px] divide-primary rounded-md border-[3px] border-primary dark:divide-secondary dark:border-secondary m8:w-full">
-					{#each odds as odd, index}
-						<p class="w-1/3 cursor-default text-center {pointsGain[index] ? resultColorText : ''}">
-							<Tooltip tooltip={displayPotentialPoints(pointsPotential[index]) + (pointsGain[index] ? ' ' + displayOdds(odd) : '')}>
-								{pointsGain[index] || odd.toPrecision(3)}
-							</Tooltip>
-						</p>
+					{#each [game.odds_home, game.odds_draw, game.odds_away] as odd, index}
+						{#if odd}
+							{@const potential_points = potentialPoints(odd, game.stage)}
+							{@const user_points = userPoints(potential_points, prono?.result)}
+							{@const show_points = user_points ? 1 - Math.sign(game.score_home - game.score_away) == index : false}
+							<p class="w-1/3 cursor-default text-center {show_points ? resultColorText : ''}">
+								<Tooltip
+									tooltip={`
+                                Partiel : ${potential_points.correct} pts 
+                                Exact : ${potential_points.exact} pts` + (show_points ? ` Côte : ${odd.toPrecision(3)}` : '')}>
+									{show_points ? `+${user_points}` : odd.toPrecision(3)}
+								</Tooltip>
+							</p>
+						{:else}
+							<p class="w-1/3 cursor-default text-center">?</p>
+						{/if}
 					{/each}
 				</div>
 			</div>

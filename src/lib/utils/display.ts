@@ -1,4 +1,5 @@
 import type { Game, SystemTime } from '$lib/types/game';
+import type { Prono } from '$lib/types/prono';
 import { Stage } from '$lib/types/game';
 import { PronoResult } from '$lib/types/prono';
 
@@ -47,7 +48,7 @@ export function sysTimeToDate(time: SystemTime): Date {
 	return new Date(time.secs_since_epoch * 1000);
 }
 
-export function displayStage(stage: Stage): string {
+export function stageToString(stage: Stage): string {
 	switch (stage) {
 		case Stage.Group:
 			return 'Poule';
@@ -70,62 +71,44 @@ type Points = {
 };
 
 // Returned array always of length 3
-export function potentialPoints(odds: [number, number, number], stage: Stage): Points[] {
+export function potentialPoints(odd: number, stage: Stage): Points {
 	let points;
 	switch (stage) {
 		case Stage.Group:
-			points = odds.map((odd) => odd * 8);
+			points = odd * 8;
 			break;
 		case Stage.Sixteen:
-			points = odds.map((odd) => odd * 12);
+			points = odd * 12;
 			break;
 		case Stage.Quarter:
-			points = odds.map((odd) => odd * 16);
+			points = odd * 16;
 			break;
 		case Stage.Semi:
-			points = odds.map((odd) => odd * 20);
+			points = odd * 20;
 			break;
 		case Stage.ThirdPlace:
-			points = odds.map((odd) => odd * 20);
+			points = odd * 20;
 			break;
 		case Stage.Final:
-			points = odds.map((odd) => odd * 30);
+			points = odd * 30;
 			break;
 	}
 
-	return points.map((point) => {
-		return {
-			correct: Math.round(point),
-			exact: Math.round(point * 2)
-		};
-	});
+	return {
+		correct: Math.round(points),
+		exact: Math.round(points * 2)
+	};
 }
 
-export function displayPotentialPoints(points: Points): string {
-	return `Partiel : ${points.correct} pts Exact : ${points.exact} pts`;
-}
-
-export function displayOdds(odds: number): string {
-	return `Côte : ${odds.toPrecision(3)}`;
-}
-
-// Returned array always of length 3
-export function userPoints(potentialPoints: Points[], score_home: number, score_away: number, result: PronoResult): string[] {
-	let gain = potentialPoints.map(() => '');
-	if (result) {
-		const i = 1 - Math.sign(score_home - score_away);
-		gain[i] = `+${resultToPoints(potentialPoints[i], result)}`;
-	}
-	return gain;
-}
-
-function resultToPoints(potentialPoints: Points, result: PronoResult): number {
+export function userPoints(points: Points, result: PronoResult): number | null {
 	switch (result) {
 		case PronoResult.Exact:
-			return potentialPoints.exact;
+			return points.exact;
 		case PronoResult.Correct:
-			return potentialPoints.correct;
+			return points.correct;
 		case PronoResult.Wrong:
 			return 0;
+        default:
+            return null;
 	}
 }

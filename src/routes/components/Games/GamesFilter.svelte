@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Stage } from '$lib/types/game';
-	import { displayStage } from '$lib/utils/display';
+	import { stageToString } from '$lib/utils/display';
 
 	export let queryTeam;
 	export let queryStage;
@@ -39,7 +39,7 @@
 		<select id="stage" class="h-10 w-full rounded bg-primary bg-opacity-20 px-3 py-1 text-primary dark:bg-white dark:bg-opacity-10 dark:text-secondary" bind:value={$queryStage}>
 			<option class="bg-primary bg-opacity-20 dark:bg-opacity-90" value="">Tous</option>
 			{#each Object.values(Stage) as stage}
-				<option class="bg-primary bg-opacity-20 dark:bg-opacity-90" value={stage}>{displayStage(stage)}</option>
+				<option class="bg-primary bg-opacity-20 dark:bg-opacity-90" value={stage}>{stageToString(stage)}</option>
 			{/each}
 		</select>
 	</div>

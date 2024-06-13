@@ -11,8 +11,8 @@ export type Prono = {
 
 export type Prediction = {
 	game_id: number;
-	prediction_home: number;
-	prediction_away: number;
+	home: number;
+	away: number;
 };
 
 export enum Team {
