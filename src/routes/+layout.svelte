@@ -9,18 +9,19 @@
 	import { storePlayers } from './fetchRanking';
 	import { storeCompetitions } from './fetchCompetitions';
 	import { fade } from 'svelte/transition';
-	import { get } from 'svelte/store';
+	import * as countries from 'i18n-iso-countries';
+	import fr from 'i18n-iso-countries/langs/fr.json';
 
 	onMount(() => {
 		storeSession();
 		storeCompetitions();
-        competitions.subscribe((value) => {
+		competitions.subscribe((value) => {
 			// If competitions are loading or there is an error, than games and players too.
-            if (value.text !== 'OK') {
+			if (value.text !== 'OK') {
 				games.set({ ...value, data: [] });
 				players.set({ ...value, data: [] });
-            }
-        });
+			}
+		});
 
 		selected_competition.subscribe((value) => {
 			if (value) {
@@ -28,6 +29,8 @@
 				storePlayers(value);
 			}
 		});
+
+        countries.registerLocale(fr);
 	});
 </script>
 
