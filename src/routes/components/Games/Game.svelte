@@ -51,7 +51,7 @@
 		switch (country) {
 			case 'Angleterre':
 				return 'gb-eng';
-			case 'Ecosse':
+			case 'Écosse':
 				return 'gb-sct';
 			case 'Pays de Galles':
 				return 'gb-wls';
