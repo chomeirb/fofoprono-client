@@ -118,17 +118,17 @@
 						{#if odd}
 							{@const potential_points = potentialPoints(odd, game.stage)}
 							{@const user_points = userPoints(potential_points, prono?.result)}
-							{@const show_points = user_points ? 1 - Math.sign(game.score_home - game.score_away) == index : false}
-							<p class="w-1/3 cursor-default text-center {show_points ? resultColorText : ''}">
+							{@const show_points = user_points !== null ? 1 - Math.sign(game.score_home - game.score_away) == index : false}
+							<span class="w-1/3 cursor-default text-center {show_points ? resultColorText : ''}">
 								<Tooltip
 									tooltip={`
                                 Partiel : ${potential_points.correct} pts 
                                 Exact : ${potential_points.exact} pts` + (show_points ? ` Côte : ${odd.toPrecision(3)}` : '')}>
 									{show_points ? `+${user_points}` : odd.toPrecision(3)}
 								</Tooltip>
-							</p>
+							</span>
 						{:else}
-							<p class="w-1/3 cursor-default text-center">?</p>
+							<span class="w-1/3 cursor-default text-center">?</span>
 						{/if}
 					{/each}
 				</div>
