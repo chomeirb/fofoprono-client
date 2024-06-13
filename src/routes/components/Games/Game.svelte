@@ -2,11 +2,12 @@
 	import { stageToString, formatDate, formatTime, isPast, userPoints, potentialPoints } from '$lib/utils/display';
 	import { PronoResult, type Prono } from '$lib/types/prono';
 	import type { Game } from '$lib/types/game';
-	import * as Teams from '$lib/assets/teams';
 	import { slide } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
 	import { pronos } from './store';
 	import Tooltip from '../Tooltip.svelte';
+	import '/node_modules/flag-icons/css/flag-icons.min.css';
+	import * as countries from 'i18n-iso-countries';
 
 	export let input: [number, number] = null!;
 	export let prono: Prono;
@@ -17,9 +18,6 @@
 	const past = isPast(game.time);
 
 	const [resultColorBorder, resultColorText] = getResultColors(prono?.result, past);
-
-	const FlagHome = Teams[game.team_home.replace(/[\s+\-]/g, '') as keyof typeof Teams] ?? null;
-	const FlagAway = Teams[game.team_away.replace(/[\s+\-]/g, '') as keyof typeof Teams] ?? null;
 
 	$: if (!input) animate = !animate;
 
@@ -48,6 +46,22 @@
 				return [`border-primary dark:border-secondary ${pastGame ? '' : 'border-opacity-30 dark:border-opacity-30'}`, 'text-primary dark:text-secondary'];
 		}
 	}
+
+	function getCountryCode(country: string) {
+		switch (country) {
+			case 'Angleterre':
+				return 'gb-eng';
+			case 'Ecosse':
+				return 'gb-sct';
+			case 'Pays de Galles':
+				return 'gb-wls';
+			case 'USA':
+			case 'États-Unis':
+				return 'us';
+			default:
+				return countries.getAlpha2Code(country, 'fr')?.toLowerCase()!;
+		}
+	}
 </script>
 
 {#key animate}
@@ -63,15 +77,11 @@
 
 			<div class="flex w-[40%] min-w-[20rem] items-center justify-between pt-2 text-center m8:w-full m8:pt-0 m8:pb-4">
 				<div class="order-first flex w-24 flex-col items-center gap-2 m8:text-sm">
-					<div class="rounded-xl bg-primary p-1 dark:bg-secondary">
-						<img src={FlagHome} alt="Flag {game.team_home}" class="h-[50px] w-[75px] rounded-lg object-cover" />
-					</div>
+					<span class={`fi fi-${getCountryCode(game.team_home)} h-[60px] rounded-lg border-4`} />
 					<p class="truncate">{game.team_home}</p>
 				</div>
 				<div class="order-last flex w-24 flex-col items-center gap-2 m8:text-sm">
-					<div class="rounded-xl bg-primary p-1 dark:bg-secondary">
-						<img src={FlagAway} alt="Flag {game.team_away}" class="h-[50px] w-[75px] rounded-lg object-cover" />
-					</div>
+					<span class={`fi fi-${getCountryCode(game.team_away)} h-[60px] rounded-lg border-4`} />
 					<p class="truncate">{game.team_away}</p>
 				</div>
 				<div class="flex w-24 flex-col items-center gap-2 font-bold">
@@ -136,3 +146,9 @@
 		</div>
 	</div>
 {/key}
+
+<style>
+	.fi {
+		width: 77px;
+	}
+</style>
