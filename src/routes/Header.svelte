@@ -47,7 +47,7 @@
 	}
 </script>
 
-<header class="flex h-[90px] w-full flex-row justify-center text-3xl text-secondary shadow-lg dark:text-primary m8:h-[60px]">
+<header class="flex h-[90px] w-full flex-row justify-center text-3xl text-secondary shadow-lg dark:text-primary m8:h-[60px] overflow-hidden">
 	<div class="flex h-full w-full max-w-8xl flex-row items-center justify-center gap-5 px-3 m12:justify-between">
 		<a href="/prono" class="h-[50%] w-[50px] duration-200 hover:-rotate-12 m8:w-[35px]">
 			<FofoPronoLogo />
@@ -56,7 +56,7 @@
 			<ul class="flex h-full w-full flex-row items-center justify-between gap-5 dark:text-secondary">
 				<div class="box-border flex h-full flex-row items-center gap-5 m12:hidden">
 					<li>
-						<select class="button inline-block h-14" name="competition" id="" bind:value={$selected_competition}>
+						<select class="button inline-block h-14 w-[200px] truncate" name="competition" id="" bind:value={$selected_competition}>
 							{#each $competitions.data as competition}
 								<option class="dark:bg-primary" value={competition.id}>{competition.name}</option>
 							{/each}
@@ -101,20 +101,20 @@
 		</nav>
 	</div>
 	<div
-		class={`fixed top-[90px] z-40 hidden h-[calc(100%_-_60px)] w-[100vw] flex-col items-center justify-center gap-10 overflow-y-auto bg-secondary text-primary shadow-in duration-500 dark:bg-primary dark:text-secondary m12:flex m8:top-[60px] ${
-			!hamIsOpen ? 'translate-x-[100vw]' : ''
-		}`}>
+		class={`fixed top-[90px] z-40 hidden h-[calc(100%_-_60px)] w-[100vw] flex-col items-center 
+        justify-between overflow-y-auto bg-secondary text-primary shadow-in duration-500 gap-1 py-8
+        dark:bg-primary dark:text-secondary m12:flex m8:top-[60px] ${!hamIsOpen ? 'translate-x-[100vw]' : ''}`}>
 		<!-- <div class="gap-10"> -->
 		<!-- <li class=""> -->
-		<select class="button inline-block h-14  w-4/6 text-center" name="competition" id="" bind:value={$selected_competition}>
+		<select class="button inline-block h-14 w-4/6 truncate text-center" name="competition" id="" bind:value={$selected_competition}>
 			{#each $competitions.data as competition}
 				<option class="dark:bg-primary" value={competition.id}>{competition.name}</option>
 			{/each}
 		</select>
-		<a class="button inline-block h-14 w-4/6 text-center" on:click={() => (hamIsOpen = false)} href="/prono">Pronostics</a>
-		<a class="button inline-block h-14 w-4/6 text-center" on:click={() => (hamIsOpen = false)} href="/ranking">Classement</a>
-		<a class="button inline-block h-14 w-4/6 text-center" on:click={() => (hamIsOpen = false)} href="/rules">Règles</a>
-		<a class="button inline-block h-14 w-4/6 text-center" on:click={() => (hamIsOpen = false)} href="/contact">Contact</a>
+		<a class="button inline-block h-14 w-4/6 truncate text-center" on:click={() => (hamIsOpen = false)} href="/prono">Pronostics</a>
+		<a class="button inline-block h-14 w-4/6 truncate text-center" on:click={() => (hamIsOpen = false)} href="/ranking">Classement</a>
+		<a class="button inline-block h-14 w-4/6 truncate text-center" on:click={() => (hamIsOpen = false)} href="/rules">Règles</a>
+		<a class="button inline-block h-14 w-4/6 truncate text-center" on:click={() => (hamIsOpen = false)} href="/contact">Contact</a>
 		<button on:click={toggleDarkMode}>
 			<ThemeIcon style="hover:opacity-70" width={40} />
 		</button>
