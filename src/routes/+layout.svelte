@@ -53,7 +53,7 @@
 		<div transition:fade={{ duration: 250 }}>
 			<Header />
 
-			<main class="h-[90vh] m12:h-[100vh] text-primary dark:text-secondary">
+			<main class="h-[88vh] m12:h-[100vh] text-primary dark:text-secondary">
 				<slot />
 			</main>
 
