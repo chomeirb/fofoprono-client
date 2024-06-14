@@ -4,7 +4,7 @@
 	import ChomeirbIcon from './components/icons/Chomeirb.svelte';
 </script>
 
-<div class="flex h-[90px] w-full flex-row items-center justify-around text-primary shadow-top dark:text-secondary m12:h-min m12:flex-col m12:gap-5 m12:shadow-none">
+<div class="flex w-full h-[60px] flex-row items-center justify-around text-primary shadow-top dark:text-secondary m12:h-min m12:flex-col m12:gap-5 m12:shadow-none">
 	<div class="flex flex-row items-center justify-end m12:text-xl m8:w-full m8:justify-center m8:text-center m6:flex-col m6:text-lg">
 		<div class="flex flex-row">
 			<p>© 2024&nbsp;</p>
